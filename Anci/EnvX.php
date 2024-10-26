@@ -2,8 +2,8 @@
 
 namespace Yale\Anci;
 
-use App\Yaic\Anci\DebugX;
 use App\Yaic\Xena\Data\StringX;
+use Illuminate\Support\Facades\App;
 
 class EnvX
 {
@@ -55,6 +55,30 @@ class EnvX
 	public static function prod()
 	{
 		return self::is('production');
+	}
+
+
+
+	// ◈ === property »
+	public static function property($property, $key = null)
+	{
+		self::init();
+
+		if (isset(self::${$property})) {
+			$property = self::${$property};
+		} else {
+			return null;
+		}
+
+		if (is_object($property)) {
+			if (!is_null($key) && property_exists($property, $key)) {
+				return $property->{$key};
+			} elseif (is_null($key)) {
+				return $property;
+			}
+		}
+
+		return null;
 	}
 
 
@@ -112,30 +136,6 @@ class EnvX
 
 
 
-	// ◈ === property »
-	public static function property($property, $key = null)
-	{
-		self::init();
-
-		if (isset(self::${$property})) {
-			$property = self::${$property};
-		} else {
-			return null;
-		}
-
-		if (is_object(self::$property)) {
-			if (!is_null($key) && property_exists(self::$property, $key)) {
-				return self::$property->{$key};
-			} elseif (is_null($key)) {
-				return self::$property;
-			}
-		}
-
-		return null;
-	}
-
-
-
 	// ◈ === init »
 	private static function init()
 	{
@@ -144,22 +144,24 @@ class EnvX
 			self::$init = true;
 
 			// @ firm
-			self::$firm = env('firm');
-			if (!empty(self::$firm)) {
-				self::$firm = StringX::toObject(self::$firm, ';', '=');
-			}
+			// self::$firm = env('firm');
+			// if (!empty(self::$firm)) {
+			// 	self::$firm = StringX::toObject(self::$firm, ';', '=');
+			// }
 
 			// @ project
-			self::$project = env('project');
-			if (!empty(self::$project)) {
-				self::$project = StringX::toObject(self::$project, ';', '=');
-			}
+			// self::$project = env('project');
+			// if (!empty(self::$project)) {
+			// 	self::$project = StringX::toObject(self::$project, ';', '=');
+			// }
 
 			// @ developer
-			self::$developer = env('developer');
-			if (!empty(self::$developer)) {
-				self::$developer = StringX::toObject(self::$developer, ';', '=');
-			}
+			// self::$developer = env('developer');
+			// if (!empty(self::$developer)) {
+			// 	self::$developer = StringX::toObject(self::$developer, ';', '=');
+			// }
+
+			self::$firm = self::toObject('firm');
 		}
 	}
 
