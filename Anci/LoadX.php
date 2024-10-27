@@ -2,8 +2,6 @@
 
 namespace Yale\Anci;
 
-use Yale\Anci\PathX;
-
 class LoadX
 {
 	// ◈ === file »
