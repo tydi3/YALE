@@ -2,7 +2,6 @@
 
 namespace Yale\Anci;
 
-use App\Yaic\Xena\Data\StringX;
 use Illuminate\Support\Facades\App;
 
 class EnvX
