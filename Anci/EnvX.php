@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\App;
 class EnvX
 {
 	// ◈ property
-	public static $init = false;
+	private static $init = false;
 	private static $env;
 	private static $firm;
 	private static $project;
@@ -141,10 +141,10 @@ class EnvX
 	{
 		if (!self::$init) {
 			self::$env = strtolower(App::environment());
-			self::$init = true;
 			self::$firm = self::toObject('firm');
 			self::$project = self::toObject('project');
 			self::$developer = self::toObject('developer');
+			self::$init = true;
 		}
 	}
 
