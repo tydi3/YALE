@@ -11,9 +11,8 @@ enum Gender: string
 
 
 	// ◈ === toArray »
-	public static function toArray(): array
+	public static function toArray($gender = []): array
 	{
-		$gender = [];
 		foreach (self::cases() as $case) {
 			$gender[$case->name] = $case->value;
 		}
