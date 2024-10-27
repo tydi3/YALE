@@ -142,26 +142,9 @@ class EnvX
 		if (!self::$init) {
 			self::$env = strtolower(App::environment());
 			self::$init = true;
-
-			// @ firm
-			// self::$firm = env('firm');
-			// if (!empty(self::$firm)) {
-			// 	self::$firm = StringX::toObject(self::$firm, ';', '=');
-			// }
-
-			// @ project
-			// self::$project = env('project');
-			// if (!empty(self::$project)) {
-			// 	self::$project = StringX::toObject(self::$project, ';', '=');
-			// }
-
-			// @ developer
-			// self::$developer = env('developer');
-			// if (!empty(self::$developer)) {
-			// 	self::$developer = StringX::toObject(self::$developer, ';', '=');
-			// }
-
 			self::$firm = self::toObject('firm');
+			self::$project = self::toObject('project');
+			self::$developer = self::toObject('developer');
 		}
 	}
 
