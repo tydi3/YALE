@@ -33,7 +33,6 @@ enum Gender: string
 	// ◈ === label »
 	public function label(): string
 	{
-		// NOTE: How to use > Gender::MALE->label();
 		return match ($this) {
 			self::MALE => 'male',
 			self::FEMALE => 'female',

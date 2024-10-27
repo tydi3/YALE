@@ -11,13 +11,12 @@ enum Status: string
 
 
 	// ◈ === toArray »
-	public static function toArray(): array
+	public static function toArray($status = []): array
 	{
-		$gender = [];
 		foreach (self::cases() as $case) {
-			$gender[$case->name] = $case->value;
+			$status[$case->name] = $case->value;
 		}
-		return $gender;
+		return $status;
 	}
 
 
@@ -33,6 +32,7 @@ enum Status: string
 	// ◈ === label »
 	public function label(): string
 	{
+		// NOTE: How to use > Status::ACTIVE->label();
 		return match ($this) {
 			self::ACTIVE => 'active',
 			self::SHELVED => 'shelved',
