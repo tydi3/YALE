@@ -1,6 +1,6 @@
 <?php //*** PeriodX ~ class » Yale™ Library - Yet Another Laravel Elevator © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace Yale\Xero\Time;
+namespace Yale\Xeno\Time;
 
 use Exception;
 use Carbon\Carbon;
