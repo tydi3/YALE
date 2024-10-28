@@ -1,6 +1,6 @@
-<?php //*** PeriodX » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
+<?php //*** PeriodX ~ class » Yale™ Library - Yet Another Laravel Elevator © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace App\Yaic\Tydi\Time;
+namespace Yale\Xero\Time;
 
 use Exception;
 use Carbon\Carbon;
