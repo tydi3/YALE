@@ -46,7 +46,7 @@ class DebugX
 	// ◈ === oversight »
 	public static function oversight($label, $message, $extra = null, $trace = null)
 	{
-		if (strpos($label, 'Yaic') === false) {
+		if (strpos($label, 'Yale') === false) {
 			$label = 'Yaic™ • ' . $label;
 		}
 		$e = '<strong>' . ucwords($label) . '</strong> | ' . $message;
@@ -85,7 +85,7 @@ class DebugX
 	// ◈ === print »
 	public static function print($var)
 	{
-		return self::dump(['Yaic!' => $var]);
+		return self::dump(['Yale!' => $var]);
 	}
 
 
