@@ -5,15 +5,16 @@ namespace Yale\Concept\Abstract;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model as EloquentModel;
-use Yale\Concept\Trait\Model as TraitModelX;
+use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\QueryException;
+use Yale\Concept\Trait\Model as TraitX;
 
-abstract class Model extends EloquentModel
+abstract class Model extends Eloquent
 {
 	// ◈ traits
-	use SoftDeletes;
 	use HasFactory;
-	use TraitModelX;
+	use SoftDeletes;
+	use TraitX;
 
 
 	// ◈ constants
