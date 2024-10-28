@@ -1,8 +1,8 @@
-<?php //*** FormX ~ class » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
+<?php //*** FormX » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace App\Yaic\Tydi\Form;
+namespace Yale\Xero\Form;
 
-use App\Yaic\Tydi\Data\StringX;
+use Yale\Xero\Data\StringX;
 
 class FormX
 {
