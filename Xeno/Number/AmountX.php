@@ -1,10 +1,9 @@
 <?php //*** AmountX » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace App\Yaic\Tydi\Number;
+namespace Yale\Xero\Number;
 
-use App\Yaic\Tydi\Data\StringX;
+use Yale\Xero\Data\StringX;
 use Illuminate\Support\Number;
-
 
 class AmountX
 {

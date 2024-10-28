@@ -1,12 +1,9 @@
 <?php //*** CalculatorX » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace App\Yaic\Tydi\Number;
-
-use App\Yaic\Tydi\Number\NumberX;
-
+namespace Yale\Xero\Number;
 class CalculatorX
 {
-	// ◈ === quantityAmount → ... »
+	// ◈ === quantityAmount »
 	public static function quantityAmount($quantity, $price)
 	{
 		$calculation = ($quantity * $price);
@@ -15,7 +12,7 @@ class CalculatorX
 
 
 
-	// ◈ === plus → ... »
+	// ◈ === plus »
 	public static function plus($amount, $more)
 	{
 		$calculation = ($amount + $more);
@@ -24,7 +21,7 @@ class CalculatorX
 
 
 
-	// ◈ === minus → ... »
+	// ◈ === minus »
 	public static function minus($amount, $less)
 	{
 		$calculation = ($amount - $less);
@@ -33,7 +30,7 @@ class CalculatorX
 
 
 
-	// ◈ === percentage → ... »
+	// ◈ === percentage »
 	public static function percentage($amount, $percentage)
 	{
 		$calculation = ($percentage / 100) * $amount;
@@ -42,7 +39,7 @@ class CalculatorX
 
 
 
-	// ◈ === percentageOf → ... »
+	// ◈ === percentageOf »
 	public static function percentageOf($amount, $total)
 	{
 		return ($amount / $total) * 100;
@@ -50,7 +47,7 @@ class CalculatorX
 
 
 
-	// ◈ === VAT → ... »
+	// ◈ === VAT »
 	public static function VAT($amount, $percentage = '7.5')
 	{
 		return self::percentage($amount, $percentage);
@@ -58,7 +55,7 @@ class CalculatorX
 
 
 
-	// ◈ === holdingTax → ... »
+	// ◈ === holdingTax »
 	public static function holdingTax($amount, $percentage = '5')
 	{
 		return self::percentage($amount, $percentage);
