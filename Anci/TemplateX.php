@@ -2,6 +2,8 @@
 
 namespace Yale\Anci;
 
+use Yale\Xeno\Data\StringX;
+
 class TemplateX
 {
 	// ◈ property
