@@ -1,6 +1,6 @@
-<?php //*** ImgX ~ class » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
+<?php //*** ImgX ~ class » Yale™ Library - Yet Another Laravel Elevator © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace App\Yaic\Tydi\File;
+namespace Yale\Xero\File;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -34,6 +34,5 @@ class ImgX
 
 		return $signature;
 	}
-
 
 }//> end of class ~ ImgX

@@ -1,11 +1,11 @@
-<?php //*** FileX ~ class » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
+<?php //*** FileX ~ class » Yale™ Library - Yet Another Laravel Elevator © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace App\Yaic\Tydi\File;
+namespace Yale\Xero\File;
 
-use App\Yaic\Anci\PathX;
-use App\Yaic\Anci\DebugX;
-use App\Yaic\Tydi\Data\StringX;
-use App\Yaic\Tydi\Maker\RandomX;
+use Yale\Anci\PathX;
+use Yale\Anci\DebugX;
+use Yale\Xero\Data\StringX;
+use Yale\Xero\Maker\RandomX;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Storage;
