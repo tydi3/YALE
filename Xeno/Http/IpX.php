@@ -1,6 +1,6 @@
-<?php //*** IpX ~ class » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
+<?php //*** IpX » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace App\Yaic\Tydi\Http;
+namespace Yale\Xeno\Http;
 
 use Illuminate\Support\Facades\Http;
 
@@ -15,7 +15,6 @@ class IpX
 
 
 
-
 	// ◈ === data » get client isp → string, boolean
 	public static function data($ip = null)
 	{
@@ -27,7 +26,6 @@ class IpX
 		}
 		return false;
 	}
-
 
 
 

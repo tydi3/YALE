@@ -1,8 +1,8 @@
-<?php //*** RouteX ~ class » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
+<?php //*** RouteX » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace App\Yaic\Tydi\Http;
+namespace Yale\Xeno\Http;
 
-use App\Yaic\Tydi\Data\StringX;
+use Yale\Xeno\Data\StringX;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
