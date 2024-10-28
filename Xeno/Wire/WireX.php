@@ -1,9 +1,9 @@
-<?php //*** WireX ~ trait » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
+<?php //*** WireX ~ abstract » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace App\Yaic\Tydi\Wire;
+namespace Yale\Xeno\Wire;
 
-use App\Yaic\Tydi\Data\FormatX;
-use App\Yaic\Tydi\Data\StringX;
+use Yale\Xeno\Data\FormatX;
+use Yale\Xeno\Data\StringX;
 use Illuminate\Support\Str;
 
 trait WireX

@@ -1,10 +1,10 @@
 <?php //*** PageX ~ abstract » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace App\Yaic\Tydi\Wire;
+namespace Yale\Xeno\Wire;
 
-use App\Yaic\Tydi\DebugX;
+use Yale\Xeno\DebugX;
+use Yale\Xeno\Wire\ComponentX;
 use Livewire\Attributes\Title;
-use App\Yaic\Tydi\Wire\ComponentX;
 
 abstract class PageX extends ComponentX
 {
@@ -71,7 +71,13 @@ abstract class PageX extends ComponentX
 	// ◈ === setViewsAllowedX »
 	private function setViewsAllowedX(array $views = [])
 	{
-		$this->$viewsAllowedX = array_merge($this->$viewsAllowedX, $views);
+		if (!empty($views)) {
+			if (is_array($this->viewsAllowedX)) {
+				$this->viewsAllowedX = array_merge($this->viewsAllowedX, $views);
+			} else {
+				$this->$viewsAllowedX = $views;
+			}
+		}
 	}
 
 }//> end of abstract ~ PageX

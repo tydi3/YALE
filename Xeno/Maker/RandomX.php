@@ -1,4 +1,4 @@
-<?php //*** RandomX » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
+<?php //*** RandomX ~ class » Yale™ Library - Yet Another Laravel Elevator © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
 namespace Yale\Xeno\Maker;
 
@@ -353,4 +353,5 @@ class RandomX
 	{
 		return date('Ym') . self::alphanumeric(4, 'uppercase') . self::alpha(2, 'uppercase');
 	}
+
 }//> end of class ~ RandomX

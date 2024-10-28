@@ -1,6 +1,6 @@
-<?php //*** CrudX ~ trait » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
+<?php //*** CrudX ~ trait » Yale™ Library - Yet Another Laravel Elevator © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace App\Yaic\Tydi\Wire;
+namespace Yale\Xeno\Wire;
 
 trait CrudX
 {
@@ -11,7 +11,7 @@ trait CrudX
 		// $this->sparkX();
 		$this->callMethodX('presetX', $action);
 		$this->callMethodX('organizeX', $action);
-		$this->callMethodX('createX', $action, );
+		$this->callMethodX('createX', $action);
 		$this->setWireRouteX($action);
 	}
 

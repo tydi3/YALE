@@ -1,11 +1,11 @@
-<?php //*** ComponentX ~ abstract » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
+<?php //*** ComponentX ~ abstract » Yale™ Library - Yet Another Laravel Elevator © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace App\Yaic\Tydi\Wire;
+namespace Yale\Xeno\Wire;
 
 use Livewire\Component;
-use App\Yaic\Anci\EnvX;
-use App\Yaic\Anci\DebugX;
-use App\Yaic\Tydi\Data\StringX;
+use Yale\Anci\EnvX;
+use Yale\Anci\DebugX;
+use Yale\Xeno\Data\StringX;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
@@ -198,13 +198,11 @@ abstract class ComponentX extends Component
 	{
 		if (empty($action)) {
 			return empty($this->viewX);
-		} else {
-			if (isset($this->viewX)) {
-				return (strtolower($this->viewX) !== strtolower($action));
-			}
-			return true;
 		}
-		return false;
+		if (isset($this->viewX)) {
+			return (strtolower($this->viewX) !== strtolower($action));
+		}
+		return true;
 	}
 
 
@@ -429,7 +427,7 @@ abstract class ComponentX extends Component
 			$wireRoute .= $action;
 		}
 
-		// ~Session::put('wireRoute', $wireRoute);
+		// ~ Session::put('wireRoute', $wireRoute);
 		Session::flash('wireRoute', $wireRoute);
 	}
 
@@ -639,6 +637,5 @@ abstract class ComponentX extends Component
 
 		return view($blade, $record);
 	}
-
 
 }//> end of abstract ~ ComponentX
