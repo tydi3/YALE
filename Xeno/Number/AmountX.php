@@ -1,8 +1,8 @@
 <?php //*** AmountX » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace Yale\Xero\Number;
+namespace Yale\Xeno\Number;
 
-use Yale\Xero\Data\StringX;
+use Yale\Xeno\Data\StringX;
 use Illuminate\Support\Number;
 
 class AmountX
