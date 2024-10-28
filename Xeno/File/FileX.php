@@ -1,11 +1,11 @@
 <?php //*** FileX ~ class » Yale™ Library - Yet Another Laravel Elevator © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace Yale\Xero\File;
+namespace Yale\Xeno\File;
 
 use Yale\Anci\PathX;
 use Yale\Anci\DebugX;
-use Yale\Xero\Data\StringX;
-use Yale\Xero\Maker\RandomX;
+use Yale\Xeno\Data\StringX;
+use Yale\Xeno\Maker\RandomX;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Storage;
