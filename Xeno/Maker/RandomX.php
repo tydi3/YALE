@@ -1,8 +1,8 @@
 <?php //*** RandomX » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace Yale\Xero\Maker;
+namespace Yale\Xeno\Maker;
 
-use Yale\Xero\Number\NumberX;
+use Yale\Xeno\Number\NumberX;
 
 class RandomX
 {
