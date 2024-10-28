@@ -3,6 +3,7 @@
 namespace Yale\Anci;
 
 use Illuminate\Support\Facades\App;
+use Yale\Xeno\Data\StringX;
 
 class EnvX
 {
