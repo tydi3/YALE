@@ -1,8 +1,8 @@
 <?php //*** AuthX ~ class » Yale™ Library - Yet Another Laravel Elevator © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace Yale\Xero\Auth;
+namespace Yale\Xeno\Auth;
 
-use Yale\Xero\Data\StringX;
+use Yale\Xeno\Data\StringX;
 use Illuminate\Support\Facades\Auth;
 
 class AuthX
