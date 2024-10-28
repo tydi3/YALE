@@ -3,7 +3,7 @@
 namespace Yale\Anci;
 
 use Yale\Xeno\File\FileX;
-use Yale\Xena\Data\StringX;
+use Yale\Xeno\Data\StringX;
 
 class AssetX
 {
@@ -131,7 +131,7 @@ class AssetX
 
 
 	// ◈ === init »
-	private static function init($var)
+	private static function init()
 	{
 		if (!self::$init) {
 			self::$theme = strtolower(EnvX::project('theme'));
