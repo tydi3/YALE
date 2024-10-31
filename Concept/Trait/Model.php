@@ -5,7 +5,7 @@ namespace Yale\Concept\Trait;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
-use Yale\Xeno\Data\DataX;
+use Yale\Xeno\Maker\GenerateX;
 
 trait Model
 {
@@ -248,18 +248,18 @@ trait Model
 	public static function oGuid($withTrashed = true)
 	{
 		$lastGuid = self::oLastGuid($withTrashed);
-		$newGuid = DataX::generateSN($lastGuid);
+		$newGuid = GenerateX::serial($lastGuid);
 		if ($lastGuid && !self::hasGuid($newGuid)) {
 			return $newGuid;
 		}
 
 		$maxGuid = self::maxSN($withTrashed);
-		$newGuid = DataX::generateSN($maxGuid);
+		$newGuid = GenerateX::serial($maxGuid);
 		if ($maxGuid && !self::hasGuid($newGuid)) {
 			return $newGuid;
 		}
 
-		return DataX::generateSN();
+		return GenerateX::serial();
 	}
 
 
