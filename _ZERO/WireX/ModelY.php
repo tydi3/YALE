@@ -12,49 +12,6 @@ use App\Spry\DataX;
 
 trait ModelX
 {
-	// • === hasGuid → ... »
-	public static function hasGuid($guid)
-	{
-		$recordFound = parent::withTrashed()->where('guid', $guid)->first();
-		if ($recordFound) {
-			return true;
-		}
-		return false;
-	}
-
-
-
-
-
-	// • === lastSN :: ... »
-	public static function lastSN()
-	{
-		// $record = self::latest()->first();
-		$record = self::withTrashed()->latest()->first();
-		if ($record) {
-			return $record->guid;
-		}
-		return null;
-	}
-
-
-
-
-
-	// • === maxSN :: ... »
-	public static function maxSN()
-	{
-		$records = self::withTrashed()->get();
-		if ($records->isEmpty()) {
-			return null;
-		}
-		$record = $records->sortByDesc('guid')->first();
-		return $record->guid;
-	}
-
-
-
-
 
 
 	// • === generateSN :: ... »
@@ -298,22 +255,6 @@ trait ModelX
 
 
 
-
-	// • === oDeleteIdX → ... »
-	public static function oDeleteIdX($id)
-	{
-		return self::oDeleteX(['id' => $id]);
-	}
-
-
-
-
-
-	// • === oDeletePuidX → ... »
-	public static function oDeletePuidX($puid)
-	{
-		return self::oDeleteX(['puid' => $puid]);
-	}
 
 
 

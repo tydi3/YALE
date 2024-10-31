@@ -217,20 +217,20 @@ trait Model
 
 
 
-	// ◈ === oHasGuid »
-	public static function oHasGuid($guid, $withTrashed = true)
-	{
-		$query = $withTrashed ? static::withTrashed() : static::query();
-		return $query->where('guid', $guid)->exists();
-	}
-
-
-
 	// ◈ === oLastGuid »
 	public static function oLastGuid($withTrashed = true)
 	{
 		$query = $withTrashed ? static::withTrashed() : static::query();
 		return $query->latest()->value('guid');
+	}
+
+
+
+	// ◈ === oHasGuid » (boolean expected)
+	public static function oHasGuid($guid, $withTrashed = true)
+	{
+		$query = $withTrashed ? static::withTrashed() : static::query();
+		return $query->where('guid', $guid)->exists();
 	}
 
 
