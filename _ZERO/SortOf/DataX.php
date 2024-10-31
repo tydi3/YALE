@@ -30,24 +30,6 @@ class DataX
 
 
 
-	// • ==== generateSN → generate sequential serial number » string
-	public static function generateSN($lastSN = null, $prefix = null)
-	{
-		if (!$prefix) {
-			$prefix = date('Ym');
-		}
-		$prefix .= '-';
-
-		if (!$lastSN) {
-			$lastSN = '000';
-		} else {
-			$lastSN = StringX::afterAs($lastSN, '-');
-		}
-
-		return $prefix . str_pad((int) $lastSN + 1, 4, '0', STR_PAD_LEFT);
-	}
-
-
 
 	// • ==== json → ... » string
 	public static function json($data, $field)
