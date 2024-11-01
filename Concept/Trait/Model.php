@@ -84,9 +84,9 @@ trait Model
 	public static function oAll($sorting = 'desc')
 	{
 		if (!$sorting || $sorting === 'desc') {
-			return self::orderByDesc('id')->get();
+			return static::orderByDesc('id')->get();
 		}
-		return self::orderBy('id')->get();
+		return static::orderBy('id')->get();
 	}
 
 
@@ -139,9 +139,9 @@ trait Model
 	{
 		if ($column === 'id') {
 			if (!$select) {
-				return self::find($id);
+				return static::find($id);
 			}
-			return self::find($id, $select);
+			return static::find($id, $select);
 		}
 		return self::oFindByColumn($column, $id, 1, $select);
 	}
@@ -167,7 +167,7 @@ trait Model
 	// ◈ === oDeleteByColumn »
 	public static function oDeleteByColumn($value, $column)
 	{
-		return self::where($column, $value)->delete();
+		return static::where($column, $value)->delete();
 	}
 
 
@@ -355,7 +355,7 @@ trait Model
 	// ◈ === fillableColumns »
 	private function fillableColumns()
 	{
-		return ['guid', 'puid', 'suid', 'tuid', 'oauthor', 'status', 'date'];
+		return ['guid', 'puid', 'suid', 'tuid', 'oauthor', 'status'];
 	}
 
 }//> end of trait ~ Model
