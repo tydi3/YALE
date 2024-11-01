@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\QueryException;
-use Yale\Concept\Trait\Model as TraitX;
+use Yale\Concept\Trait\Model as ModelTraitX;
 
 abstract class Model extends Eloquent
 {
 	// ◈ traits
 	use HasFactory;
 	use SoftDeletes;
-	use TraitX;
+	use ModelTraitX;
 
 
 	// ◈ constants
@@ -29,16 +29,16 @@ abstract class Model extends Eloquent
 
 
 	// ◈ === oCreateX »
-	public static function oCreateX($data)
-	{
-		try {
-			$result = parent::oCreate($data);
-		} catch (QueryException $e) {
-			// TODO: Log error & handle exception | Move to a handler class
-			Log::error('Error::DB->Create: ' . $e->getMessage());
-			return false;
-		}
-		return $result;
-	}
+	// public static function oCreateX($data)
+	// {
+	// 	try {
+	// 		$result = parent::oCreate($data);
+	// 	} catch (QueryException $e) {
+	// 		// TODO: Log error & handle exception | Move to a handler class
+	// 		Log::error('Error::DB->Create: ' . $e->getMessage());
+	// 		return false;
+	// 	}
+	// 	return $result;
+	// }
 
 }//> end of abstract ~ Model
