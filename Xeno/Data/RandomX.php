@@ -1,6 +1,6 @@
 <?php //*** RandomX ~ class » Yale™ Library - Yet Another Laravel Elevator © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace Yale\Xeno\Maker;
+namespace Yale\Xeno\Data;
 
 use Yale\Xeno\Number\NumberX;
 

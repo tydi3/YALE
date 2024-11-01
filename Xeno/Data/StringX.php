@@ -5,7 +5,6 @@ namespace Yale\Xeno\Data;
 use Yale\Orig\Is;
 use Yale\Orig\Can;
 use Yale\Orig\Has;
-use Yale\Xeno\Maker\RandomX;
 
 class StringX
 {

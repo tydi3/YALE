@@ -5,7 +5,7 @@ namespace Yale\Concept\Trait;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
-use Yale\Xeno\Maker\GenerateX;
+use Yale\Xeno\Data\GenerateX;
 
 trait Model
 {
