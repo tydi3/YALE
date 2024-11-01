@@ -272,10 +272,50 @@ trait Model
 
 
 
+	// ◈ === oUpdateByID »
+	public static function oUpdateByID(int $id, $data)
+	{
+		return static::where('id', $id)->update($data);
+	}
+
+
+
+	// ◈ === oUpdateByGUID »
+	public static function oUpdateByGUID(int $guid, $data)
+	{
+		return static::where('guid', $guid)->update($data);
+	}
+
+
+
+	// ◈ === oUpdateByPUID »
+	public static function oUpdateByPUID(int $puid, $data)
+	{
+		return static::where('puid', $puid)->update($data);
+	}
+
+
+
+	// ◈ === oUpdateBySUID »
+	public static function oUpdateBySUID(int $suid, $data)
+	{
+		return static::where('suid', $suid)->update($data);
+	}
+
+
+
+	// ◈ === oUpdateByTUID »
+	public static function oUpdateByTUID(int $tuid, $data)
+	{
+		return static::where('tuid', $tuid)->update($data);
+	}
+
+
+
 	// ◈ === oDeleteByID »
 	public static function oDeleteByID(int $id)
 	{
-		return self::where('id', $id)->delete();
+		return static::where('id', $id)->delete();
 	}
 
 
@@ -283,7 +323,7 @@ trait Model
 	// ◈ === oDeleteByGUID »
 	public static function oDeleteByGUID(int $guid)
 	{
-		return self::where('guid', $guid)->delete();
+		return static::where('guid', $guid)->delete();
 	}
 
 
@@ -291,7 +331,7 @@ trait Model
 	// ◈ === oDeleteByPUID »
 	public static function oDeleteByPUID(int $puid)
 	{
-		return self::where('puid', $puid)->delete();
+		return static::where('puid', $puid)->delete();
 	}
 
 
@@ -299,7 +339,7 @@ trait Model
 	// ◈ === oDeleteBySUID »
 	public static function oDeleteBySUID(int $suid)
 	{
-		return self::where('suid', $suid)->delete();
+		return static::where('suid', $suid)->delete();
 	}
 
 
@@ -307,7 +347,7 @@ trait Model
 	// ◈ === oDeleteByTUID »
 	public static function oDeleteByTUID(int $tuid)
 	{
-		return self::where('tuid', $tuid)->delete();
+		return static::where('tuid', $tuid)->delete();
 	}
 
 
