@@ -2,6 +2,8 @@
 
 namespace Yale\Anci;
 
+use Yale\Xeno\Data\StringX;
+
 class LoadX
 {
 	// ◈ === file »
@@ -40,13 +42,22 @@ class LoadX
 	// ◈ === router »
 	public static function router(string $path)
 	{
-		if ($path === 'zero') {
-			$path = PathX::zero('route');
+		if (StringX::beginWith($path, 'zero')) {
+			$directory = PathX::zero('route');
 			$files = [
-				$path . 'api.php',
-				$path . 'app.php',
-				$path . 'site.php',
+				'api' => $directory . 'api.php',
+				'app' => $directory . 'app.php',
+				'site' => $directory . 'site.php',
 			];
+			if (StringX::endWith($path, '-api')) {
+				unset($files['app'], $files['site']);
+			} elseif (StringX::endWith($path, '-app')) {
+				unset($files['api'], $files['site']);
+			} elseif (StringX::endWith($path, '-site')) {
+				unset($files['api'], $files['app']);
+			} elseif (StringX::endWith($path, '-web')) {
+				unset($files['api']);
+			}
 			return self::files($files, false);
 		}
 
@@ -54,6 +65,10 @@ class LoadX
 			$path = PathX::debug('route');
 			return self::directory($path, false, 'php');
 		}
+
+		// TODO: Implement check for $path to return appropriately
+
+		return $path;
 	}
 
 }//> end of class ~ LoadX
