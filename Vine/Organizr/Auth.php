@@ -1,6 +1,6 @@
 <?php //*** Auth ~ class » Yale™ Library - Yet Another Laravel Elevator © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace Yale\Vine\Organizer;
+namespace Yale\Vine\Organizr;
 
 use Yale\Anci\EnvX;
 use Yale\Anci\DebugX;
