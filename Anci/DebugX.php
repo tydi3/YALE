@@ -82,7 +82,7 @@ class DebugX
 	// ◈ === print »
 	public static function print($var)
 	{
-		return self::dump(['Yale!' => $var]);
+		return self::dump(['Yale™' => $var]);
 	}
 
 
