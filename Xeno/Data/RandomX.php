@@ -259,10 +259,10 @@ class RandomX
 
 
 
-	// ◈ === token » 50 alphanumeric characters
-	public static function token($length = 'RAND')
+	// ◈ === token » alphanumeric characters
+	public static function token($length = null)
 	{
-		if ($length === 'RAND') {
+		if (!$length) {
 			$length = mt_rand(20, 30);
 		}
 		return substr(self::uid(), 0, $length);
