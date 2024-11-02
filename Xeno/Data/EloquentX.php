@@ -4,11 +4,12 @@ namespace Yale\Xeno\Data;
 
 use Yale\Orig\Is;
 use Yale\Anci\DebugX;
+use Yale\Xeno\Data\ArrayX;
 
 class EloquentX
 {
 	// ◈ property
-	private static $model = false;
+	private static $model;
 	protected static $result;
 
 
@@ -16,6 +17,7 @@ class EloquentX
 	// ◈ === init »
 	public static function init($model)
 	{
+		self::end();
 		self::$model = self::model($model);
 	}
 
@@ -24,29 +26,80 @@ class EloquentX
 	// ◈ === end »
 	public static function end()
 	{
-		self::$model = false;
+		self::$result = null;
+		self::$model = null;
 	}
 
 
 
-	// ◈ === all »
-	public static function all($model = null, $as = null)
+	// ◈ === all » get all records (columns & rows)
+	public static function all($model = null)
 	{
-		$instance = self::model($model);
-		$result = $instance::all();
-		return self::result($result, $as);
+		$model = self::model($model);
+		self::$result = $model::oAll();
+		return self::$result;
+	}
+
+
+
+	// ◈ === record »
+	public static function record($result = null)
+	{
+		return self::result('array', $result);
+	}
+
+
+
+	// ◈ === rows »
+	public static function rows($result = null)
+	{
+		$record = self::record($result);
+		if (is_array($record)) {
+			if (!ArrayX::isMultiAndKeyNumeric($record)) {
+				return [$record];
+			}
+		}
+		// TODO: implement check if not array
+		return $record;
+	}
+
+
+
+	// ◈ === row »
+	public static function row($result = null)
+	{
+		$record = self::record($result);
+		if (is_array($record)) {
+			if (ArrayX::isMultiAndKeyNumeric($record)) {
+				return ArrayX::firstValue($record);
+			}
+		}
+		// TODO: implement check if not array
+		return $record;
+	}
+
+
+
+	// ◈ === json »
+	public static function json($result = null)
+	{
+		return self::result('json', $result);
 	}
 
 
 
 	// ◈ === result »
-	protected static function result($result, $returnAs = null)
+	protected static function result($return = null, $result = null)
 	{
-		if ($returnAs === 'rows') {
+		if (!$result && self::$result) {
+			$result = self::$result;
+		}
+
+		if ($return === 'array') {
 			return $result->toArray();
 		}
 
-		if ($returnAs === 'json') {
+		if ($return === 'json') {
 			return $result->toJson();
 		}
 
