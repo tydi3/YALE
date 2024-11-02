@@ -2,7 +2,7 @@
 
 namespace Yale\Vine\Organizr;
 
-use Yale\Xero\Http\RouteX;
+use Yale\Xeno\Http\RouteX;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
