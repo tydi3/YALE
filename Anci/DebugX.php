@@ -47,9 +47,9 @@ class DebugX
 	public static function oversight($label, $message, $extra = null, $trace = null)
 	{
 		if (strpos($label, 'Yale') === false) {
-			$label = 'Yaic™ • ' . $label;
+			$label = 'Yale™ • ' . $label;
 		}
-		$e = '<strong>' . ucwords($label) . '</strong> | ' . $message;
+		$e = '<strong>' . ucwords($label) . '</strong> | ' . ucfirst($message);
 		if (!empty($extra)) {
 			$e .= ' → [<em>' . self::extra($extra) . '</em>]';
 		}
@@ -73,9 +73,6 @@ class DebugX
 	// ◈ === exit »
 	public static function exit($var, string $title = null)
 	{
-		if (empty($title)) {
-			$title = 'Yaic™';
-		}
 		self::dump($var, $title);
 		exit;
 	}
