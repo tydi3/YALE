@@ -23,4 +23,12 @@ class GenerateX
 		return $prefix . str_pad((int) $lastSN + 1, 4, '0', STR_PAD_LEFT);
 	}
 
+
+
+	// ◈ === token » 30 alpha numeric characters
+	public static function token($length = 30)
+	{
+		return RandomX::token($length);
+	}
+
 }//> end of class ~ GenerateX
