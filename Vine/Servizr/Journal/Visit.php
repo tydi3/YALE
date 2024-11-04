@@ -19,9 +19,10 @@ class Visit
 		$oSessionToken = session('oSessionToken');
 
 		// • route name or uri
-		$route = $request->route()->getName();
+		$routeObj = $request->route();
+		$route = callObjectMethodX($routeObj, 'getName');
 		if (empty($route)) {
-			$route = $request->route()->uri();
+			$route = callObjectMethodX($routeObj, 'uri');
 		}
 
 		// • session id
@@ -30,7 +31,6 @@ class Visit
 		} else {
 			$osession = session()->getId();
 		}
-
 
 		// • parameter
 		$param['method'] = !empty($param['method']) ? $param['method'] : $request->method();
