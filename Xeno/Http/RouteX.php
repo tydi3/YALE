@@ -21,6 +21,17 @@ class RouteX
 				$route = '/' . $route;
 			}
 		}
+
+
+		// • Route for active uri
+		else {
+			$route = Route::currentRouteName();
+			if (empty($route)) {
+				$route = request()->getRequestUri();
+			}
+		}
+
+
 		return $route;
 	}
 
@@ -64,5 +75,41 @@ class RouteX
 
 		return self:: as($route, [], $absolute);
 	}
+
+
+
+	// ◈ === isGroupAuth » is route considered part of auth?
+	public static function isGroupAuth($route = null)
+	{
+		$route = self:: as();
+		// dd($route);
+		if (!empty($route)) {
+			$route = StringX::cropBegin($route, '/');
+			$routes = 'register | login | logout | password.request';
+			return StringX::contain($routes, $route);
+		}
+		return false;
+	}
+
+
+
+	// ◈ === title »
+	public static function title($title = null)
+	{
+		if (!$title) {
+			$title = self:: as();
+			$title = StringX::cropBegin($title, '/');
+
+			if (self::isGroupAuth()) {
+				if (strtolower($title) === 'password.request') {
+					$title = 'lost password';
+				}
+				$title = StringX::beforeAs($title, '.');
+				$title = ucwords($title);
+			}
+		}
+		return ucfirst($title);
+	}
+
 
 }//> end of class ~ RouteX
