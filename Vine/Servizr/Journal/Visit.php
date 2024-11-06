@@ -9,8 +9,20 @@ use Yale\Vine\Utilizr\Session as SessionUtilizr;
 
 class Visit
 {
+	// ◈ === make »
+	public static function make(Request $request, array $param = [])
+	{
+		$data = self::toCreate($request, $param);
+		// TODO: ensure $data is clean & safe
+		// TODO: implement try and catch exceptions
+
+		return VisitModelizr::create($data);
+	}
+
+
+
 	// ◈ === toCreate »
-	public static function toCreate(Request $request, array $param = [])
+	private static function toCreate(Request $request, array $param = [])
 	{
 		// • session token identifier
 		if (!session()->has('oSessionToken')) {
@@ -40,7 +52,7 @@ class Visit
 		$param['ip'] = !empty($param['ip']) ? $param['ip'] : $request->ip();
 
 		// SALIENT: resolves [integrity constraint violation]
-		if (SessionUtilizr::hasID($osession)) {
+		if (self::safeToCreateWithSession($param['token'], $osession)) {
 			$param['osession'] = $osession;
 		}
 
@@ -51,15 +63,21 @@ class Visit
 
 
 
-	// ◈ === make »
-	public static function make(Request $request, array $param = [])
+	// ◈ === safeToCreate »
+	private static function safeToCreateWithSession($token, $session)
 	{
-		$data = self::toCreate($request, $param);
-		// TODO: ensure $data is clean & safe
-		// TODO: implement try and catch exceptions
+		if (!SessionUtilizr::hasID($session)) {
+			return false;
+		}
 
-		return VisitModelizr::create($data);
+		$tokenCount = VisitModelizr::oCountByValue('token', $token);
+		if ($tokenCount < 1) {
+			return false;
+		}
+
+		return true;
 	}
+
 
 
 }//> end of class ~ Visit
