@@ -15,25 +15,6 @@ trait Model
 
 
 
-	// ◈ === getFillable »
-	public function getFillable()
-	{
-		if (method_exists($this, 'fillableColumns')) {
-			$fillable = array_merge($this->fillableColumns(), $this->fillable);
-		}
-		$this->fillable = array_unique($fillable);
-		return $this->fillable ?? parent::getFillable();
-	}
-
-
-
-
-
-
-
-
-
-
 	// ◈ === oAuthor »
 	public function oAuthor()
 	{
@@ -46,6 +27,18 @@ trait Model
 	public static function oCountByValue($column, $value)
 	{
 		return self::query()->where($column, $value)->count();
+	}
+
+
+
+	// ◈ === getFillable »
+	public function getFillable()
+	{
+		if (method_exists($this, 'fillableColumns')) {
+			$fillable = array_merge($this->fillableColumns(), $this->fillable);
+		}
+		$this->fillable = array_unique($fillable);
+		return $this->fillable ?? parent::getFillable();
 	}
 
 
