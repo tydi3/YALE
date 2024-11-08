@@ -10,6 +10,15 @@ class PathX
 
 
 
+	// ◈ === DS »
+	public static function DS()
+	{
+		self::init();
+		return self::$DS;
+	}
+
+
+
 	// ◈ === app »
 	public static function app(string $path = '')
 	{
