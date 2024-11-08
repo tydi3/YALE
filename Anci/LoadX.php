@@ -2,6 +2,7 @@
 
 namespace Yale\Anci;
 
+use Yale\Anci\DebugX;
 use Yale\Xeno\Data\StringX;
 
 class LoadX
@@ -11,6 +12,8 @@ class LoadX
 	{
 		if (is_file($file)) {
 			require $file;
+		} elseif ($check) {
+			return DebugX::oversight('LoadX::File', 'File Unavailable',$file);
 		}
 	}
 
@@ -69,6 +72,21 @@ class LoadX
 		// TODO: Implement check for $path to return appropriately
 
 		return $path;
+	}
+
+
+
+	// ◈ === routerFile »
+	public static function routerFile($file, $path = 'zero')
+	{
+		if ($path === 'zero') {
+			$path = PathX::zero('route');
+		}
+		$file = $path . $file;
+		if (!StringX::endWith($file, '.php')) {
+			$file .= '.php';
+		}
+		return self::file($file, true);
 	}
 
 }//> end of class ~ LoadX
