@@ -15,8 +15,8 @@ trait Model
 
 
 
-	// ◈ === oAuthor »
-	public function oAuthor()
+	// ◈ === oauthor »
+	public function author()
 	{
 		return $this->belongsTo(\App\Models\User::class, 'oauthor', 'tuid');
 	}
@@ -52,7 +52,7 @@ trait Model
 			$model->puid = !empty($model->puid) ? $model->puid : Str::random(20);
 			$model->suid = !empty($model->suid) ? $model->suid : Str::random(40);
 			$model->tuid = !empty($model->tuid) ? $model->tuid : Str::random(70);
-			if (empty($model->oauthor) && Auth::check() && !empty(Auth::user()->tuid)) {
+			if (empty($model->oauthor) && (Auth::check() === true && !empty(Auth::user()->tuid))) {
 				$model->oauthor = Auth::user()->tuid;
 			}
 		});
