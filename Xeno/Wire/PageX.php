@@ -1,83 +1,18 @@
-<?php //*** PageX ~ abstract » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
+<?php //*** PageX ~ class » Yale™ Library - Yet Another Laravel Elevator © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
 namespace Yale\Xeno\Wire;
 
-use Yale\Xeno\DebugX;
+use Yale\Xeno\StringX;
 use Yale\Xeno\Wire\ComponentX;
-use Livewire\Attributes\Title;
 
 abstract class PageX extends ComponentX
 {
-	// ◈ property
-	protected $defaultViewX;
-	protected $defaultActionX;
-	protected $viewsAllowedX = ['index', 'landing', 'notify', 'form', 'listing', 'create', 'read', 'update', 'clone', 'delete'];
-
-
-
-	// ◈ === pageX »
-	protected function pageX($blade = null, $layout = null, $theme = null, $record = null, $check404 = true)
+	// ◈ === iPageX »
+	protected function iPageX($view, $layout = null, $data = [])
 	{
-		return $this->viewX($blade, $layout, $theme, 'page', $record, true, $check404);
+		$layout = $this->setLayoutX($layout, 'page');
+		$view = $this->setViewX($view, 'page');
+		return $this->iRenderX($view, $layout, $data);
 	}
 
-
-
-	// ◈ === setRouteViewX »
-	protected function setRouteViewX($route = null, $useAuto = false)
-	{
-		$route = !empty($route) ? $route :
-			(!empty($this->routeX) ? $this->routeX :
-				(!empty($this->componentX) ? $this->componentX : null));
-
-		$action = !empty($this->actionX) ? $this->actionX :
-			(!empty($this->defaultActionX) ? $this->defaultActionX :
-				(!empty($this->defaultActionX) ? $this->defaultActionX : null));
-
-		if ($useAuto === true && empty($action)) {
-			if ($route === $this->componentX) {
-				$action = 'index';
-			}
-		}
-
-		if ($action && $this->isNotViewX($action)) {
-			return $this->callActionX($action);
-		}
-	}
-
-
-
-	// ◈ === callActionX »
-	protected function callActionX($action)
-	{
-		if ($action === 'index') {
-			if (method_exists($this, 'index')) {
-				return $this->index();
-			}
-		} elseif ($action === 'landing') {
-			if (method_exists($this, 'landing')) {
-				return $this->landing();
-			} elseif (method_exists($this, 'index')) {
-				return $this->index();
-			}
-		} elseif (method_exists($this, $action)) {
-			return $this->{$action}();
-		}
-		return $this->setViewX($action);
-	}
-
-
-
-	// ◈ === setViewsAllowedX »
-	private function setViewsAllowedX(array $views = [])
-	{
-		if (!empty($views)) {
-			if (is_array($this->viewsAllowedX)) {
-				$this->viewsAllowedX = array_merge($this->viewsAllowedX, $views);
-			} else {
-				$this->$viewsAllowedX = $views;
-			}
-		}
-	}
-
-}//> end of abstract ~ PageX
+}//> end of class ~ PageX

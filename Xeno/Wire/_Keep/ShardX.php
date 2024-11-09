@@ -1,6 +1,6 @@
 <?php //*** ShardX ~ abstract » Yaic™ Library for Laravel © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace Yale\Xeno\Wire;
+namespace Yale\Xeno\Wire\_Keep;
 
 use Yale\Xeno\Wire\ComponentX;
 

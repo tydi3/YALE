@@ -76,8 +76,8 @@ class LoadX
 
 
 
-	// ◈ === routerFile »
-	public static function routerFile($file, $path = 'zero')
+	// ◈ === routeFile »
+	public static function routeFile($file, $path = 'zero')
 	{
 		if ($path === 'zero') {
 			$path = PathX::zero('route');
