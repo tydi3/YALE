@@ -2,48 +2,77 @@
 
 namespace Yale\Xeno\Wire;
 
-use Livewire\Component;
 use Yale\Anci\EnvX;
+use Yale\Anci\DebugX;
+use Livewire\Component;
 
 abstract class ComponentX extends Component
 {
+	// ◈ property
+	protected $componentX;
+	protected $layoutX;
+	protected $viewX;
+
+
+
+	// ◈ === setComponentX »
+	protected function setComponentX($component)
+	{
+		if (!empty($component)) {
+			$this->componentX = strtolower($component);
+		}
+	}
+
+
+
 	// ◈ === setLayoutX »
 	protected function setLayoutX($layout = null, $kind = null)
 	{
 		if (!$layout) {
-			$layout = EnvX::project('component') . '.layout';
+			$layout = EnvX::project('theme') . '.layout';
 			if ($kind === 'page') {
 				$layout .= '.page';
 			}
 		}
-		return $layout;
+
+		if (!empty($layout)) {
+			$this->layoutX = strtolower($layout);
+		}
 	}
 
 
 
 	// ◈ === setViewX »
-	protected function setViewX($view = null, $kind = null)
+	protected function setViewX($view, $kind = null)
 	{
-		if($kind){
-			$path = EnvX::project('component');
+		if ($kind) {
+			$path = EnvX::project('theme');
 			if ($kind === 'page') {
-				$view = $path.'.page.'.$view;
+				$view = $path . '.page.' . $view;
 			}
 		}
-		return $view;
+
+		if (!empty($view)) {
+			$this->viewX = strtolower($view);
+		}
 	}
 
 
 
 
 	// ◈ === iRenderX »
-	protected function iRenderX($view, $layout = null, $data = [])
+	protected function iRenderX($data = [])
 	{
-		if (!$layout) {
-			$render = view($view, $data);
-		} else {
-			$render = view($view, $data)->layout($layout);
+		if (empty($this->viewX)) {
+			return DebugX::oversight('LivewireX', 'Undefined View');
 		}
+
+		if (!empty($this->layoutX)) {
+			$render = view($this->viewX, $data)->layout($this->layoutX);
+		} else {
+			$render = view($this->viewX, $data);
+		}
+
 		return $render;
 	}
 
