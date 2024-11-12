@@ -793,18 +793,18 @@ class StringX
 
 
 	// ◈ === notBeginWith »
-	public static function notEndWith($string, $begin)
+	public static function notEndWith($string, $end)
 	{
-		return (self::endWith($string, $begin) === false);
+		return (self::endWith($string, $end) === false);
 	}
 
 
 
 
 	// ◈ === notBeginWithAny »
-	public static function notEndWithAny($string, $begins)
+	public static function notEndWithAny($string, $ending)
 	{
-		return (self::endWithAny($string, $begins) === false);
+		return (self::endWithAny($string, $ending) === false);
 	}
 
 
