@@ -10,9 +10,9 @@ abstract class PageX extends ComponentX
 	// ◈ === iPageX »
 	protected function iPageX($view, $layout = null, $data = [])
 	{
-		$layout = $this->setLayoutX($layout, 'page');
-		$view = $this->setViewX($view, 'page');
-		return $this->iRenderX($view, $layout, $data);
+		$this->setViewX($view, 'page');
+		$this->setLayoutX($layout, 'page');
+		return $this->iRenderX($data);
 	}
 
 }//> end of class ~ PageX
