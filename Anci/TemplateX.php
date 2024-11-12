@@ -71,7 +71,7 @@ class TemplateX
 	// ◈ === slice »
 	public static function slice($file = null)
 	{
-		return self::piece('slice.' . $file);
+		return self::layout('slice.' . $file);
 	}
 
 
