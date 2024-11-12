@@ -120,6 +120,40 @@ class AssetX
 
 
 
+	// ◈ === fa » fontawesome css or js
+	public static function fa($file, $extension, $check = false)
+	{
+		if (StringX::notEndWith($file, '.' . $extension)) {
+			$file .= '.' . $extension;
+		}
+		return self::fontawesome($extension . '/' . $file, $check);
+	}
+
+
+
+	// ◈ === href »
+	public static function href($href, $tag = null)
+	{
+		if ($tag === 'vendor') {
+			$href = self::vendor($href);
+		} elseif ($tag === 'fontawesome') {
+			$href = self::fontawesome($href);
+		} elseif ($tag === 'css') {
+			$href = self::css($href);
+			if (StringX::notEndWith($href, '.css')) {
+				$href .= '.css';
+			}
+		} elseif ($tag === 'js') {
+			$href = self::js($href);
+			if (StringX::notEndWith($href, '.js')) {
+				$href .= '.js';
+			}
+		}
+		return $href;
+	}
+
+
+
 	// ◈ === isFile »
 	public static function isFile($file)
 	{
