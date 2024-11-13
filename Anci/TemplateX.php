@@ -60,10 +60,18 @@ class TemplateX
 
 
 
+	// ◈ === collop »
+	public static function collop($file = null)
+	{
+		return self::path('collop.' . $file);
+	}
+
+
+
 	// ◈ === form »
 	public static function form($file = null)
 	{
-		return self::piece('form.' . $file);
+		return self::collop('form.' . $file);
 	}
 
 
