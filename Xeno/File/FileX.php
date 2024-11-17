@@ -12,55 +12,8 @@ use Illuminate\Support\Facades\Storage;
 
 class FileX
 {
-	// ◈ === name »
-	public static function name()
-	{
-		return RandomX::filename();
-	}
-
-
-
 	// ◈ === exist »
-	public static function isPublic($file)
-	{
-		$path = PathX::public($file);
-		return file_exists($path);
-	}
-
-
-
-	// ◈ === isBlade »
-	public static function isBlade($blade)
-	{
-		if (View::exists($blade)) {
-			return true;
-		}
-		return false;
-	}
-
-
-
-	// ◈ === inStorage »
-	public static function inStorage($file, $public = true)
-	{
-		if ($public) {
-			return Storage::disk('public')->exists($file);
-		}
-		return Storage::exists($file);
-	}
-
-
-
-	// ◈ === signature »
-	public static function signature($file, $public = true)
-	{
-		return Storage::url($file);
-	}
-
-
-
-	// ◈ === is »
-	public static function is($file)
+	public static function exist($file)
 	{
 		if (File::exists($file)) {
 			$fileIs = realpath($file);
@@ -74,86 +27,124 @@ class FileX
 
 
 
-	// ◈ === isWire »
-	public static function isWire($component, &$wireComponent = null)
+	// ◈ === is »
+	public static function is($file = null)
 	{
-		$component = StringX::swap($component, '/', '.');
-		$component = StringX::toCamelCase($component, '.', false);
-		if (StringX::contain($component, '-')) {
-			$component = ucwords($component, '-');
-			$component = StringX::swap($component, '-', '');
+		if (!empty($file)) {
+			return self::exist($file);
 		}
-		$component = ucfirst($component);
-		$component = StringX::swap($component, '.', DIRECTORY_SEPARATOR);
-
-		$wireComponent = 'App\\Livewire\\' . $component;
-		$component = PathX::app('Livewire' . DIRECTORY_SEPARATOR . $component . '.php');
-		return self::is($component);
+		return new IsX();
 	}
 
 
 
-	// ◈ === wire »
-	public static function wire($component, $directory = null, $type = null)
+	public static function in()
+	{
+		return new InX();
+	}
+
+
+
+	// ◈ === name » generate filename
+	public static function name()
+	{
+		return RandomX::filename();
+	}
+
+
+
+	// ◈ === storage »
+	public static function storage($file)
+	{
+		return Storage::url($file);
+	}
+
+
+
+	// ◈ === blade » return blade view name
+	public static function blade($blade, $directory = null, $type = null)
 	{
 		if (!empty($directory)) {
-			$component = $directory . '.' . $component;
+			$blade = $directory . '.' . $blade;
 		}
-		if (in_array($type, ['widget', 'page', 'shard'])) {
-			$component = $type . '.' . $component;
+		if (in_array($type, ['page', 'shard', 'widget'])) {
+			$blade = $type . '.' . $blade;
 		}
-		$component = StringX::swap($component, '/', '.');
-		$wire = null;
-		if (!self::isWire($component, $wire)) {
-			return DebugX::wire404(file: $component, wire: $wire);
-		}
-		return $component;
+		return StringX::swap($blade, '/', '.');
 	}
 
 
 
-	// ◈ === wireShard »
-	public static function wireShard($component, $directory = null)
+	// ◈ === page » as blade name
+	public static function page($blade, $directory = null)
 	{
-		return self::wire($component, $directory, 'shard');
+		return self::blade($blade, $directory, 'page');
 	}
 
 
 
-	// ◈ === blade » blade
-	public static function blade($component, $type = null)
+	// ◈ === shard » as blade name
+	public static function shard($blade, $directory = null)
 	{
-		if (in_array($type, ['widget', 'page', 'shard'])) {
-			$component = $type . '.' . $component;
+		return self::blade($blade, $directory, 'shard');
+	}
+
+
+
+	// ◈ === widget » as blade name
+	public static function widget($blade, $directory = null)
+	{
+		return self::blade($blade, $directory, 'widget');
+	}
+
+
+
+	// ◈ === wire » livewire component class file
+	public static function wire($component = null, $check = true)
+	{
+		if (!empty($component)) {
+			$component = StringX::swap($component, '/', '.');
+			$component = StringX::camelCase($component, '.', false);
+			if (StringX::contain($component, '-')) {
+				$component = ucwords($component, '-');
+				$component = StringX::swap($component, '-', '');
+			}
+			$component = ucfirst($component);
+			$component = StringX::swap($component, '.', DIRECTORY_SEPARATOR);
+			$component = PathX::app('Livewire' . DIRECTORY_SEPARATOR . $component . '.php');
+
+			if ($check === true) {
+				return IsX::wire($component);
+			}
+			return $component;
 		}
-		return StringX::swap($component, '/', '.');
-	}
+
+		return new class {
+
+			// » page
+			public function page($component = null, $directory = null, $check = true)
+			{
+				$component = FileX::page($component, $directory);
+				return FileX::wire($component, $check);
+			}
 
 
-
-	// ◈ === widget »
-	public static function widget($component)
-	{
-		return self::blade($component, 'widget');
-	}
-
-
-
-	// ◈ === page »
-	public static function page($component)
-	{
-		return self::blade($component, 'page');
-	}
+			// » shard
+			public function shard($component = null, $directory = null, $check = true)
+			{
+				$component = FileX::shard($component, $directory);
+				return FileX::wire($component, $check);
+			}
 
 
+			// » widget
+			public function widget($component = null, $directory = null, $check = true)
+			{
+				$component = FileX::widget($component, $directory);
+				return FileX::wire($component, $check);
+			}
 
-	// ◈ === shard »
-	public static function shard($component, $path = null)
-	{
-		if (!empty($path)) {
-			$component = "{$path}." . $component;
-		}
-		return self::blade($component, 'shard');
+		};
 	}
 
 
