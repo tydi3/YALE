@@ -579,6 +579,35 @@ class StringX
 
 
 
+	// ◈ === camelCase →
+	public static function camelCase($string, $separator = null, $strip = true)
+	{
+		if (!empty($separator)) {
+			$words = explode($separator, $string);
+			foreach ($words as $key => $word) {
+				if (self::isUppercase($word)) {
+					$words[$key] = strtolower($word);
+				}
+				$string = implode(' ', $words);
+			}
+		}
+		if (!$strip) {
+			$string = self::swap($string, ' ', ' ' . $separator);
+		}
+		// $string = preg_replace('/[^a-zA-Z0-9]+/', ' ', $string); #removes special characters
+		$string = strtolower($string);
+		if (!$strip) {
+			$string = ucwords($string, $separator);
+		} else {
+			$string = ucwords($string);
+		}
+		$string = str_replace(' ', '', $string);
+		$string = lcfirst($string);
+		return $string;
+	}
+
+
+
 	// ◈ === sentenceCase »
 	public static function sentenceCase($string, $acronym = true)
 	{
@@ -963,35 +992,6 @@ class StringX
 		$string = preg_replace('/\s+/u', '', ucwords($string));
 		$string = preg_replace('/(.)(?=[A-Z])/u', '$1_', $string);
 		return strtolower($string);
-	}
-
-
-
-	// ◈ === toCamelCase →
-	public static function toCamelCase($string, $separator = null, $strip = true)
-	{
-		if (!empty($separator)) {
-			$words = explode($separator, $string);
-			foreach ($words as $key => $word) {
-				if (self::isUppercase($word)) {
-					$words[$key] = strtolower($word);
-				}
-				$string = implode(' ', $words);
-			}
-		}
-		if (!$strip) {
-			$string = self::swap($string, ' ', ' ' . $separator);
-		}
-		// $string = preg_replace('/[^a-zA-Z0-9]+/', ' ', $string); #removes special characters
-		$string = strtolower($string);
-		if (!$strip) {
-			$string = ucwords($string, $separator);
-		} else {
-			$string = ucwords($string);
-		}
-		$string = str_replace(' ', '', $string);
-		$string = lcfirst($string);
-		return $string;
 	}
 
 
