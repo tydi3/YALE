@@ -19,7 +19,7 @@ class Auth
 	// ◈ === passwordChange »
 	public function passwordChange(Request $request)
 	{
-		return view($this->setViewAs('update.password'), $this->setData());
+		return view($this->setViewAs('password'), $this->setData());
 	}
 
 
