@@ -39,7 +39,7 @@ class FormatX
 	// ◈ === capitalize »
 	public static function capitalize($var)
 	{
-		$var = StringX::toCapitalize($var);
+		$var = StringX::capitalize($var);
 		$var = StringX::swap($var, '(hq)', '(HQ)');
 		return $var;
 	}
