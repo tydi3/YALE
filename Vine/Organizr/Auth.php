@@ -27,7 +27,7 @@ class Auth
 	// ◈ === profileUpdate »
 	public function profileUpdate(Request $request)
 	{
-		return view($this->setViewAs('update.profile'), $this->setData());
+		return view($this->setViewAs('profile'), $this->setData());
 	}
 
 
@@ -35,7 +35,7 @@ class Auth
 	// ◈ === signatureUpdate »
 	public function signatureUpdate(Request $request)
 	{
-		return view($this->setViewAs('update.signature'), $this->setData());
+		return view($this->setViewAs('signature'), $this->setData());
 	}
 
 
