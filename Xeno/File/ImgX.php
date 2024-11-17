@@ -2,7 +2,9 @@
 
 namespace Yale\Xeno\File;
 
+use Yale\Xeno\File\ImgX;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ImgX
 {
@@ -26,8 +28,8 @@ class ImgX
 			$signature = 'signature/none.png';
 		}
 
-		if (!empty($signature) && FileX::inStorage($signature, $public)) {
-			$signature = FileX::signature($signature, $public);
+		if (!empty($signature) && FileX::in()->storage($signature, $public)) {
+			$signature = FileX::storage($signature);
 		} else {
 			$signature = '/storage/signature/404.png';
 		}
