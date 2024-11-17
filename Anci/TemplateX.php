@@ -140,6 +140,12 @@ class TemplateX
 			{
 				return self::piece('nav.topbar.' . $file);
 			}
+
+			// ~ header »
+			public function header($file = null)
+			{
+				return self::piece('nav.header.' . $file);
+			}
 		};
 	}
 
