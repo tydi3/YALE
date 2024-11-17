@@ -159,7 +159,7 @@ class AssetX
 	{
 		self::init();
 		$file = self::$DS . self::$theme . self::$DS . StringX::swap($file, '/', self::$DS);
-		return FileX::isPublic($file);
+		return FileX::is()->public($file);
 	}
 
 
