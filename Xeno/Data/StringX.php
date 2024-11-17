@@ -554,17 +554,19 @@ class StringX
 	// ◈ === grabAcronym »
 	public static function grabAcronym($string)
 	{
-		preg_match_all('/[A-Z]{2,}/', $string, $matches, PREG_OFFSET_CAPTURE);
-		$found = $matches[0];
-		if (!empty($found) && is_array($found)) {
-			$var = [];
+		preg_match_all('/(?<=\s|^)([A-Z]{2,})(?=\s|$)/', $string, $matches, PREG_OFFSET_CAPTURE);
+		$found = $matches[1];
+		if (!empty($found)) {
+			$result = [];
 			foreach ($found as $key => $match) {
-				$var[$key]['acronym'] = $match[0];
-				$var[$key]['position'] = $match[1];
-				// echo "Found '$matchedText' at position $position\n";
+				$result[] = [
+					'acronym' => $match[0],
+					'position' => $match[1]
+				];
 			}
-			return $var;
+			return $result;
 		}
+		return [];
 	}
 
 
@@ -604,6 +606,14 @@ class StringX
 			return ucfirst($string);
 		}
 		return false;
+	}
+
+
+
+	// ◈ === capitalize →
+	public static function capitalize($string)
+	{
+		return ucwords(self::sentenceCase($string));
 	}
 
 
@@ -936,17 +946,6 @@ class StringX
 
 
 
-	// ◈ === toSentenceCase →
-	public static function toSentenceCase($string)
-	{
-		if (self::is($string)) {
-			return ucfirst(strtolower($string));
-		}
-		return false;
-	}
-
-
-
 	// ◈ === toSnakeCase →
 	public static function toSnakeCase($string, $separator = null)
 	{
@@ -993,14 +992,6 @@ class StringX
 		$string = str_replace(' ', '', $string);
 		$string = lcfirst($string);
 		return $string;
-	}
-
-
-
-	// ◈ === toCapitalize →
-	public static function toCapitalize($string)
-	{
-		return ucwords(self::toSentenceCase($string));
 	}
 
 
