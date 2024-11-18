@@ -3,6 +3,7 @@
 namespace Yale\Xeno\File;
 
 use Yale\Xeno\File\ImgX;
+use Yale\Xeno\Data\StringX;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,7 +13,11 @@ class ImgX
 	public static function profile($img = 'auth')
 	{
 		if ($img === 'auth' && Auth::check()) {
-			return Auth::user()->profile_photo_url;
+			$image = Auth::user()->profile_photo_url;
+			if(StringX::contain($image, 'storage/profile-photos')){
+				$image = '/'.StringX::afterAs($image, 'storage/', false);
+			}
+			return $image;
 		}
 		return '/storage/profile-photos/404.png';
 	}
