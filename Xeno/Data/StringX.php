@@ -209,6 +209,22 @@ class StringX
 
 
 
+	// ◈ === swapDS → swap directory separator »
+	public static function swapDS($string, $swap, $occurrence = 'all')
+	{
+		return self::swap($string, DIRECTORY_SEPARATOR, $swap, $occurrence);
+	}
+
+
+
+	// ◈ === swapPS → swap directory separator »
+	public static function swapPS($string, $swap, $occurrence = 'all')
+	{
+		return self::swap($string, '/', $swap, $occurrence);
+	}
+
+
+
 	// ◈ === swapFirst → replace first occurrence »
 	public static function swapFirst($string, $needle, $swap = '', $case = false)
 	{
