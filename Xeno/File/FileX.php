@@ -5,7 +5,7 @@ namespace Yale\Xeno\File;
 use Yale\Anci\PathX;
 use Yale\Anci\DebugX;
 use Yale\Xeno\Data\StringX;
-use Yale\Xeno\Maker\RandomX;
+use Yale\Xeno\Data\RandomX;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Storage;
@@ -38,6 +38,7 @@ class FileX
 
 
 
+	// ◈ === in »
 	public static function in()
 	{
 		return new InX();
@@ -46,9 +47,13 @@ class FileX
 
 
 	// ◈ === name » generate filename
-	public static function name()
+	public static function name($extension = null)
 	{
-		return RandomX::filename();
+		$name = RandomX::filename();
+		if (!empty($extension)) {
+			$name .= '.' . $extension;
+		}
+		return $name;
 	}
 
 
@@ -150,11 +155,12 @@ class FileX
 
 
 	// ◈ === component »
-	public static function component($component){
+	public static function component($component)
+	{
 		$component = StringX::cropEnd($component, '.php');
 		$component = StringX::cropEnd($component, '.blade');
 
-		if(StringX::contain($component, DIRECTORY_SEPARATOR.'Livewire'.DIRECTORY_SEPARATOR)){
+		if (StringX::contain($component, DIRECTORY_SEPARATOR . 'Livewire' . DIRECTORY_SEPARATOR)) {
 			$component = StringX::afterAs($component, 'Livewire' . DIRECTORY_SEPARATOR);
 		}
 		$component = StringX::swapDS($component, '.');
