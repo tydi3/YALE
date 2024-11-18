@@ -218,6 +218,10 @@ class SetX
 		}
 
 		if (!empty($label)) {
+			if ($label === 'reset') {
+				$type = 'reset';
+			}
+
 			if (!empty($module) && !StringX::isNumber($module)) {
 				$label .= ' ' . $module;
 			}
@@ -239,11 +243,9 @@ class SetX
 			$scheme = StringX::swap($scheme, 'primary', 'gray');
 		}
 
+
 		$scheme = $scheme === 'gray' ? 'gray-100' : $scheme;
 		$scheme = $scheme === 'outline-gray' ? 'outline-gray-200' : $scheme;
-
 	}
-
-
 
 }//> end of class ~ SetX
