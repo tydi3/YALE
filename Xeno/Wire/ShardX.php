@@ -11,7 +11,6 @@ abstract class ShardX extends ComponentX
 	protected function iShardX($view, $data = [])
 	{
 		$this->setViewX($view, 'shard');
-		$this->setLayoutX($layout, 'page');
 		return $this->iRenderX($data);
 	}
 
