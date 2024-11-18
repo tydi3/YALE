@@ -34,7 +34,6 @@ abstract class ComponentX extends Component
 				$layout .= '.page';
 			}
 		}
-
 		if (!empty($layout)) {
 			$this->layoutX = strtolower($layout);
 		}
