@@ -116,7 +116,7 @@ class FileX
 			if ($check === true) {
 				return IsX::wire($component);
 			}
-			return $component;
+			return self::component($component);
 		}
 
 		return new class {
@@ -149,6 +149,15 @@ class FileX
 
 
 
+	// ◈ === component »
+	private static function component($component){
+		// $component = StringX::swap($file, '/', '.');
+		// $component = StringX::swap($file, '/', '.');
+		dd($component);
+	}
+
+
+s
 	// ◈ === format »
 	private static function format($file, $append = null)
 	{
