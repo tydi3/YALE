@@ -49,6 +49,9 @@ abstract class ComponentX extends Component
 			if ($kind === 'page') {
 				$view = $path . '.page.' . $view;
 			}
+			if ($kind === 'shard') {
+				$view = $path . '.shard.' . $view;
+			}
 		}
 
 		if (!empty($view)) {
