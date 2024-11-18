@@ -27,7 +27,7 @@ class IsX
 	// ◈ === wire »
 	public static function wire($component, $class = null)
 	{
-		if(!$class){
+		if (!$class) {
 			$class = $component;
 		}
 		// » get class name
@@ -35,8 +35,10 @@ class IsX
 		$class = StringX::beforeAs($class, ".php");
 		$class = 'App\\Livewire' . $class;
 
-		if (!file_exists($component) || !class_exists($class)) {
-			return DebugX::wire404(file: $component, wire: $class);
+		if (!file_exists($component)) {
+			return DebugX::wire404(file: $component);
+		} elseif (!class_exists($class)) {
+			return DebugX::wire404(file: $component, message: 'Component Undefined', wire: $class);
 		}
 		return $component;
 	}
