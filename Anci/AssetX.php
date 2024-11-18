@@ -34,9 +34,9 @@ class AssetX
 
 
 	// ◈ === logo »
-	public static function logo($file, $check = false)
+	public static function logo($file, $check = false, $trimBase = true)
 	{
-		return self::path('logo/' . $file, $check);
+		return self::path('logo/' . $file, $check, $trimBase);
 	}
 
 
