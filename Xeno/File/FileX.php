@@ -150,14 +150,20 @@ class FileX
 
 
 	// ◈ === component »
-	private static function component($component){
-		// $component = StringX::swap($file, '/', '.');
-		// $component = StringX::swap($file, '/', '.');
-		dd($component);
+	public static function component($component){
+		$component = StringX::cropEnd($component, '.php');
+		$component = StringX::cropEnd($component, '.blade');
+
+		if(StringX::contain($component, DIRECTORY_SEPARATOR.'Livewire'.DIRECTORY_SEPARATOR)){
+			$component = StringX::afterAs($component, 'Livewire' . DIRECTORY_SEPARATOR);
+		}
+		$component = StringX::swapDS($component, '.');
+		$component = StringX::swapPS($component, '.');
+		return strtolower($component);
 	}
 
 
-s
+
 	// ◈ === format »
 	private static function format($file, $append = null)
 	{
