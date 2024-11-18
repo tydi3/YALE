@@ -243,6 +243,9 @@ class SetX
 			$scheme = StringX::swap($scheme, 'primary', 'gray');
 		}
 
+		if(!empty($title)){
+			$title = StringX::capitalize($title);
+		}
 
 		$scheme = $scheme === 'gray' ? 'gray-100' : $scheme;
 		$scheme = $scheme === 'outline-gray' ? 'outline-gray-200' : $scheme;
