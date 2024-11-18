@@ -64,6 +64,8 @@ class EnvX
 	{
 		self::init();
 
+
+
 		if (isset(self::${$property})) {
 			$property = self::${$property};
 		} else {
@@ -141,9 +143,9 @@ class EnvX
 	{
 		if (!self::$init) {
 			self::$env = strtolower(App::environment());
-			self::$firm = self::toObject('firm');
-			self::$project = self::toObject('project');
-			self::$developer = self::toObject('developer');
+			self::$firm = self::toObject('FIRM');
+			self::$project = self::toObject('PROJECT');
+			self::$developer = self::toObject('DEVELOPER');
 			self::$init = true;
 		}
 	}
@@ -153,21 +155,59 @@ class EnvX
 	// ◈ === toObject »
 	private static function toObject($property)
 	{
-		$properties = ['firm', 'project', 'developer'];
-		if (in_array($property, $properties)) {
-			$array = array_reduce(
-				array_filter(array_map('trim', explode(';', trim(env($property, ''))))),
-				function ($parsed, $item) {
-					if (strpos($item, '=') !== false) {
-						list($key, $value) = explode('=', $item, 2);
-						$parsed[$key] = $value;
-					}
-					return $parsed;
-				},
-				[]
-			);
-			return (object) $array;
+		// $properties = ['firm', 'project', 'developer'];
+		// if (in_array($property, $properties)) {
+		// 	$array = array_reduce(
+		// 		array_filter(array_map('trim', explode(';', trim(env($property, ''))))),
+		// 		function ($parsed, $item) {
+		// 			if (strpos($item, '=') !== false) {
+		// 				list($key, $value) = explode('=', $item, 2);
+		// 				$parsed[$key] = $value;
+		// 			}
+		// 			return $parsed;
+		// 		},
+		// 		[]
+		// 	);
+		// 	return (object) $array;
+		// }
+
+
+
+		// List of properties we want to parse from the .env file
+		$properties = ['FIRM', 'PROJECT', 'DEVELOPER'];
+
+		// Check if the provided property is valid
+		if (!in_array($property, $properties)) {
+			return null;
 		}
+
+		// Fetch the multi-line environment variable and trim whitespace
+		$envValue = trim(env($property, ''));
+
+		// If the environment variable is empty, return an empty object
+		if (empty($envValue)) {
+			return (object) [];
+		}
+
+		// Parse the environment variable into an associative array
+		$array = array_reduce(
+			array_filter(array_map('trim', explode(';', $envValue))),
+			function ($parsed, $item) {
+				if (strpos($item, '=') !== false) {
+					list($key, $value) = explode('=', $item, 2);
+
+					// Evaluate environment variables inside values
+					$parsed[$key] = preg_replace_callback('/\${(.*?)}/', function ($matches) {
+						return env($matches[1], '');
+					}, trim($value));
+				}
+				return $parsed;
+			},
+			[]
+		);
+
+		// Convert the parsed array into an object
+		return (object) $array;
 	}
 
 
