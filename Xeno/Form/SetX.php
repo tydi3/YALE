@@ -209,4 +209,41 @@ class SetX
 	}
 
 
+
+	// ◈ === button »
+	public static function button(&$label = 'Save', &$id = null, &$module = null, &$title = null, &$type = 'submit', &$scheme = 'primary')
+	{
+		if (empty($label) && !empty($id) && !StringX::isNumber($id)) {
+			$label = $id;
+		}
+
+		if (!empty($label)) {
+			if (!empty($module) && !StringX::isNumber($module)) {
+				$label .= ' ' . $module;
+			}
+			$label = StringX::capitalize($label);
+
+			if (empty($title)) {
+				$title = $label;
+			}
+		}
+
+		if ($type === 'submit') {
+			$type = in_array($label, ['reset', 'clear'], true) ? 'reset' : $type;
+		}
+
+		if ($type === 'reset') {
+			if (empty($label)) {
+				$label = 'clear';
+			}
+			$scheme = StringX::swap($scheme, 'primary', 'gray');
+		}
+
+		$scheme = $scheme === 'gray' ? 'gray-100' : $scheme;
+		$scheme = $scheme === 'outline-gray' ? 'outline-gray-200' : $scheme;
+
+	}
+
+
+
 }//> end of class ~ SetX
