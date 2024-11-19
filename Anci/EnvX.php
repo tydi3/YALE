@@ -19,12 +19,13 @@ class EnvX
 	// ◈ === is »
 	public static function is($env = null)
 	{
+		self::init();
+
 		if ($env === null) {
 			return self::$env;
 		}
 
 		if (!empty($env) && is_string($env)) {
-			self::init();
 			if (self::$env === strtolower($env)) {
 				return true;
 			}
@@ -64,12 +65,10 @@ class EnvX
 	{
 		self::init();
 
-
-
 		if (isset(self::${$property})) {
 			$property = self::${$property};
 		} else {
-			return null;
+			return DebugX::oversight('Env', 'property not set', $property);
 		}
 
 		if (is_object($property)) {
@@ -109,35 +108,6 @@ class EnvX
 
 
 
-	// ◈ === properties » get all values in .env
-	public static function properties()
-	{
-		self::init();
-
-		$path = PathX::base('.env');
-		if (!file_exists($path)) {
-			return [];
-		}
-		$lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-		$properties = [];
-		$multi = '';
-		list($label, $value) = [null, null];
-		foreach ($lines as $index => $line) {
-			if (empty($line) || $line[0] === '#') {
-				unset($lines[$index]);
-				continue;
-			}
-			$multi .= self::line($lines, $index, $line, $label, $value);
-			if (isset($label)) {
-				$properties[$label] = $value;
-			}
-		}
-		self::lines($multi, $properties);
-		return $properties;
-	}
-
-
-
 	// ◈ === init »
 	private static function init()
 	{
@@ -152,81 +122,24 @@ class EnvX
 
 
 
-	// ◈ === toObject »
-	private static function toObject($property)
-	{
-		// $properties = ['firm', 'project', 'developer'];
-		// if (in_array($property, $properties)) {
-		// 	$array = array_reduce(
-		// 		array_filter(array_map('trim', explode(';', trim(env($property, ''))))),
-		// 		function ($parsed, $item) {
-		// 			if (strpos($item, '=') !== false) {
-		// 				list($key, $value) = explode('=', $item, 2);
-		// 				$parsed[$key] = $value;
-		// 			}
-		// 			return $parsed;
-		// 		},
-		// 		[]
-		// 	);
-		// 	return (object) $array;
-		// }
-
-
-
-		// List of properties we want to parse from the .env file
-		$properties = ['FIRM', 'PROJECT', 'DEVELOPER'];
-
-		// Check if the provided property is valid
-		if (!in_array($property, $properties)) {
-			return null;
-		}
-
-		// Fetch the multi-line environment variable and trim whitespace
-		$envValue = trim(env($property, ''));
-
-		// If the environment variable is empty, return an empty object
-		if (empty($envValue)) {
-			return (object) [];
-		}
-
-		// Parse the environment variable into an associative array
-		$array = array_reduce(
-			array_filter(array_map('trim', explode(';', $envValue))),
-			function ($parsed, $item) {
-				if (strpos($item, '=') !== false) {
-					list($key, $value) = explode('=', $item, 2);
-
-					// Evaluate environment variables inside values
-					$parsed[$key] = preg_replace_callback('/\${(.*?)}/', function ($matches) {
-						return env($matches[1], '');
-					}, trim($value));
-				}
-				return $parsed;
-			},
-			[]
-		);
-
-		// Convert the parsed array into an object
-		return (object) $array;
-	}
-
-
-
 	// ◈ === lineToArray »
-	private static function lineToArray($string)
+	private static function lineToArray($input)
 	{
 		$result = [];
-		$pairs = explode(';', $string);
+		$pairs = array_filter(array_map('trim', explode(';', $input)));
 		foreach ($pairs as $pair) {
-			$pair = trim($pair);
-			if (!$pair) {
-				continue;
-			}
-			list($key, $value) = explode('=', $pair, 2);
-			$key = trim($key);
-			$value = isset($value) ? trim($value) : '';
-			if ($key !== '') {
-				$result[$key] = $value;
+			if (strpos($pair, '=') !== false) {
+				list($key, $value) = explode('=', $pair, 2);
+				$key = trim($key);
+				$value = trim($value);
+				if (isset($result[$key])) {
+					if (!is_array($result[$key])) {
+						$result[$key] = [$result[$key]];
+					}
+					$result[$key][] = $value;
+				} else {
+					$result[$key] = $value;
+				}
 			}
 		}
 		return $result;
@@ -234,34 +147,34 @@ class EnvX
 
 
 
-	// ◈ === lines »
-	private static function lines($lines, &$array = [])
+	// ◈ === toObject »
+	private static function toObject($property)
 	{
-		$pattern = '/(\w+)=(?:"(.*?)"|(true|false|\d+|[\w\-.]+))/';
-		preg_match_all($pattern, $lines, $matches, PREG_SET_ORDER);
-		foreach ($matches as $match) {
-			$key = $match[1];
-			$value = $match[2] !== '' ? $match[2] : ($match[3] !== '' ? $match[3] : $match[4]);
-			$array[$key] = self::lineToArray($value);
+		// ~ List of properties we want to parse from the .env file
+		$properties = ['FIRM', 'PROJECT', 'DEVELOPER'];
+
+		// ~ Check if the provided property is valid
+		if (!in_array($property, $properties)) {
+			return DebugX::oversight('Env', 'invalid property', $property);
 		}
-	}
+
+		// ~ Fetch the multi-line environment variable and trim whitespace
+		$property = strtolower($property);
+		$value = config('app.' . $property);
 
 
-
-	// ◈ === line »
-	private static function line(&$lines, $index, $line, &$label, &$value)
-	{
-		if (StringX::contain($line, '="') && StringX::endWith($line, '"') && !StringX::endWith($line, '="')) {
-			$label = StringX::before($line, '="');
-			$value = StringX::cropEnd(StringX::after($line, '="'), '"');
-			unset($lines[$index]);
-		} elseif (StringX::contain($line, '=') && !StringX::endWithAny($line, [';', '="'])) {
-			$label = StringX::before($line, '=');
-			$value = StringX::after($line, '=');
-			unset($lines[$index]);
-		} else {
-			return trim($line);
+		// ~ If the environment variable is empty, return an empty object
+		if (empty($value)) {
+			return DebugX::oversight('Env', 'property should not be empty', $property);
 		}
+
+		// ~ Parse the environment variable into an associative array
+		$array = self::lineToArray($value);
+
+
+
+		// ~ convert array to object
+		return (object) $array;
 	}
 
 }//> end of class ~ EnvX
