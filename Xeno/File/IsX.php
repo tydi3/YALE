@@ -31,10 +31,9 @@ class IsX
 			$class = $file;
 		}
 		// » get class name
-		$class = StringX::afterAs($class, "\Livewire");
+		$class = StringX::afterAs($class, DIRECTORY_SEPARATOR . "Livewire");
 		$class = StringX::beforeAs($class, ".php");
-		$class = 'App\\Livewire' . $class;
-
+		$class = 'App\\Livewire' . StringX::swapDS($class, '\\');
 		if (!file_exists($file)) {
 			return DebugX::wire404(file: $file);
 		} elseif (!class_exists($class)) {
