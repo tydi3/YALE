@@ -13,6 +13,23 @@ abstract class ComponentX extends Component
 	protected $componentX;
 	protected $layoutX;
 	protected $viewX;
+	public $wireX;
+
+
+
+	// ◈ === setWireX »
+	public function setWireX(array $param = [])
+	{
+		if (!isset($this->wireX)) {
+			$this->wireX = new \stdClass();
+		}
+
+		if (!empty($param)) {
+			foreach ($param as $key => $value) {
+				$this->wireX->$key = $value;
+			}
+		}
+	}
 
 
 
@@ -63,9 +80,25 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === checkViewX »
-	protected function checkViewX($blade){
-		$check = FileX::is()->blade($blade);
-		dd($check);
+	protected function checkViewX()
+	{
+		if (!empty($this->viewX)) {
+			if (!FileX::is()->blade($this->viewX)) {
+				return DebugX::blade404($this->viewX);
+			}
+		}
+	}
+
+
+
+	// ◈ === checkLayoutX »
+	protected function checkLayoutX()
+	{
+		if (!empty($this->layoutX)) {
+			if (!FileX::is()->blade($this->layoutX)) {
+				return DebugX::blade404($this->layoutX);
+			}
+		}
 	}
 
 
@@ -79,11 +112,11 @@ abstract class ComponentX extends Component
 			return DebugX::oversight('LivewireX', 'Undefined View');
 		}
 
-		$this->checkViewX($this->viewX);
+		$this->checkViewX();
 
 		if (!empty($this->layoutX)) {
-			// TODO: verify layout exists
-			$render = view($this->viewX, $data)->layout($this->layoutX.'.ogo');
+			$this->checkLayoutX();
+			$render = view($this->viewX, $data)->layout($this->layoutX);
 		} else {
 			$render = view($this->viewX, $data);
 		}

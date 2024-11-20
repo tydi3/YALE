@@ -60,6 +60,14 @@ class TemplateX
 
 
 
+	// ◈ === silo »
+	public static function silo($file = null)
+	{
+		return self::piece('silo.' . $file);
+	}
+
+
+
 	// ◈ === collop »
 	public static function collop($file = null)
 	{

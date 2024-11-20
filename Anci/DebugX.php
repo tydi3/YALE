@@ -120,9 +120,9 @@ class DebugX
 
 
 	// ◈ === blade404 »
-	public static function blade404($file, $label = 'blade', $message = 'Resource Unavailable')
+	public static function blade404($blade, $label = 'blade', $message = 'Resource Unavailable')
 	{
-		return self::oversight($label, $message, $file);
+		return self::oversight($label, $message, $blade);
 	}
 
 
