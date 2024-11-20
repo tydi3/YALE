@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\QueryException;
-use Yale\Concept\Trait\Model as ModelTraitX;
+use Yale\Concept\Trait\Model as TraitModelX;
 
 abstract class Model extends Eloquent
 {
 	// ◈ traits
 	use HasFactory;
 	use SoftDeletes;
-	use ModelTraitX;
+	use TraitModelX;
 
 
 	// ◈ constants
