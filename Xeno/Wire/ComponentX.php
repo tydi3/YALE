@@ -5,6 +5,7 @@ namespace Yale\Xeno\Wire;
 use Yale\Anci\EnvX;
 use Yale\Anci\DebugX;
 use Livewire\Component;
+use Yale\Xeno\File\FileX;
 
 abstract class ComponentX extends Component
 {
@@ -61,6 +62,15 @@ abstract class ComponentX extends Component
 
 
 
+	// ◈ === checkViewX »
+	protected function checkViewX($blade){
+		$check = FileX::is()->blade($blade);
+		dd($check);
+	}
+
+
+
+
 
 	// ◈ === iRenderX »
 	protected function iRenderX($data = [])
@@ -69,8 +79,11 @@ abstract class ComponentX extends Component
 			return DebugX::oversight('LivewireX', 'Undefined View');
 		}
 
+		$this->checkViewX($this->viewX);
+
 		if (!empty($this->layoutX)) {
-			$render = view($this->viewX, $data)->layout($this->layoutX);
+			// TODO: verify layout exists
+			$render = view($this->viewX, $data)->layout($this->layoutX.'.ogo');
 		} else {
 			$render = view($this->viewX, $data);
 		}
