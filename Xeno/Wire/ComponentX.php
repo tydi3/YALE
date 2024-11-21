@@ -6,6 +6,7 @@ use Yale\Anci\EnvX;
 use Yale\Anci\DebugX;
 use Livewire\Component;
 use Yale\Xeno\File\FileX;
+use Yale\Xeno\Data\StringX;
 
 abstract class ComponentX extends Component
 {
@@ -14,6 +15,7 @@ abstract class ComponentX extends Component
 	protected $layoutX;
 	protected $viewX;
 	public $wireX;
+	public $recordX;
 
 
 
@@ -33,11 +35,38 @@ abstract class ComponentX extends Component
 
 
 
+	// ◈ === setRecordX »
+	protected function setRecordX($record = null)
+	{
+		if (!empty($record)) {
+			$this->recordX = $record;
+		} else {
+			$this->recordX = [];
+		}
+	}
+
+
+
+
 	// ◈ === setComponentX »
-	protected function setComponentX($component)
+	protected function setComponentX($component = null)
 	{
 		if (!empty($component)) {
 			$this->componentX = strtolower($component);
+		} else {
+			$this->componentX = StringX::beforeAs($this->routeX, '-');
+		}
+	}
+
+
+
+	// ◈ === setModuleX »
+	protected function setModuleX($module = null)
+	{
+		if (!empty($module)) {
+			$this->moduleX = strtolower($module);
+		} elseif (!empty($this->componentX)) {
+			$this->moduleX = $this->componentX;
 		}
 	}
 
