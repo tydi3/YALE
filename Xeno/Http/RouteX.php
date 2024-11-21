@@ -37,6 +37,20 @@ class RouteX
 
 
 
+	// ◈ === current »
+	public static function current($return = null)
+	{
+		if ($return === 'name') {
+			return Route::currentRouteName();
+		} elseif ($return === 'url') {
+			return url()->current();
+		} else {
+			return Route::current();
+		}
+	}
+
+
+
 	// ◈ === expired »
 	public static function expired($route = 'login', $param = ['status' => 'session-expired'], $absolute = false)
 	{
