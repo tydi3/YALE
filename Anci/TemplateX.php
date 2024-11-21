@@ -69,8 +69,11 @@ class TemplateX
 
 
 	// ◈ === collop »
-	public static function collop($file = null)
+	public static function collop($file = null, $module = null)
 	{
+		if (!empty($module)) {
+			$file = $module . '.' . $file;
+		}
 		return self::path('collop.' . $file);
 	}
 
@@ -93,14 +96,14 @@ class TemplateX
 
 
 	// ◈ === slab »
-	public static function slab($file, $path = null, $component = null)
+	public static function slab($file, $component = null, $path = 'collop')
 	{
 		$file = 'slab.' . $file;
 		if (!empty($component)) {
 			$file = $component . '.' . $file;
 		}
 		if (!empty($path)) {
-			$paths = ['page'];
+			$paths = ['page', 'collop'];
 			if (in_array($path, $paths)) {
 				$file = self::{$path}($file);
 			}
