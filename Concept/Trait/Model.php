@@ -5,6 +5,7 @@ namespace Yale\Concept\Trait;
 use Illuminate\Support\Str;
 use Yale\Xeno\Data\GenerateX;
 use Yale\Concept\Trait\Model\Scope as ScopeX;
+use Yale\Concept\Trait\Model\Record as RecordX;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 
@@ -12,6 +13,7 @@ trait Model
 {
 	// ◈ traits
 	use ScopeX;
+	use RecordX;
 
 
 
@@ -63,7 +65,7 @@ trait Model
 	// ◈ === fillableColumns »
 	private function fillableColumns()
 	{
-		return ['guid', 'puid', 'suid', 'tuid', 'oauthor', 'status'];
+		return ['guid', 'puid', 'suid', 'tuid', 'oauthor', 'status', 'date'];
 	}
 
 }//> end of trait ~ Model
