@@ -2,9 +2,9 @@
 
 namespace Yale\Vine\Modelizr\Journal;
 
-use Yale\Concept\Abstract\Model as ModelAbstractX;
+use Yale\Concept\Abstract\Model as AbstractModelX;
 
-class Visit extends ModelAbstractX
+class Visit extends AbstractModelX
 {
 	// ◈ property
 	protected $table = 'journal_visit';
@@ -16,7 +16,7 @@ class Visit extends ModelAbstractX
 		'os',
 		'ip',
 		'isp',
-		'device',
+		'device'
 	];
 
 }//> end of modelizr ~ Visit
