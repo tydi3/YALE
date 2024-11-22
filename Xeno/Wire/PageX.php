@@ -3,6 +3,7 @@
 namespace Yale\Xeno\Wire;
 
 use Yale\Xeno\Http\RouteX;
+use Illuminate\Support\Str;
 use Yale\Xeno\Data\StringX;
 use Yale\Xeno\Wire\ComponentX;
 
@@ -12,6 +13,7 @@ abstract class PageX extends ComponentX
 	protected $routeX;
 	protected $actionX;
 	protected $titleX;
+	protected $taglineX;
 
 
 
@@ -44,7 +46,7 @@ abstract class PageX extends ComponentX
 
 	protected function setWireParamX()
 	{
-		$params = ['routeX', 'actionX', 'componentX', 'moduleX', 'titleX'];
+		$params = ['routeX', 'actionX', 'componentX', 'moduleX', 'titleX', 'taglineX'];
 		$wireX = [];
 		foreach ($params as $param) {
 			if (!empty($this->$param)) {
@@ -55,6 +57,14 @@ abstract class PageX extends ComponentX
 					$this->titleX = $this->moduleX;
 					$wireX[$param] = $this->titleX;
 				}
+			} elseif ($param === 'taglineX') {
+
+				$this->taglineX = $this->actionX . ' ' . $this->moduleX;
+				// TODO: move sections of this code into a setTitleX()
+				if ($this->actionX === 'listing') {
+					$this->taglineX = 'List of ' . Str::plural($this->moduleX);
+				}
+				$wireX[$param] = $this->taglineX;
 			}
 			// TODO: implement for tagline based on action
 		}
