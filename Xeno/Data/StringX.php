@@ -5,6 +5,7 @@ namespace Yale\Xeno\Data;
 use Yale\Orig\Is;
 use Yale\Orig\Can;
 use Yale\Orig\Has;
+use Illuminate\Support\Str;
 
 class StringX
 {
@@ -1060,5 +1061,14 @@ class StringX
 		}
 		return false;
 	}
+
+
+
+	// ◈ === plural »
+	public static function plural($string)
+	{
+		return Str::plural($string);
+	}
+
 
 }//> end of class ~ StringX
