@@ -39,4 +39,12 @@ class ObjectX
 		return false;
 	}
 
+
+
+	// ◈ === toArray »
+	public static function toArray($object){
+		return (array)$object;
+	}
+
+
 }//> end of class ~ ObjectX
