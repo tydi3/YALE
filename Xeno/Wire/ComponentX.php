@@ -11,6 +11,7 @@ use Yale\Xeno\Data\StringX;
 abstract class ComponentX extends Component
 {
 	// ◈ property
+	protected $permissionX = [];
 	protected $componentX;
 	protected $layoutX;
 	protected $viewX;
@@ -19,8 +20,17 @@ abstract class ComponentX extends Component
 
 
 
+	// ◈ === setPermissionX »
+	protected function setPermissionX(array $permission = [])
+	{
+		$this->permissionX = $permission;
+		$this->setWireX(['permissionX' => $this->permissionX]);
+	}
+
+
+
 	// ◈ === setWireX »
-	public function setWireX(array $param = [])
+	protected function setWireX(array $param = [])
 	{
 		if (!isset($this->wireX)) {
 			$this->wireX = new \stdClass();
@@ -142,7 +152,6 @@ abstract class ComponentX extends Component
 		}
 
 		$this->checkViewX();
-
 		if (!empty($this->layoutX)) {
 			$this->checkLayoutX();
 			$render = view($this->viewX, $data)->layout($this->layoutX);

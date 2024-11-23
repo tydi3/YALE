@@ -25,7 +25,7 @@ abstract class PageX extends ComponentX
 		} else {
 			$this->routeX = RouteX::current('name');
 		}
-
+// dd($this->routeX);
 		// • also set component and module
 		$this->setComponentX();
 		$this->setModuleX();
@@ -62,7 +62,7 @@ abstract class PageX extends ComponentX
 				$this->taglineX = $this->actionX . ' ' . $this->moduleX;
 				// TODO: move sections of this code into a setTitleX()
 				if ($this->actionX === 'listing') {
-					$this->taglineX = 'List of ' . Str::plural($this->moduleX);
+					$this->taglineX = 'List of ' . ucwords(Str::plural($this->moduleX));
 				}
 				$wireX[$param] = $this->taglineX;
 			}
