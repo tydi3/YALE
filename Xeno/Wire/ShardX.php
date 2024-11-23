@@ -2,16 +2,20 @@
 
 namespace Yale\Xeno\Wire;
 
-use Yale\Xeno\StringX;
-use Yale\Xeno\Wire\ComponentX;
-
 abstract class ShardX extends ComponentX
 {
-	// ◈ === iShardX »
-	protected function iShardX($view, $data = [])
+	// ◈ property
+	protected $viewX;
+
+
+
+	// ◈ === setViewX »
+	protected function setViewX($view, $theme = true)
 	{
-		$this->setViewX($view, 'shard');
-		return $this->iRenderX($data);
+		if (!empty($view)) {
+			$view = 'shard.' . $view;
+			$this->viewX = $this->iBladeX($view, $theme);
+		}
 	}
 
 }//> end of class ~ ShardX
