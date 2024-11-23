@@ -44,11 +44,6 @@ class VarX
 
 
 
-
-
-
-
-
 	// • ==== setIfNot → ... » boolean
 	public static function setIfNot(&$var, $value)
 	{
