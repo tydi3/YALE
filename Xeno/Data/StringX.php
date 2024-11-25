@@ -1071,4 +1071,19 @@ class StringX
 	}
 
 
+
+	// ◈ === words »
+	public static function words($string, $noOfWords)
+	{
+		return Str::words($string, $noOfWords);
+	}
+
+
+
+	// ◈ === firstWord »
+	public static function firstWord($string)
+	{
+		return Str::words($string, 1);
+	}
+
 }//> end of class ~ StringX
