@@ -3,17 +3,21 @@
 namespace Yale\Xeno\Wire;
 
 use Yale\Anci\EnvX;
+use Yale\Anci\DebugX;
 use Livewire\Component;
+use Yale\Xeno\Data\ArrayX;
 use Yale\Xeno\Data\StringX;
 
 abstract class ComponentX extends Component
 {
 	// ◈ property
 	protected $componentX;
+	protected $moduleX;
 	protected $actionX;
 	protected $recordX = [];
 	protected $titleX;
 	protected $sloganX;
+	protected $permissionX = [];
 	public $wireX;
 
 
@@ -107,9 +111,14 @@ abstract class ComponentX extends Component
 	// ◈ === setRecordX »
 	protected function setRecordX(array|object|null $record = null)
 	{
-		if (!empty($record)) {
+		if (empty($record)) {
 			$record = [];
 		}
+
+		// if (is_array($record)) {
+		// 	$record = ArrayX::toObject($record);
+		// }
+
 		$this->recordX = $record;
 	}
 
@@ -145,31 +154,65 @@ abstract class ComponentX extends Component
 
 
 
-	// ◈ === setWireX »
-	protected function setWireX()
+	// ◈ === setPermissionX »
+	protected function setPermissionX(array $permission = [])
 	{
-		if (!isset($this->wireX)) {
-			$this->wireX = new \stdClass();
-		}
-		$params = ['route', 'component', 'action', 'title', 'slogan'];
-		foreach ($params as $param) {
-			$property = $param . 'X';
-			if (!empty($this->$property)) {
-				$this->wireX->$param = $this->$property;
-			} elseif (in_array($param, ['title', 'slogan'])) {
-				$method = 'set' . ucfirst($property);
-				if (method_exists($this, $method)) {
-					$this->$method();
-					$this->wireX->$param = $this->$property;
-				} else {
-					$this->wireX->$param = '';
-				}
-			} else {
-				$this->wireX->$param = '';
+		$this->permissionX = array_merge($this->permissionX, $permission);
+	}
+
+
+	// ◈ === setModuleX »
+	protected function setModuleX($module = true)
+	{
+		if ($module === true) {
+			if (!empty($this->componentX)) {
+				$this->moduleX = StringX::firstWord($this->componentX);
 			}
+		} elseif (!empty($module)) {
+			$this->moduleX = $module;
 		}
 	}
 
 
+
+	// ◈ === setWireX »
+	protected function setWireX()
+	{
+		// • new object
+		if (!isset($this->wireX)) {
+			$this->wireX = new \stdClass();
+		}
+
+		// • set parameters & values
+		$wire = $this->wireX;
+		$params = ['route', 'component', 'module', 'action', 'title', 'slogan', 'permission'];
+		$properties = array_map(
+			function ($param) {
+				return $param . 'X';
+			},
+			$params
+		);
+
+		// • params
+		foreach ($params as $key => $param) {
+			$property = $properties[$key];
+			if (!empty($this->$property)) {
+				$wire->$param = $this->{$property};
+			} elseif ($param === 'permission') {
+				$wire->$param = [];
+			} elseif (in_array($param, ['title', 'slogan'])) {
+				$method = 'set' . ucfirst($property);
+				if (method_exists($this, $method)) {
+					$this->$method();
+					$wire->$param = $this->{$property};
+				} else {
+					$wire->$param = '';
+				}
+			} else {
+				$wire->$param = '';
+			}
+		}
+		$this->wireX = $wire;
+	}
 
 }//> end of class ~ ComponentX
