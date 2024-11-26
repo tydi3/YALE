@@ -10,6 +10,7 @@ trait ManageX
 	protected $actionCountX;
 
 
+
 	// ◈ === listingX »
 	protected function listingX($record = [], $action = 'listing')
 	{
