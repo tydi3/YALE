@@ -25,8 +25,9 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === callMethodX »
-	protected function callMethodX($method, ...$arguments){
-		if(method_exists($this, $method)){
+	protected function callMethodX($method, ...$arguments)
+	{
+		if (method_exists($this, $method)) {
 			return $this->$method(...$arguments);
 		}
 	}
@@ -199,16 +200,17 @@ abstract class ComponentX extends Component
 	protected function setActionX(?string $action = null)
 	{
 		if (empty($action)) {
-			if (!empty($this->routeX) && !empty($this->componentX)) {
+			if (!empty($this->routeX) && strtolower($this->routeX) !== 'livewire.update') {
 				if (($this->routeX !== $this->componentX)) {
 					$action = StringX::after($this->routeX, $this->componentX . '.');
+				} else {
+					$action = 'index';
 				}
 			}
 		}
-		if (empty($action)) {
-			$action = 'index';
+		if (!empty($action)) {
+			$this->actionX = strtolower($action);
 		}
-		$this->actionX = strtolower($action);
 	}
 
 
