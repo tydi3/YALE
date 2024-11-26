@@ -2,6 +2,8 @@
 
 namespace Yale\Xeno\Wire\Trait;
 
+use Yale\Xeno\Data\StringX;
+
 trait ManageX
 {
 	// ◈ property
@@ -12,61 +14,42 @@ trait ManageX
 	protected function listingX($record = [], $action = 'listing')
 	{
 		$this->setIfNotX('action', $action);
-
+		$this->setActionCountX($action);
+		$this->setWireRouteX($action);
+		$this->setRecordX($record);
+		if (!empty($this->moduleX)) {
+			$this->setTitleX($this->moduleX);
+			$this->setSloganX('list of ' . StringX::plural($this->moduleX));
+		}
 	}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	// ◈ === createX »
+	protected function createX($action = 'create')
+	{
+		$this->setIfNotX('action', $action);
+		$this->setActionCountX($action);
+		$this->setWireRouteX($action);
+		if (!empty($this->moduleX)) {
+			$this->setTitleX($this->moduleX);
+			$this->setSloganX('create new ' . $this->moduleX);
+		}
+	}
 
 
 
 	// ◈ === updateX »
 	protected function updateX($action = 'update')
 	{
-		$this->setActionX($action);
-
-	}
-
-
-
-
-	// ◈ === createX »
-	protected function createX($component = null, $view = 'create')
-	{
-		$this->titleX = FormatX::title($component);
-		$this->taglineX = 'Create new ' . FormatX::title($component);
-		$this->viewCountX['create'] = ($this->viewCountX['create'] ?? 0) + 1;
-		$this->setViewIfNotX($view);
-		$this->setWireRouteX($view, $component);
-	}
-
-
-
-	protected function listingXz($record = null, $component = null, $view = 'listing')
-	{
-		$this->titleX = FormatX::title($component);
-		$this->taglineX = 'List of ' . FormatX::title(Str::plural($component));
-		$this->viewCountX['list'] = ($this->viewCountX['list'] ?? 0) + 1;
-		if (!empty($record)) {
-			$this->setRecordX($record);
+		$this->setIfNotX('action', $action);
+		$this->setActionCountX($action);
+		$this->setWireRouteX($action);
+		if (!empty($this->moduleX)) {
+			$this->setTitleX($this->moduleX);
+			$this->setSloganX('update ' . $this->moduleX);
 		}
-		$this->setViewIfNotX($view);
-		$this->setWireRouteX($view, $component);
 	}
+
 
 }//> end of trait ~ ManageX
