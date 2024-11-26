@@ -2,7 +2,9 @@
 
 namespace Yale\Xeno\Wire;
 
+use Yale\Anci\EnvX;
 use Yale\Xeno\Http\RouteX;
+use Yale\Xeno\Data\StringX;
 
 abstract class PageX extends ComponentX
 {
@@ -17,7 +19,7 @@ abstract class PageX extends ComponentX
 	public function mount()
 	{
 		$this->setActionX();
-		// $this->setModuleX();
+		$this->callMethodX('mountX');
 	}
 
 
@@ -29,12 +31,7 @@ abstract class PageX extends ComponentX
 		$this->setComponentX();
 		$this->setActionX();
 		$this->setModuleX();
-	}
-	public function detail($id = null)
-	{
-		$this->setActionX('detail');
-		// $this->setRouteX('');
-
+		$this->callMethodX('bootX');
 	}
 
 
@@ -116,14 +113,23 @@ abstract class PageX extends ComponentX
 
 
 	// ◈ === emitNavX »
-	protected function emitNavX($title = null, $route = null, $param = [], $absoluteURL = false)
+	protected function emitNavX($title = null, $route = null, $param = [], $absolute = false)
 	{
 		if (!empty($title)) {
-			$this->dispatch('titleChanged', $title);
+			if (StringX::wordCount($title) === 1 && (strtolower($title) === strtolower($this->titleX)) && !empty($this->actionX)) {
+				if ($this->actionX === 'detail') {
+					$title .= '';
+				} else {
+					$title = $actionX . ' ' . $titleX;
+				}
+				$title .= ' - ' . EnvX::project('name') . ' • ' . EnvX::firm('brand');
+			}
+			$this->dispatch('titleChanged', ucwords($title));
 		}
+
 		if (!empty($route)) {
-			$url = RouteX:: as($route, $param, $absoluteURL);
-			$this->dispatch('urlChanged', $url);
+			$link = RouteX:: as($route, $param, $absolute);
+			$this->dispatch('urlChanged', $link);
 		}
 	}
 
