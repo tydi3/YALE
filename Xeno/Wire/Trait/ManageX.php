@@ -31,6 +31,7 @@ trait ManageX
 		$this->setIfNotX('action', $action);
 		$this->setActionCountX($action);
 		$this->setWireRouteX($action);
+		$this->callMethodX('organizeX', $action);
 		if (!empty($this->moduleX)) {
 			$this->setTitleX($this->moduleX);
 			$this->setSloganX('create new ' . $this->moduleX);
@@ -45,9 +46,25 @@ trait ManageX
 		$this->setIfNotX('action', $action);
 		$this->setActionCountX($action);
 		$this->setWireRouteX($action);
+		$this->callMethodX('organizeX', $action);
 		if (!empty($this->moduleX)) {
 			$this->setTitleX($this->moduleX);
 			$this->setSloganX('update ' . $this->moduleX);
+		}
+	}
+
+
+
+	// ◈ === cloneX »
+	protected function cloneX($action = 'clone')
+	{
+		$this->setIfNotX('action', $action);
+		$this->setActionCountX($action);
+		$this->setWireRouteX($action);
+		$this->callMethodX('organizeX', $action);
+		if (!empty($this->moduleX)) {
+			$this->setTitleX($this->moduleX);
+			$this->setSloganX('create as new ' . $this->moduleX);
 		}
 	}
 
