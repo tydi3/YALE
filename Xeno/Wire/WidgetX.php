@@ -14,7 +14,7 @@ abstract class WidgetX extends ComponentX
 	{
 		if (!empty($view)) {
 			$view = 'widget.' . $view;
-			$this->viewX = $this->iBladeX($view, $theme);
+			$this->viewX = $this->asBladeX($view, $theme);
 		}
 	}
 
