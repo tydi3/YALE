@@ -24,6 +24,15 @@ abstract class ComponentX extends Component
 
 
 
+	// ◈ === callMethodX »
+	protected function callMethodX($method, ...$arguments){
+		if(method_exists($this, $method)){
+			return $this->$method(...$arguments);
+		}
+	}
+
+
+
 	// ◈ === actionCountX »
 	protected function actionCountX($action, $do = 'return', $number = 1)
 	{
