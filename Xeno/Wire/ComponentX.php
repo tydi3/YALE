@@ -24,6 +24,23 @@ abstract class ComponentX extends Component
 
 
 
+	// ◈ === actionCountX »
+	protected function actionCountX($action, $do = 'return', $number = 1)
+	{
+		$this->actionCountX[$action] = $this->actionCountX[$action] ?? 0;
+		if ($do === 'increment') {
+			$this->actionCountX[$action] += $number;
+		} elseif ($do === 'decrement') {
+			$this->actionCountX[$action] += $number;
+		} elseif ($do === 'calibrate') {
+			$this->actionCountX[$action] = $number;
+		} elseif ($do === 'return') {
+			return $this->actionCountX[$action];
+		}
+	}
+
+
+
 	// ◈ === asClassX »
 	public function asClassX()
 	{
@@ -175,6 +192,16 @@ abstract class ComponentX extends Component
 
 
 
+	// ◈ === setActionCountX »
+	protected function setActionCountX($action, $number = 1, $increment = true)
+	{
+		if ($increment === true) {
+			return $this->actionCountX($action, 'increment', $number);
+		}
+	}
+
+
+
 	// ◈ === setWireX »
 	protected function setWireX()
 	{
@@ -231,8 +258,12 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === setWireRouteX → set wire method as route name »
-	protected function setWireRouteX($route, $persist = true)
+	protected function setWireRouteX($route, $persist = true, $component = true)
 	{
+		if ($component === true) {
+			$route = $this->componentX . '.' . route;
+		}
+
 		// ~ requests available until session is cleared or data overwritten
 		if ($persist) {
 			Session::put('wireRouteX', $route);
@@ -257,23 +288,6 @@ abstract class ComponentX extends Component
 			$render = view($view, ['recordX' => $record]);
 		}
 		return $render;
-	}
-
-
-
-	// ◈ === actionCountX »
-	protected function actionCountX($action, $do = 'return', $number = 1)
-	{
-		$this->actionCountX[$action] = $this->actionCountX[$action] ?? 0;
-		if ($do === 'increment') {
-			$this->actionCountX[$action] += $number;
-		} elseif ($do === 'decrement') {
-			$this->actionCountX[$action] += $number;
-		} elseif ($do === 'calibrate') {
-			$this->actionCountX[$action] = $number;
-		} elseif ($do === 'return') {
-			return $this->actionCountX[$action];
-		}
 	}
 
 }//> end of class ~ ComponentX
