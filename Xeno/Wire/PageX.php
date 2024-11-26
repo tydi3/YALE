@@ -29,7 +29,7 @@ abstract class PageX extends ComponentX
 	{
 		if (!empty($view)) {
 			$view = 'page.' . $view;
-			$this->viewX = $this->iBladeX($view, $theme);
+			$this->viewX = $this->asBladeX($view, $theme);
 		}
 	}
 
@@ -40,7 +40,7 @@ abstract class PageX extends ComponentX
 	{
 		if (!empty($layout)) {
 			$layout = 'layout.' . $layout;
-			$this->layoutX = $this->iBladeX($layout, $theme);
+			$this->layoutX = $this->asBladeX($layout, $theme);
 		}
 	}
 
@@ -54,7 +54,7 @@ abstract class PageX extends ComponentX
 				if (!empty($this->moduleX)) {
 					$view = $this->moduleX;
 				} else {
-					$view = strtolower($this->iClassX());
+					$view = strtolower($this->asClassX());
 				}
 				$this->setViewX($view);
 			}
@@ -84,8 +84,7 @@ abstract class PageX extends ComponentX
 	// ◈ === iPageX »
 	protected function iPageX(?string $view = null, array|object|null $record = null, string|bool|null $layout = true)
 	{
-		return $this->iRenderX($this->getViewX($view), $this->getLayoutX($layout), $record);
+		return $this->doRenderX($this->getViewX($view), $this->getLayoutX($layout), $record);
 	}
-
 
 }//> end of class ~ PageX
