@@ -41,6 +41,18 @@ abstract class ComponentX extends Component
 
 
 
+	// ◈ === notifyX »
+	protected function notifyX($key, $value, $persist = false)
+	{
+		if ($persist) {
+			Session::put($key, $value);
+		} else {
+			Session::flash($key, $value);
+		}
+	}
+
+
+
 	// ◈ === asClassX »
 	public function asClassX()
 	{
