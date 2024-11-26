@@ -13,6 +13,32 @@ abstract class PageX extends ComponentX
 
 
 
+	// ◈ === mount » [initial request]
+	public function mount()
+	{
+		$this->setActionX();
+		// $this->setModuleX();
+	}
+
+
+
+	// ◈ === boot » [every request]
+	public function boot()
+	{
+		$this->setRouteX();
+		$this->setComponentX();
+		$this->setActionX();
+		$this->setModuleX();
+	}
+	public function detail($id = null)
+	{
+		$this->setActionX('detail');
+		// $this->setRouteX('');
+
+	}
+
+
+
 	// ◈ === setRouteX »
 	protected function setRouteX(?string $route = null)
 	{
