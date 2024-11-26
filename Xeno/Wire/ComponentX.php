@@ -284,7 +284,7 @@ abstract class ComponentX extends Component
 	protected function setWireRouteX($route, $persist = true, $component = true)
 	{
 		if ($component === true) {
-			$route = $this->componentX . '.' . route;
+			$route = $this->componentX . '.' . $route;
 		}
 
 		// ~ requests available until session is cleared or data overwritten
