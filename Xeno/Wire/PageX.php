@@ -87,4 +87,18 @@ abstract class PageX extends ComponentX
 		return $this->doRenderX($this->getViewX($view), $this->getLayoutX($layout), $record);
 	}
 
+
+
+	// ◈ === emitNavX »
+	protected function emitNavX($title = null, $route = null, $param = [], $absoluteURL = false)
+	{
+		if (!empty($title)) {
+			$this->dispatch('titleChanged', $title);
+		}
+		if (!empty($route)) {
+			$url = RouteX:: as($route, $param, $absoluteURL);
+			$this->dispatch('urlChanged', $url);
+		}
+	}
+
 }//> end of class ~ PageX
