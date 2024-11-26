@@ -1086,4 +1086,12 @@ class StringX
 		return Str::words($string, 1);
 	}
 
+
+
+	// ◈ === wordCount »
+	public static function wordCount($string)
+	{
+		return str_word_count($string, 0, '');
+	}
+
 }//> end of class ~ StringX
