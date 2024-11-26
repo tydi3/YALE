@@ -68,5 +68,4 @@ trait ManageX
 		}
 	}
 
-
 }//> end of trait ~ ManageX
