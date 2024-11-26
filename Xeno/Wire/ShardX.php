@@ -14,7 +14,7 @@ abstract class ShardX extends ComponentX
 	{
 		if (!empty($view)) {
 			$view = 'shard.' . $view;
-			$this->viewX = $this->iBladeX($view, $theme);
+			$this->viewX = $this->asBladeX($view, $theme);
 		}
 	}
 
