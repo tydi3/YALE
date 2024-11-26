@@ -26,6 +26,21 @@ trait ManageX
 
 
 
+	// ◈ === detailX »
+	protected function detailX($record = [], $action = 'detail')
+	{
+		$this->setIfNotX('action', $action);
+		$this->setActionCountX($action);
+		$this->setWireRouteX($action);
+		$this->setRecordX($record);
+		if (!empty($this->moduleX)) {
+			$this->setTitleX($this->moduleX);
+			$this->setSloganX('review ' . $this->moduleX . 'details');
+		}
+	}
+
+
+
 	// ◈ === createX »
 	protected function createX($action = 'create')
 	{
@@ -66,6 +81,16 @@ trait ManageX
 		if (!empty($this->moduleX)) {
 			$this->setTitleX($this->moduleX);
 			$this->setSloganX('create as new ' . $this->moduleX);
+		}
+	}
+
+
+
+	// ◈ === setViewAsX »
+	protected function setViewAsX($view = 'manage')
+	{
+		if ($this->componentX !== 'dashboard') {
+			$this->setViewX($view);
 		}
 	}
 
