@@ -5,8 +5,10 @@ namespace Yale\Xeno\Wire;
 use Yale\Anci\EnvX;
 use Yale\Anci\DebugX;
 use Livewire\Component;
+use Yale\Xeno\File\FileX;
 use Yale\Xeno\Data\ArrayX;
 use Yale\Xeno\Data\StringX;
+use Illuminate\Support\Facades\Session;
 
 abstract class ComponentX extends Component
 {
@@ -14,24 +16,24 @@ abstract class ComponentX extends Component
 	protected $componentX;
 	protected $moduleX;
 	protected $actionX;
-	protected $recordX = [];
 	protected $titleX;
 	protected $sloganX;
 	protected $permissionX = [];
+	protected $recordX = [];
 	public $wireX;
 
 
 
-	// ◈ === iClassX »
-	public function iClassX()
+	// ◈ === asClassX »
+	public function asClassX()
 	{
 		return basename(get_class($this));
 	}
 
 
 
-	// ◈ === iBladeX »
-	protected function iBladeX(string $blade, bool $theme = true)
+	// ◈ === asBladeX »
+	protected function asBladeX(string $blade, bool $theme = true)
 	{
 		if (!empty($blade)) {
 			if ($theme) {
@@ -43,51 +45,45 @@ abstract class ComponentX extends Component
 
 
 
-	// ◈ === iRenderX »
-	protected function iRenderX(string $view, ?string $layout = null, array|object|null $record = null)
-	{
-		if (empty($record)) {
-			$record = $this->recordX;
-		}
-
-		if (!empty($layout)) {
-			$render = view($view, ['recordX' => $record])->layout($layout);
-		} else {
-			$render = view($view, ['recordX' => $record]);
-		}
-		return $render;
-	}
-
-
-
-	// ◈ === iComponentX »
-	protected function iComponentX(?string $component = null)
+	// ◈ === asComponentX »
+	protected function asComponentX(?string $component = null)
 	{
 		if (empty($component)) {
-			$component = $this->iClassX();
-			// $component = StringX::beforeAs($this->routeX, '-');
+			$component = $this->asClassX();
 		}
 		return strtolower($component);
 	}
 
 
 
-	// ◈ === iActionX »
-	protected function iActionX(?string $action = null)
+	// ◈ === checkBladeX »
+	protected function checkBladeX($blade)
 	{
-		if (empty($action)) {
-			if (!empty($this->routeX) && !empty($this->componentX)) {
-				if (($this->routeX !== $this->componentX)) {
-					$action = StringX::after($this->routeX, $this->componentX . '.');
-				}
+		if (!empty($blade)) {
+			if (!FileX::is()->blade($blade)) {
+				return DebugX::blade404($blade);
 			}
 		}
+	}
 
-		if (empty($action)) {
-			$action = 'index';
+
+
+	// ◈ === checkViewX »
+	protected function checkViewX()
+	{
+		if (!empty($this->viewX)) {
+			return self::checkBladeX($this->viewX);
 		}
+	}
 
-		return strtolower($action);
+
+
+	// ◈ === checkLayoutX »
+	protected function checkLayoutX()
+	{
+		if (!empty($this->layoutX)) {
+			return self::checkBladeX($this->layoutX);
+		}
 	}
 
 
@@ -95,15 +91,7 @@ abstract class ComponentX extends Component
 	// ◈ === setComponentX »
 	protected function setComponentX(?string $component = null)
 	{
-		$this->componentX = $this->iComponentX($component);
-	}
-
-
-
-	// ◈ === setActionX »
-	protected function setActionX(?string $action = null)
-	{
-		$this->actionX = $this->iActionX($action);
+		$this->componentX = $this->asComponentX($component);
 	}
 
 
@@ -114,11 +102,7 @@ abstract class ComponentX extends Component
 		if (empty($record)) {
 			$record = [];
 		}
-
-		// if (is_array($record)) {
-		// 	$record = ArrayX::toObject($record);
-		// }
-
+		// if (is_array($record)) {$record = ArrayX::toObject($record);}
 		$this->recordX = $record;
 	}
 
@@ -127,9 +111,8 @@ abstract class ComponentX extends Component
 	// ◈ === setTitleX »
 	protected function setTitleX(?string $title = null)
 	{
-		// TODO: change from component to module as componet may be more that a single word & module would have to be define from a setModuleX()
-		if (empty($title) && !empty($this->componentX)) {
-			$title = $this->componentX;
+		if (empty($title) && !empty($this->moduleX)) {
+			$title = $this->moduleX;
 		}
 		$this->titleX = $title;
 	}
@@ -139,16 +122,14 @@ abstract class ComponentX extends Component
 	// ◈ === setSloganX »
 	protected function setSloganX(?string $slogan = null)
 	{
-		// TODO: change from component to module as componet may be more that a single word & module would have to be define from a setModuleX()
-		if (empty($slogan) && !empty($this->componentX) && !empty($this->actionX) && $this->actionX !== 'index') {
-			$slogan = $this->actionX . ' ' . $this->componentX;
+		if (empty($slogan) && !empty($this->moduleX) && !empty($this->actionX) && $this->actionX !== 'index') {
+			$slogan = $this->actionX . ' ' . $this->moduleX;
 			if ($this->actionX === 'detail') {
-				$slogan = 'review ' . $this->componentX . ' details';
+				$slogan = 'review ' . $this->moduleX . ' details';
 			} elseif ($this->actionX === 'listing') {
-				$slogan = 'list of ' . StringX::plural($this->componentX);
+				$slogan = 'list of ' . StringX::plural($this->moduleX);
 			}
 		}
-
 		$this->sloganX = $slogan;
 	}
 
@@ -161,6 +142,7 @@ abstract class ComponentX extends Component
 	}
 
 
+
 	// ◈ === setModuleX »
 	protected function setModuleX($module = true)
 	{
@@ -171,6 +153,24 @@ abstract class ComponentX extends Component
 		} elseif (!empty($module)) {
 			$this->moduleX = $module;
 		}
+	}
+
+
+
+	// ◈ === setActionX »
+	protected function setActionX(?string $action = null)
+	{
+		if (empty($action)) {
+			if (!empty($this->routeX) && !empty($this->componentX)) {
+				if (($this->routeX !== $this->componentX)) {
+					$action = StringX::after($this->routeX, $this->componentX . '.');
+				}
+			}
+		}
+		if (empty($action)) {
+			$action = 'index';
+		}
+		$this->actionX = strtolower($action);
 	}
 
 
@@ -213,6 +213,67 @@ abstract class ComponentX extends Component
 			}
 		}
 		$this->wireX = $wire;
+	}
+
+
+
+	// ◈ === setIfNotX »
+	protected function setIfNotX($property, $value)
+	{
+		//~ $this->actionX
+		if ($property === 'action') {
+			if (empty($this->actionX) || $this->actionX !== $value) {
+				$this->setActionX($value);
+			}
+		}
+	}
+
+
+
+	// ◈ === setWireRouteX → set wire method as route name »
+	protected function setWireRouteX($route, $persist = true)
+	{
+		// ~ requests available until session is cleared or data overwritten
+		if ($persist) {
+			Session::put('wireRouteX', $route);
+		} else {
+			// ~ next request only
+			Session::flash('wireRouteX', $route);
+		}
+	}
+
+
+
+	// ◈ === doRenderX »
+	protected function doRenderX(string $view, ?string $layout = null, array|object|null $record = null)
+	{
+		if (empty($record)) {
+			$record = $this->recordX;
+		}
+
+		if (!empty($layout)) {
+			$render = view($view, ['recordX' => $record])->layout($layout);
+		} else {
+			$render = view($view, ['recordX' => $record]);
+		}
+		return $render;
+	}
+
+
+
+	// ◈ === actionCountX »
+	protected function actionCountX($action, $do = 'return', $number = 1)
+	{
+		$this->actionCountX[$action] = $this->actionCountX[$action] ?? 0;
+		if ($do === 'increment') {
+			$this->actionCountX[$action] += $number;
+		} elseif ($do === 'decrement') {
+			$this->actionCountX[$action] += $number;
+		} elseif ($do === 'calibrate') {
+			$this->actionCountX[$action] = $number;
+		} elseif ($do === 'return') {
+			return $this->actionCountX[$action];
+		}
 	}
 
 }//> end of class ~ ComponentX
