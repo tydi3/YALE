@@ -141,7 +141,9 @@ abstract class ComponentX extends Component
 		if (empty($record)) {
 			$record = [];
 		}
-		// if (is_array($record)) {$record = ArrayX::toObject($record);}
+		if (is_array($record)) {
+			$record = ArrayX::toObject($record);
+		}
 		$this->recordX = $record;
 	}
 

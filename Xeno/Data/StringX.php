@@ -128,7 +128,7 @@ class StringX
 
 
 
-	// ◈ === first → first character (nth) » string
+	// ◈ === first → first (nth) number of characters » string
 	public static function first($string, $nth = 1)
 	{
 		if (self::notEmpty($string) && is_numeric($nth)) {
@@ -142,7 +142,7 @@ class StringX
 
 
 
-	// ◈ === last → last character (nth) » string
+	// ◈ === last → last (nth) number of characters » string
 	public static function last($string, $nth = 1)
 	{
 		if (self::notEmpty($string) && is_numeric($nth)) {
@@ -171,8 +171,25 @@ class StringX
 
 
 
-	// ◈ === occurrenceNth »
-	public static function occurrenceNth($string, $separator, $nth, $req = 'nth')
+	// ◈ === occurrenceNth » get position of nth occurrence
+	public static function occurrenceNth($string, $character, $nth)
+	{
+		$position = -1;
+		while ($nth > 0) {
+			$position = strpos($string, $character, $position + 1);
+			if ($position === false) {
+				return false;
+			}
+			$nth--;
+		}
+		return $position;
+	}
+
+
+
+	// ◈ === occurrenceGroupNth »
+	// TODO: understand code and purpose, I wrote this a long time ago
+	public static function occurrenceGroupNth($string, $separator, $nth, $req = 'nth')
 	{
 		$occurrence = [];
 		$parts = explode($separator, $string);
@@ -299,6 +316,26 @@ class StringX
 
 
 
+	// ◈ === stripNth → remove nth character from string »
+	public static function stripNth($string, $nth, $number = null)
+	{
+		if (!$number) {
+			if ($nth <= 0 || $nth > strlen($string)) {
+				return $string;
+			}
+			return substr($string, 0, $nth - 1) . substr($string, $nth);
+		} else {
+			if ($nth <= 0 || $nth > strlen($string) || $x <= 0) {
+				return $string;
+			}
+			$start = substr($string, 0, $nth - 1);
+			$end = substr($string, $nth + $x - 1);
+			return $start . $end;
+		}
+	}
+
+
+
 	// ◈ === crop → trim edges or character(s) »
 	public static function crop($string, $needle = 'space', $strictCase = false)
 	{
@@ -327,6 +364,14 @@ class StringX
 
 
 
+	// ◈ === cropBeginNth → crop from beginning of string to nth position »
+	public static function cropBeginNth($string, $nth)
+	{
+		return substr($string, $nth);
+	}
+
+
+
 	// ◈ === cropEnd → remove end of string »
 	public static function cropEnd($string, $needle, $strictCase = false)
 	{
@@ -334,6 +379,14 @@ class StringX
 			return self::stripLast($string, $needle, $strictCase);
 		}
 		return $string;
+	}
+
+
+
+	// ◈ === cropEndNth → crop from ending of string to nth position »
+	public static function cropEndNth($string, $nth)
+	{
+		return substr($string, 0, $nth);
 	}
 
 

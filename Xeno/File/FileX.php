@@ -2,10 +2,11 @@
 
 namespace Yale\Xeno\File;
 
+use Yale\Anci\EnvX;
 use Yale\Anci\PathX;
 use Yale\Anci\DebugX;
-use Yale\Xeno\Data\StringX;
 use Yale\Xeno\Data\RandomX;
+use Yale\Xeno\Data\StringX;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Storage;
@@ -62,6 +63,15 @@ class FileX
 	public static function storage($file)
 	{
 		return Storage::url($file);
+	}
+
+
+
+	// ◈ === photo »
+	public static function photo($file)
+	{
+		$path = '/'.EnvX::project('theme') . '/photo/';
+		return $path . $file;
 	}
 
 

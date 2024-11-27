@@ -9,17 +9,50 @@ use Illuminate\Support\Facades\Storage;
 
 class ImgX
 {
-	// ◈ === profile »
-	public static function profile($img = 'auth')
+	// ◈ === asPath »
+	public static function asPath($link, $trimStorage = false)
 	{
-		if ($img === 'auth' && Auth::check()) {
-			$image = Auth::user()->profile_photo_url;
-			if(StringX::contain($image, 'storage/profile-photos')){
-				$image = '/'.StringX::afterAs($image, 'storage/', false);
+		if (!empty($link)) {
+			if (StringX::beginWithAny($link, ['http://', 'https://'])) {
+				$position = StringX::occurrenceNth($link, '/', 3);
+				$link = StringX::cropBeginNth($link, $position);
 			}
-			return $image;
+
+			if ($trimStorage === true && StringX::beginWithAny($link, ['/storage/', 'storage/'])) {
+				$link = StringX::afterAs($link, 'storage/');
+			}
 		}
-		return '/storage/profile-photos/404.png';
+		return $link;
+	}
+
+
+
+	// ◈ === profile »
+	public static function profile($image = null)
+	{
+		if (!empty($image)) {
+			if ($image === 'auth') {
+				if (Auth::check()) {
+					$image = Auth::user()->profile_photo_url;
+				} else {
+					$image = null;
+				}
+			}
+			$image = self::asPath($image, true);
+			$isFile = FileX::in()->storage($image, true);
+			if ($isFile) {
+				return FileX::storage($image);
+			}
+		}
+		return FileX::photo('user/no-dp.png');
+	}
+
+
+
+	// ◈ === auth »
+	public static function auth()
+	{
+		return self::profile('auth');
 	}
 
 
