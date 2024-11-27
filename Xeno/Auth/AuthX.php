@@ -107,4 +107,19 @@ class AuthX
 		return $dp;
 	}
 
+
+
+	// ◈ === privilege »
+	public static function privilege()
+	{
+		$data = ['type' => '', 'kind' => '', 'role' => ''];
+		if (self::is()) {
+			$data['type'] = self::$auth->type;
+			$data['kind'] = self::$auth->kind;
+			$data['role'] = self::$auth->role;
+		}
+		return $data;
+	}
+
+
 }//> end of class ~ AuthX
