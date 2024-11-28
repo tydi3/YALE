@@ -2,6 +2,10 @@
 
 namespace Yale\Xeno\Wire;
 
+use Yale\Anci\EnvX;
+use Yale\Xeno\Http\RouteX;
+use Yale\Xeno\Data\StringX;
+
 abstract class ShardX extends ComponentX
 {
 	// ◈ property
@@ -12,10 +16,35 @@ abstract class ShardX extends ComponentX
 	// ◈ === setViewX »
 	protected function setViewX($view, $theme = true)
 	{
-		if (!empty($view)) {
-			$view = 'shard.' . $view;
-			$this->viewX = $this->asBladeX($view, $theme);
+		if (empty($view)) {
+			// TODO: implement using module as name
 		}
+
+		$view = 'shard.' . $view;
+		$this->viewX = $this->asBladeX($view, $theme);
 	}
 
-}//> end of class ~ ShardX
+
+
+	// ◈ === getViewX »
+	protected function getViewX()
+	{
+		if (!empty($this->viewX)) {
+			return $this->viewX;
+		}
+		// TODO: flag error when view is empty
+	}
+
+
+
+	// ◈ === iShardX »
+	protected function iShardX(?string $view = null, array|object|null $record = null, $theme = true)
+	{
+		if (!empty($view)) {
+			$this->setViewX($view, $theme);
+		}
+
+		return $this->doRenderX(view: $this->getViewX(), record: $record);
+	}
+
+}//> end of class ~ ShardXs
