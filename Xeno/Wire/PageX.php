@@ -107,7 +107,11 @@ abstract class PageX extends ComponentX
 	// ◈ === iPageX »
 	protected function iPageX(?string $view = null, array|object|null $record = null, string|bool|null $layout = true)
 	{
-		return $this->doRenderX($this->getViewX($view), $this->getLayoutX($layout), $record);
+		// if (!empty($view)) {
+		// 	$this->setViewX($view);
+		// }
+		// $view = $this->getViewX($view);
+		return $this->doRenderX($view, $this->getLayoutX($layout), $record);
 	}
 
 
