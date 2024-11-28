@@ -33,6 +33,14 @@ trait Model
 
 
 
+	// ◈ === oArray » sefely perform toArray()
+	public static function oArray($result)
+	{
+		return $result ? $result->toArray() : [];
+	}
+
+
+
 	// ◈ === getFillable »
 	public function getFillable()
 	{
