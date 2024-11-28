@@ -91,6 +91,8 @@ trait ManageX
 	{
 		if ($this->componentX !== 'dashboard') {
 			$this->setViewX($view);
+		} else {
+			$this->setViewX('dashboard');
 		}
 	}
 
