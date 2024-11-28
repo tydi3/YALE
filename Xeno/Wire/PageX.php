@@ -3,6 +3,7 @@
 namespace Yale\Xeno\Wire;
 
 use Yale\Anci\EnvX;
+use Yale\Anci\DebugX;
 use Yale\Xeno\Http\RouteX;
 use Yale\Xeno\Data\StringX;
 
@@ -50,9 +51,14 @@ abstract class PageX extends ComponentX
 	// ◈ === setViewX »
 	protected function setViewX($view, $theme = true)
 	{
+		if (empty($view)) {
+			// TODO: implement using module as name
+		}
+
 		if (!empty($view)) {
 			$view = 'page.' . $view;
 			$this->viewX = $this->asBladeX($view, $theme);
+			return true;
 		}
 	}
 
@@ -70,20 +76,26 @@ abstract class PageX extends ComponentX
 
 
 	// ◈ === getViewX »
-	protected function getViewX(?string $view = null)
+	protected function getViewX()
 	{
-		if (empty($view)) {
-			if (empty($this->viewX)) {
-				if (!empty($this->moduleX)) {
-					$view = $this->moduleX;
-				} else {
-					$view = strtolower($this->asClassX());
-				}
-				$this->setViewX($view);
-			}
+		// if (empty($view)) {
+		// 	if (empty($this->viewX)) {
+		// 		if (!empty($this->moduleX)) {
+		// 			$view = $this->moduleX;
+		// 		} else {
+		// 			$view = strtolower($this->asClassX());
+		// 		}
+		// 		$this->setViewX($view);
+		// 	}
+		// 	return $this->viewX;
+		// }
+		// return $view;
+
+		if (!empty($this->viewX)) {
 			return $this->viewX;
 		}
-		return $view;
+		// TODO: flag error when view is empty
+		DebugX::oversight('PageX', __FUNCTION__ . '() view is empty on $this->viewX');
 	}
 
 
@@ -107,11 +119,11 @@ abstract class PageX extends ComponentX
 	// ◈ === iPageX »
 	protected function iPageX(?string $view = null, array|object|null $record = null, string|bool|null $layout = true)
 	{
-		// if (!empty($view)) {
-		// 	$this->setViewX($view);
-		// }
-		// $view = $this->getViewX($view);
-		return $this->doRenderX($view, $this->getLayoutX($layout), $record);
+		if (!empty($view)) {
+			$this->setViewX($view, $theme);
+		}
+
+		return $this->doRenderX(view: $this->getViewX(), layout: $this->getLayoutX($layout), record: $record);
 	}
 
 
