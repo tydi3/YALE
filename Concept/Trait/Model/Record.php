@@ -15,4 +15,32 @@ trait Record
 		return static::orderBy('id')->get();
 	}
 
+
+
+	// ◈ === oExistByPuid »
+	public static function oExistByPuid($puid)
+	{
+		// 	if (empty($puid)) {
+		// 		throw new InvalidArgumentException('PUID cannot be empty.');
+		// return false;
+		// }
+		return static::where('puid', $puid)->exists();
+	}
+
+
+
+	// ◈ === oFindByPuid »
+	public static function oFindByPuid($puid, string|array $columns = ['*'])
+	{
+		return static::where('puid', $puid)->select($columns)->first();
+	}
+
+
+
+	// ◈ === oUpdateByPuid »
+	public static function oUpdateByPuid($puid, array $data)
+	{
+		return static::where('puid', $puid)->update($data);
+	}
+
 }//> end of trait ~ Record
