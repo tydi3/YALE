@@ -20,6 +20,7 @@ abstract class ComponentX extends Component
 	protected $sloganX;
 	protected $permissionX = [];
 	protected $recordX = [];
+	protected $idX;
 	public $wireX;
 
 
@@ -63,6 +64,52 @@ abstract class ComponentX extends Component
 
 
 
+	// ◈ === redirectX → ... »
+	protected function redirectX($url = null)
+	{
+		// if (is_null($url)) {
+		// 	route($this->component);
+		// }
+		return $this->redirect($url, navigate: true);
+	}
+
+
+
+	// ◈ === gotoX »
+	protected function gotoX($destination, array $param = null)
+	{
+		if ($destination === 'refresh') {
+			return $this->refreshX();
+		} elseif ($destination === 'reload') {
+			return $this->reloadX();
+		} elseif (!empty($destination)) {
+			if (!empty($param)) {
+				// TODO  improve code
+				return $this->redirect(RouteX:: as($destination, $param), navigate: true);
+			}
+			return $this->redirect(RouteX:: as($destination), navigate: true);
+		}
+	}
+
+
+
+	// ◈ === resolveX »
+	protected function resolveX($action, $result = null, $next = null)
+	{
+		if ($action === 'update') {
+			// ~ success
+			if ($result) {
+				$this->doSuccessX();
+				if ($next) {
+					// return $this->gotoX($next);
+					return $this->redirectX($next);
+				}
+			}
+		}
+	}
+
+
+
 	// ◈ === asClassX »
 	public function asClassX()
 	{
@@ -91,6 +138,33 @@ abstract class ComponentX extends Component
 			$component = $this->asClassX();
 		}
 		return strtolower($component);
+	}
+
+
+
+	// ◈ === spotActionX » detect action from http
+	protected function spotActionX($caller = null)
+	{
+		$action = null;
+		if (!empty($this->routeX)) {
+			if (strtolower($this->routeX) !== 'livewire.update') {
+				if (StringX::contain($this->routeX, '.')) {
+					if (($this->routeX !== $this->componentX)) {
+						$action = StringX::after($this->routeX, $this->componentX . '.');
+					} else {
+						$action = StringX::after($this->routeX, '.');
+					}
+				} else {
+					$action = 'initial';
+				}
+			}
+		}
+
+		if (!empty($action)) {
+			$action = strtolower($action);
+		}
+
+		return $action;
 	}
 
 
@@ -127,6 +201,33 @@ abstract class ComponentX extends Component
 
 
 
+	// ◈ === grabIdX »
+	protected function grabIdX($id = null)
+	{
+		if (!empty($id) && empty($this->idX)) {
+			self::setIdX($id);
+		}
+
+		if (!empty($this->idX)) {
+			return $this->idX;
+		}
+
+		// TODO: build an error handler for when $id is expected or record is not found
+		DebugX::oversight($this->moduleX, 'id parameter not found');
+	}
+
+
+
+	// ◈ === setIdX »
+	protected function setIdX($id = null)
+	{
+		if (!empty($id)) {
+			$this->idX = $id;
+		}
+	}
+
+
+
 	// ◈ === setComponentX »
 	protected function setComponentX(?string $component = null)
 	{
@@ -149,6 +250,18 @@ abstract class ComponentX extends Component
 
 
 
+	// ◈ === setPropertyX »
+	protected function setPropertyX(array $property = [])
+	{
+		if (!empty($property)) {
+			foreach ($property as $key => $value) {
+				$this->{$key} = $value;
+			}
+		}
+	}
+
+
+
 	// ◈ === setTitleX »
 	protected function setTitleX(?string $title = null)
 	{
@@ -163,7 +276,7 @@ abstract class ComponentX extends Component
 	// ◈ === setSloganX »
 	protected function setSloganX(?string $slogan = null)
 	{
-		if (empty($slogan) && !empty($this->moduleX) && !empty($this->actionX) && $this->actionX !== 'index') {
+		if (empty($slogan) && !empty($this->moduleX) && !empty($this->actionX) && $this->actionX !== 'initial') {
 			$slogan = $this->actionX . ' ' . $this->moduleX;
 			if ($this->actionX === 'detail') {
 				$slogan = 'review ' . $this->moduleX . ' details';
@@ -206,7 +319,7 @@ abstract class ComponentX extends Component
 				if (($this->routeX !== $this->componentX)) {
 					$action = StringX::after($this->routeX, $this->componentX . '.');
 				} else {
-					$action = 'index';
+					$action = 'initial';
 				}
 			}
 		}
@@ -237,7 +350,7 @@ abstract class ComponentX extends Component
 
 		// • set parameters & values
 		$wire = $this->wireX;
-		$params = ['route', 'component', 'module', 'action', 'title', 'slogan', 'permission'];
+		$params = ['route', 'component', 'module', 'action', 'title', 'slogan', 'permission', 'id'];
 		$properties = array_map(
 			function ($param) {
 				return $param . 'X';
@@ -285,16 +398,32 @@ abstract class ComponentX extends Component
 	// ◈ === setWireRouteX → set wire method as route name »
 	protected function setWireRouteX($route, $persist = true, $component = true)
 	{
+		$routeIs = $route;
 		if ($component === true) {
-			$route = $this->componentX . '.' . $route;
+			$routeIs = $this->componentX;
+			if ($route !== 'initial') {
+				$routeIs .= '.' . $route;
+			}
 		}
 
 		// ~ requests available until session is cleared or data overwritten
 		if ($persist) {
-			Session::put('wireRouteX', $route);
+			Session::put('wireRouteX', $routeIs);
 		} else {
 			// ~ next request only
-			Session::flash('wireRouteX', $route);
+			Session::flash('wireRouteX', $routeIs);
+		}
+	}
+
+
+
+	// ◈ === doSuccessX »
+	protected function doSuccessX($message = 'success', $persist = false)
+	{
+		if ($persist) {
+			Session::put('successX', $message);
+		} else {
+			Session::flash('successX', $message);
 		}
 	}
 
