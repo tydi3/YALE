@@ -2,20 +2,23 @@
 
 namespace Yale\Xeno\Wire\Render;
 
+use Yale\Anci\DebugX;
 use Yale\Xeno\Wire\PageX;
 use Yale\Xeno\Wire\Trait\ManageX;
+use Yale\Xeno\Wire\Trait\ParamX;
 
 abstract class Page extends PageX
 {
 	// ◈ traits »
 	use ManageX;
+	use ParamX;
 
 
 
-	// ◈ === bootX »
-	protected function bootX()
+	// ◈ === igniteX »
+	protected function igniteX()
 	{
-		$actions = ['listing'];
+		$actions = ['initial', 'listing', 'create', 'update'];
 		if (!empty($this->actionX) && in_array($this->actionX, $actions)) {
 			$action = $this->actionX;
 			$this->{$action}();
@@ -30,6 +33,37 @@ abstract class Page extends PageX
 		$this->setViewAsX();
 		$this->setWireX();
 		return $this->iPageX();
+		// $this->debug();
+	}
+
+
+
+
+
+
+
+
+
+	protected function debug()
+	{
+		$param = [
+			'property' => [
+				'route' => $this->routeX,
+				'component' => $this->componentX,
+				'module' => $this->moduleX,
+				'action' => $this->actionX,
+				'id' => $this->idX,
+				'view' => $this->viewX,
+				'logs' => $this->actionCountX,
+				'record' => $this->recordX,
+				// 'model' => $this->modelX,
+			],
+			'wire' => $this->wireX,
+		];
+		if (isset($this->modelX)) {
+			$param['property']['model'] = $this->modelX;
+		}
+		return DebugX::exit($param);
 	}
 
 }//> end of class ~ Page
