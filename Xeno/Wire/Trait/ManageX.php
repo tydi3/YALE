@@ -11,6 +11,20 @@ trait ManageX
 
 
 
+	// ◈ === initialX »
+	protected function initialX($record = [], $action = 'initial')
+	{
+		$this->setIfNotX('action', $action);
+		$this->setActionCountX($action);
+		$this->setWireRouteX($action);
+		if (!empty($this->moduleX)) {
+			$this->setTitleX($this->moduleX);
+			$this->setSloganX('manage ' . $this->moduleX);
+		}
+	}
+
+
+
 	// ◈ === listingX »
 	protected function listingX($record = [], $action = 'listing')
 	{
