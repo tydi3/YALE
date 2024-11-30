@@ -17,10 +17,16 @@ abstract class PageX extends ComponentX
 
 
 	// ◈ === mount » [initial request]
-	public function mount()
+	public function mount($id = null)
 	{
-		$this->setActionX();
-		$this->callMethodX('mountX');
+		$action = $this->spotActionX('mount');
+		if (!empty($action)) {
+			$this->setActionX($action);
+		} else {
+			$this->setActionX();
+		}
+		$this->setIdX($id);
+		$this->callMethodX('igniteX');
 	}
 
 
@@ -30,9 +36,9 @@ abstract class PageX extends ComponentX
 	{
 		$this->setRouteX();
 		$this->setComponentX();
-		$this->setActionX();
 		$this->setModuleX();
-		$this->callMethodX('bootX');
+		// $this->callMethodX('igniteX');
+		// $this->setActionX();
 	}
 
 
@@ -122,7 +128,6 @@ abstract class PageX extends ComponentX
 		if (!empty($view)) {
 			$this->setViewX($view, $theme);
 		}
-
 		return $this->doRenderX(view: $this->getViewX(), layout: $this->getLayoutX($layout), record: $record);
 	}
 
