@@ -71,7 +71,7 @@ class DebugX
 
 
 	// ◈ === exit »
-	public static function exit($var, string $title = null)
+	public static function exit($var, string $title = 'Yale™')
 	{
 		self::dump($var, $title);
 		exit;
@@ -80,7 +80,7 @@ class DebugX
 
 
 	// ◈ === print »
-	public static function print($var)
+	public static function print(...$var)
 	{
 		return self::dump(['Yale™' => $var]);
 	}
