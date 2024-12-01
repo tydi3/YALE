@@ -21,6 +21,7 @@ abstract class ShardX extends WireX
 	}
 
 
+
 	// ◈ === cue404X » trigger a 404 error
 	protected function cue404X()
 	{
@@ -36,7 +37,6 @@ abstract class ShardX extends WireX
 		}
 		$render = [
 			'view' => $this->getViewX(),
-			'layout' => $this->getLayoutX(),
 			'record' => $record,
 		];
 		return $this->doRenderX($render);
