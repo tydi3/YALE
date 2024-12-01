@@ -21,6 +21,7 @@ abstract class WidgetX extends WireX
 	}
 
 
+
 	// ◈ === cue404X » trigger a 404 error
 	protected function cue404X()
 	{
