@@ -11,6 +11,7 @@ use Yale\Xeno\Data\StringX;
 abstract class WireX extends Component
 {
 	// ◈ property
+	protected $recordX = [];
 
 
 
@@ -64,6 +65,17 @@ abstract class WireX extends Component
 			return $this->layoutX;
 		}
 		return null;
+	}
+
+
+
+	// ◈ === getRecordX »
+	protected function getRecordX()
+	{
+		if (!empty($this->recordX)) {
+			return $this->recordX;
+		}
+		return [];
 	}
 
 
@@ -129,6 +141,23 @@ abstract class WireX extends Component
 			$layout = $this->getLayoutX();
 		}
 		return self::checkBladeX($layout, $label);
+	}
+
+
+
+	// ◈ === doRenderX »
+	protected function doRenderX(string $view, ?string $layout = null, array|object|null $record = null)
+	{
+		if (empty($record)) {
+			$record = $this->getRecordX();
+		}
+
+		if (!empty($layout)) {
+			$render = view($view, ['recordX' => $record])->layout($layout);
+		} else {
+			$render = view($view, ['recordX' => $record]);
+		}
+		return $render;
 	}
 
 }//> end of abstract ~ WireX

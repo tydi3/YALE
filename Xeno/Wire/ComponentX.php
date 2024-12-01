@@ -19,7 +19,7 @@ abstract class ComponentX extends Component
 	protected $titleX;
 	protected $sloganX;
 	protected $permissionX = [];
-	protected $recordX = [];
+	// protected $recordX = [];
 	protected $idX;
 	public $wireX;
 
@@ -237,16 +237,16 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === setRecordX »
-	protected function setRecordX(array|object|null $record = null)
-	{
-		if (empty($record)) {
-			$record = [];
-		}
-		if (is_array($record)) {
-			$record = ArrayX::toObject($record);
-		}
-		$this->recordX = $record;
-	}
+	// protected function setRecordX(array|object|null $record = null)
+	// {
+	// 	if (empty($record)) {
+	// 		$record = [];
+	// 	}
+	// 	if (is_array($record)) {
+	// 		$record = ArrayX::toObject($record);
+	// 	}
+	// 	$this->recordX = $record;
+	// }
 
 
 
