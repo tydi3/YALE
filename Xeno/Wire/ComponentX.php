@@ -119,15 +119,15 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === asBladeX »
-	protected function asBladeX(string $blade, bool $theme = true)
-	{
-		if (!empty($blade)) {
-			if ($theme) {
-				$blade = EnvX::project('theme') . '.' . $blade;
-			}
-			return strtolower($blade);
-		}
-	}
+	// protected function asBladeX(string $blade, bool $theme = true)
+	// {
+	// 	if (!empty($blade)) {
+	// 		if ($theme) {
+	// 			$blade = EnvX::project('theme') . '.' . $blade;
+	// 		}
+	// 		return strtolower($blade);
+	// 	}
+	// }
 
 
 
