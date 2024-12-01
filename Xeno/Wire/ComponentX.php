@@ -430,18 +430,18 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === doRenderX »
-	protected function doRenderX(string $view, ?string $layout = null, array|object|null $record = null)
-	{
-		if (empty($record)) {
-			$record = $this->recordX;
-		}
+	// protected function doRenderX(string $view, ?string $layout = null, array|object|null $record = null)
+	// {
+	// 	if (empty($record)) {
+	// 		$record = $this->recordX;
+	// 	}
 
-		if (!empty($layout)) {
-			$render = view($view, ['recordX' => $record])->layout($layout);
-		} else {
-			$render = view($view, ['recordX' => $record]);
-		}
-		return $render;
-	}
+	// 	if (!empty($layout)) {
+	// 		$render = view($view, ['recordX' => $record])->layout($layout);
+	// 	} else {
+	// 		$render = view($view, ['recordX' => $record]);
+	// 	}
+	// 	return $render;
+	// }
 
 }//> end of class ~ ComponentX
