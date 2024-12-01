@@ -420,14 +420,14 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === doSuccessX »
-	protected function doSuccessX($message = 'success', $persist = false)
-	{
-		if ($persist) {
-			Session::put('successX', $message);
-		} else {
-			Session::flash('successX', $message);
-		}
-	}
+	// protected function doSuccessX($message = 'success', $persist = false)
+	// {
+	// 	if ($persist) {
+	// 		Session::put('successX', $message);
+	// 	} else {
+	// 		Session::flash('successX', $message);
+	// 	}
+	// }
 
 
 
