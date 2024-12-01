@@ -7,6 +7,7 @@ use Yale\Anci\DebugX;
 use Livewire\Component;
 use Yale\Xeno\File\FileX;
 use Yale\Xeno\Data\StringX;
+use Illuminate\Support\Facades\Session;
 
 abstract class WireX extends Component
 {
@@ -22,6 +23,20 @@ abstract class WireX extends Component
 	{
 		if (method_exists($this, $method)) {
 			return $this->$method(...$arguments);
+		}
+	}
+
+
+
+	// ◈ === flashX »
+	protected function flashX($key, $message, $persist = false)
+	{
+		// ~ requests available until session is cleared or data overwritten
+		if ($persist) {
+			Session::put($key, $message);
+		} else {
+			// ~ next request only
+			Session::flash($key, $message);
 		}
 	}
 
@@ -122,13 +137,27 @@ abstract class WireX extends Component
 
 
 
+	// ◈ === getPropertyX »
+	protected function getPropertyX($property)
+	{
+		if (!empty($property) && isset($this->{$property})) {
+			return $this->{$property};
+		}
+		return null;
+	}
+
+
+
 	// ◈ === setComponentX »
 	protected function setComponentX(?string $component = null)
 	{
 		if (empty($component)) {
 			$component = $this->getClassX();
 		}
-		return strtolower($component);
+
+		if (empty($component)) {
+			$this->componentX = strtolower($component);
+		}
 	}
 
 
@@ -157,6 +186,31 @@ abstract class WireX extends Component
 		}
 		if (!empty($permission)) {
 			$this->permissionX = array_merge($this->permissionX, $permission);
+		}
+	}
+
+
+
+	// ◈ === setPropertyX »
+	protected function setPropertyX(array $property = [])
+	{
+		if (!empty($property) && is_array($property)) {
+			foreach ($property as $key => $value) {
+				$this->{$key} = $value;
+			}
+		}
+	}
+
+
+
+	// ◈ === setIfNotX »
+	protected function setIfNotX($property, $value)
+	{
+		//~ $this->actionX
+		if ($property === 'action') {
+			if (empty($this->actionX) || $this->actionX !== $value) {
+				$this->callMethodX('setActionX', $value);
+			}
 		}
 	}
 
