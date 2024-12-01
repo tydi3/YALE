@@ -18,7 +18,7 @@ abstract class ComponentX extends Component
 	protected $actionX;
 	// protected $titleX;
 	// protected $sloganX;
-	protected $permissionX = [];
+	// protected $permissionX = [];
 	// protected $recordX = [];
 	protected $idX;
 	public $wireX;
@@ -290,10 +290,10 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === setPermissionX »
-	protected function setPermissionX(array $permission = [])
-	{
-		$this->permissionX = array_merge($this->permissionX, $permission);
-	}
+	// protected function setPermissionX(array $permission = [])
+	// {
+	// 	$this->permissionX = array_merge($this->permissionX, $permission);
+	// }
 
 
 
