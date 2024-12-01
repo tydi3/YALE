@@ -13,6 +13,7 @@ abstract class WireX extends Component
 	// ◈ property
 	protected $componentX;
 	protected $moduleX;
+	protected $permissionX;
 
 
 
@@ -148,6 +149,19 @@ abstract class WireX extends Component
 
 
 
+	// ◈ === setPermissionX »
+	protected function setPermissionX(array $permission = [])
+	{
+		if (!$this->permissionX) {
+			$this->permissionX = [];
+		}
+		if (!empty($permission)) {
+			$this->permissionX = array_merge($this->permissionX, $permission);
+		}
+	}
+
+
+
 	// ◈ === isBladeX »
 	protected function isBladeX(?string $blade)
 	{
@@ -177,6 +191,17 @@ abstract class WireX extends Component
 			$layout = $this->getLayoutX();
 		}
 		return $this->isBladeX($layout);
+	}
+
+
+
+	// ◈ === inPermissionX »
+	protected function inPermissionX($permission)
+	{
+		if (!empty($permission) && !empty($this->permissionX)) {
+			return in_array($permission, $this->permissionX);
+		}
+		return false;
 	}
 
 
