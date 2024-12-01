@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Session;
 abstract class ComponentX extends Component
 {
 	// ◈ property
-	protected $componentX;
-	protected $moduleX;
+	// protected $componentX;
+	// protected $moduleX;
 	protected $actionX;
-	protected $titleX;
-	protected $sloganX;
+	// protected $titleX;
+	// protected $sloganX;
 	protected $permissionX = [];
 	// protected $recordX = [];
 	protected $idX;
@@ -26,29 +26,29 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === callMethodX »
-	protected function callMethodX($method, ...$arguments)
-	{
-		if (method_exists($this, $method)) {
-			return $this->$method(...$arguments);
-		}
-	}
+	// protected function callMethodX($method, ...$arguments)
+	// {
+	// 	if (method_exists($this, $method)) {
+	// 		return $this->$method(...$arguments);
+	// 	}
+	// }
 
 
 
 	// ◈ === actionCountX »
-	protected function actionCountX($action, $do = 'return', $number = 1)
-	{
-		$this->actionCountX[$action] = $this->actionCountX[$action] ?? 0;
-		if ($do === 'increment') {
-			$this->actionCountX[$action] += $number;
-		} elseif ($do === 'decrement') {
-			$this->actionCountX[$action] += $number;
-		} elseif ($do === 'calibrate') {
-			$this->actionCountX[$action] = $number;
-		} elseif ($do === 'return') {
-			return $this->actionCountX[$action];
-		}
-	}
+	// protected function actionCountX($action, $do = 'return', $number = 1)
+	// {
+	// 	$this->actionCountX[$action] = $this->actionCountX[$action] ?? 0;
+	// 	if ($do === 'increment') {
+	// 		$this->actionCountX[$action] += $number;
+	// 	} elseif ($do === 'decrement') {
+	// 		$this->actionCountX[$action] += $number;
+	// 	} elseif ($do === 'calibrate') {
+	// 		$this->actionCountX[$action] = $number;
+	// 	} elseif ($do === 'return') {
+	// 		return $this->actionCountX[$action];
+	// 	}
+	// }
 
 
 
@@ -111,10 +111,10 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === asClassX »
-	public function asClassX()
-	{
-		return basename(get_class($this));
-	}
+	// public function asClassX()
+	// {
+	// 	return basename(get_class($this));
+	// }
 
 
 
@@ -132,40 +132,40 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === asComponentX »
-	protected function asComponentX(?string $component = null)
-	{
-		if (empty($component)) {
-			$component = $this->asClassX();
-		}
-		return strtolower($component);
-	}
+	// protected function asComponentX(?string $component = null)
+	// {
+	// 	if (empty($component)) {
+	// 		$component = $this->asClassX();
+	// 	}
+	// 	return strtolower($component);
+	// }
 
 
 
 	// ◈ === spotActionX » detect action from http
-	protected function spotActionX($caller = null)
-	{
-		$action = null;
-		if (!empty($this->routeX)) {
-			if (strtolower($this->routeX) !== 'livewire.update') {
-				if (StringX::contain($this->routeX, '.')) {
-					if (($this->routeX !== $this->componentX)) {
-						$action = StringX::after($this->routeX, $this->componentX . '.');
-					} else {
-						$action = StringX::after($this->routeX, '.');
-					}
-				} else {
-					$action = 'initial';
-				}
-			}
-		}
+	// protected function spotActionX($caller = null)
+	// {
+	// 	$action = null;
+	// 	if (!empty($this->routeX)) {
+	// 		if (strtolower($this->routeX) !== 'livewire.update') {
+	// 			if (StringX::contain($this->routeX, '.')) {
+	// 				if (($this->routeX !== $this->componentX)) {
+	// 					$action = StringX::after($this->routeX, $this->componentX . '.');
+	// 				} else {
+	// 					$action = StringX::after($this->routeX, '.');
+	// 				}
+	// 			} else {
+	// 				$action = 'initial';
+	// 			}
+	// 		}
+	// 	}
 
-		if (!empty($action)) {
-			$action = strtolower($action);
-		}
+	// 	if (!empty($action)) {
+	// 		$action = strtolower($action);
+	// 	}
 
-		return $action;
-	}
+	// 	return $action;
+	// }
 
 
 
@@ -263,29 +263,29 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === setTitleX »
-	protected function setTitleX(?string $title = null)
-	{
-		if (empty($title) && !empty($this->moduleX)) {
-			$title = $this->moduleX;
-		}
-		$this->titleX = $title;
-	}
+	// protected function setTitleX(?string $title = null)
+	// {
+	// 	if (empty($title) && !empty($this->moduleX)) {
+	// 		$title = $this->moduleX;
+	// 	}
+	// 	$this->titleX = $title;
+	// }
 
 
 
 	// ◈ === setSloganX »
-	protected function setSloganX(?string $slogan = null)
-	{
-		if (empty($slogan) && !empty($this->moduleX) && !empty($this->actionX) && $this->actionX !== 'initial') {
-			$slogan = $this->actionX . ' ' . $this->moduleX;
-			if ($this->actionX === 'detail') {
-				$slogan = 'review ' . $this->moduleX . ' details';
-			} elseif ($this->actionX === 'listing') {
-				$slogan = 'list of ' . StringX::plural($this->moduleX);
-			}
-		}
-		$this->sloganX = $slogan;
-	}
+	// protected function setSloganX(?string $slogan = null)
+	// {
+	// 	if (empty($slogan) && !empty($this->moduleX) && !empty($this->actionX) && $this->actionX !== 'initial') {
+	// 		$slogan = $this->actionX . ' ' . $this->moduleX;
+	// 		if ($this->actionX === 'detail') {
+	// 			$slogan = 'review ' . $this->moduleX . ' details';
+	// 		} elseif ($this->actionX === 'listing') {
+	// 			$slogan = 'list of ' . StringX::plural($this->moduleX);
+	// 		}
+	// 	}
+	// 	$this->sloganX = $slogan;
+	// }
 
 
 
@@ -298,45 +298,45 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === setModuleX »
-	protected function setModuleX($module = true)
-	{
-		if ($module === true) {
-			if (!empty($this->componentX)) {
-				$this->moduleX = StringX::firstWord($this->componentX);
-			}
-		} elseif (!empty($module)) {
-			$this->moduleX = $module;
-		}
-	}
+	// protected function setModuleX($module = true)
+	// {
+	// 	if ($module === true) {
+	// 		if (!empty($this->componentX)) {
+	// 			$this->moduleX = StringX::firstWord($this->componentX);
+	// 		}
+	// 	} elseif (!empty($module)) {
+	// 		$this->moduleX = $module;
+	// 	}
+	// }
 
 
 
 	// ◈ === setActionX »
-	protected function setActionX(?string $action = null)
-	{
-		if (empty($action)) {
-			if (!empty($this->routeX) && strtolower($this->routeX) !== 'livewire.update') {
-				if (($this->routeX !== $this->componentX)) {
-					$action = StringX::after($this->routeX, $this->componentX . '.');
-				} else {
-					$action = 'initial';
-				}
-			}
-		}
-		if (!empty($action)) {
-			$this->actionX = strtolower($action);
-		}
-	}
+	// protected function setActionX(?string $action = null)
+	// {
+	// 	if (empty($action)) {
+	// 		if (!empty($this->routeX) && strtolower($this->routeX) !== 'livewire.update') {
+	// 			if (($this->routeX !== $this->componentX)) {
+	// 				$action = StringX::after($this->routeX, $this->componentX . '.');
+	// 			} else {
+	// 				$action = 'initial';
+	// 			}
+	// 		}
+	// 	}
+	// 	if (!empty($action)) {
+	// 		$this->actionX = strtolower($action);
+	// 	}
+	// }
 
 
 
 	// ◈ === setActionCountX »
-	protected function setActionCountX($action, $number = 1, $increment = true)
-	{
-		if ($increment === true) {
-			return $this->actionCountX($action, 'increment', $number);
-		}
-	}
+	// protected function setActionCountX($action, $number = 1, $increment = true)
+	// {
+	// 	if ($increment === true) {
+	// 		return $this->actionCountX($action, 'increment', $number);
+	// 	}
+	// }
 
 
 
