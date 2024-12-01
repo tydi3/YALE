@@ -15,6 +15,7 @@ abstract class WireX extends Component
 	protected $componentX;
 	protected $moduleX;
 	protected $permissionX;
+	public $wireX;
 
 
 
@@ -199,6 +200,37 @@ abstract class WireX extends Component
 				$this->{$key} = $value;
 			}
 		}
+	}
+
+
+
+	// ◈ === setWireX »
+	protected function setWireX()
+	{
+		// ~ new object
+		if (!isset($this->wireX)) {
+			$this->wireX = new \stdClass();
+		}
+
+		$wire = $this->wireX;
+		$params = ['route', 'component', 'module', 'action', 'title', 'slogan', 'permission', 'id'];
+		$properties = array_map(
+			function ($param) {
+				return $param . 'X';
+			},
+			$params
+		);
+
+		foreach ($params as $key => $param) {
+			$property = $properties[$key];
+			if (!empty($this->$property)) {
+				$wire->{$param} = $this->{$property};
+			} else {
+				$wire->$param = '';
+			}
+		}
+
+		$this->wireX = $wire;
 	}
 
 
