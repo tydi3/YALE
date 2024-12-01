@@ -10,9 +10,9 @@ use Yale\Xeno\Data\StringX;
 abstract class PageX extends ComponentX
 {
 	// ◈ property
-	protected $routeX;
-	protected $viewX;
-	protected $layoutX;
+	// protected $routeX;
+	// protected $viewX;
+	// protected $layoutX;
 
 
 
@@ -44,13 +44,13 @@ abstract class PageX extends ComponentX
 
 
 	// ◈ === setRouteX »
-	protected function setRouteX(?string $route = null)
-	{
-		if (empty($route)) {
-			$route = RouteX::current('name');
-		}
-		$this->routeX = $route;
-	}
+	// protected function setRouteX(?string $route = null)
+	// {
+	// 	if (empty($route)) {
+	// 		$route = RouteX::current('name');
+	// 	}
+	// 	$this->routeX = $route;
+	// }
 
 
 
