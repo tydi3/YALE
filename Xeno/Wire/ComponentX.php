@@ -21,7 +21,7 @@ abstract class ComponentX extends Component
 	// protected $permissionX = [];
 	// protected $recordX = [];
 	// protected $idX;
-	public $wireX;
+	// public $wireX;
 
 
 
@@ -65,31 +65,31 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === redirectX → ... »
-	protected function redirectX($url = null)
-	{
-		// if (is_null($url)) {
-		// 	route($this->component);
-		// }
-		return $this->redirect($url, navigate: true);
-	}
+	// protected function redirectX($url = null)
+	// {
+	// 	// if (is_null($url)) {
+	// 	// 	route($this->component);
+	// 	// }
+	// 	return $this->redirect($url, navigate: true);
+	// }
 
 
 
 	// ◈ === gotoX »
-	protected function gotoX($destination, array $param = null)
-	{
-		if ($destination === 'refresh') {
-			return $this->refreshX();
-		} elseif ($destination === 'reload') {
-			return $this->reloadX();
-		} elseif (!empty($destination)) {
-			if (!empty($param)) {
-				// TODO  improve code
-				return $this->redirect(RouteX:: as($destination, $param), navigate: true);
-			}
-			return $this->redirect(RouteX:: as($destination), navigate: true);
-		}
-	}
+	// protected function gotoX($destination, array $param = null)
+	// {
+	// 	if ($destination === 'refresh') {
+	// 		return $this->refreshX();
+	// 	} elseif ($destination === 'reload') {
+	// 		return $this->reloadX();
+	// 	} elseif (!empty($destination)) {
+	// 		if (!empty($param)) {
+	// 			// TODO  improve code
+	// 			return $this->redirect(RouteX:: as($destination, $param), navigate: true);
+	// 		}
+	// 		return $this->redirect(RouteX:: as($destination), navigate: true);
+	// 	}
+	// }
 
 
 
@@ -107,6 +107,8 @@ abstract class ComponentX extends Component
 			}
 		}
 	}
+
+
 
 
 
@@ -340,45 +342,45 @@ abstract class ComponentX extends Component
 
 
 
-	// ◈ === setWireX »
-	protected function setWireX()
-	{
-		// • new object
-		if (!isset($this->wireX)) {
-			$this->wireX = new \stdClass();
-		}
+	// // ◈ === setWireX »
+	// protected function setWireX()
+	// {
+	// 	// • new object
+	// 	if (!isset($this->wireX)) {
+	// 		$this->wireX = new \stdClass();
+	// 	}
 
-		// • set parameters & values
-		$wire = $this->wireX;
-		$params = ['route', 'component', 'module', 'action', 'title', 'slogan', 'permission', 'id'];
-		$properties = array_map(
-			function ($param) {
-				return $param . 'X';
-			},
-			$params
-		);
+	// 	// • set parameters & values
+	// 	$wire = $this->wireX;
+	// 	$params = ['route', 'component', 'module', 'action', 'title', 'slogan', 'permission', 'id'];
+	// 	$properties = array_map(
+	// 		function ($param) {
+	// 			return $param . 'X';
+	// 		},
+	// 		$params
+	// 	);
 
-		// • params
-		foreach ($params as $key => $param) {
-			$property = $properties[$key];
-			if (!empty($this->$property)) {
-				$wire->$param = $this->{$property};
-			} elseif ($param === 'permission') {
-				$wire->$param = [];
-			} elseif (in_array($param, ['title', 'slogan'])) {
-				$method = 'set' . ucfirst($property);
-				if (method_exists($this, $method)) {
-					$this->$method();
-					$wire->$param = $this->{$property};
-				} else {
-					$wire->$param = '';
-				}
-			} else {
-				$wire->$param = '';
-			}
-		}
-		$this->wireX = $wire;
-	}
+	// 	// • params
+	// 	foreach ($params as $key => $param) {
+	// 		$property = $properties[$key];
+	// 		if (!empty($this->$property)) {
+	// 			$wire->$param = $this->{$property};
+	// 		} elseif ($param === 'permission') {
+	// 			$wire->$param = [];
+	// 		} elseif (in_array($param, ['title', 'slogan'])) {
+	// 			$method = 'set' . ucfirst($property);
+	// 			if (method_exists($this, $method)) {
+	// 				$this->$method();
+	// 				$wire->$param = $this->{$property};
+	// 			} else {
+	// 				$wire->$param = '';
+	// 			}
+	// 		} else {
+	// 			$wire->$param = '';
+	// 		}
+	// 	}
+	// 	$this->wireX = $wire;
+	// }
 
 
 
