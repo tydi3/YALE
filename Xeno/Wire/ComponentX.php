@@ -15,12 +15,12 @@ abstract class ComponentX extends Component
 	// ◈ property
 	// protected $componentX;
 	// protected $moduleX;
-	protected $actionX;
+	// protected $actionX;
 	// protected $titleX;
 	// protected $sloganX;
 	// protected $permissionX = [];
 	// protected $recordX = [];
-	protected $idX;
+	// protected $idX;
 	public $wireX;
 
 
@@ -53,14 +53,14 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === notifyX »
-	protected function notifyX($key, $value, $persist = false)
-	{
-		if ($persist) {
-			Session::put($key, $value);
-		} else {
-			Session::flash($key, $value);
-		}
-	}
+	// protected function notifyX($key, $value, $persist = false)
+	// {
+	// 	if ($persist) {
+	// 		Session::put($key, $value);
+	// 	} else {
+	// 		Session::flash($key, $value);
+	// 	}
+	// }
 
 
 
@@ -202,37 +202,37 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === grabIdX »
-	protected function grabIdX($id = null)
-	{
-		if (!empty($id) && empty($this->idX)) {
-			self::setIdX($id);
-		}
+	// protected function grabIdX($id = null)
+	// {
+	// 	if (!empty($id) && empty($this->idX)) {
+	// 		self::setIdX($id);
+	// 	}
 
-		if (!empty($this->idX)) {
-			return $this->idX;
-		}
+	// 	if (!empty($this->idX)) {
+	// 		return $this->idX;
+	// 	}
 
 		// TODO: build an error handler for when $id is expected or record is not found
-		DebugX::oversight($this->moduleX, 'id parameter not found');
-	}
+	// 	DebugX::oversight($this->moduleX, 'id parameter not found');
+	// }
 
 
 
 	// ◈ === setIdX »
-	protected function setIdX($id = null)
-	{
-		if (!empty($id)) {
-			$this->idX = $id;
-		}
-	}
+	// protected function setIdX($id = null)
+	// {
+	// 	if (!empty($id)) {
+	// 		$this->idX = $id;
+	// 	}
+	// }
 
 
 
 	// ◈ === setComponentX »
-	protected function setComponentX(?string $component = null)
-	{
-		$this->componentX = $this->asComponentX($component);
-	}
+	// protected function setComponentX(?string $component = null)
+	// {
+	// 	$this->componentX = $this->asComponentX($component);
+	// }
 
 
 
@@ -251,14 +251,14 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === setPropertyX »
-	protected function setPropertyX(array $property = [])
-	{
-		if (!empty($property)) {
-			foreach ($property as $key => $value) {
-				$this->{$key} = $value;
-			}
-		}
-	}
+	// protected function setPropertyX(array $property = [])
+	// {
+	// 	if (!empty($property)) {
+	// 		foreach ($property as $key => $value) {
+	// 			$this->{$key} = $value;
+	// 		}
+	// 	}
+	// }
 
 
 
@@ -383,37 +383,37 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === setIfNotX »
-	protected function setIfNotX($property, $value)
-	{
-		//~ $this->actionX
-		if ($property === 'action') {
-			if (empty($this->actionX) || $this->actionX !== $value) {
-				$this->setActionX($value);
-			}
-		}
-	}
+	// protected function setIfNotX($property, $value)
+	// {
+	// 	//~ $this->actionX
+	// 	if ($property === 'action') {
+	// 		if (empty($this->actionX) || $this->actionX !== $value) {
+	// 			$this->setActionX($value);
+	// 		}
+	// 	}
+	// }
 
 
 
 	// ◈ === setWireRouteX → set wire method as route name »
-	protected function setWireRouteX($route, $persist = true, $component = true)
-	{
-		$routeIs = $route;
-		if ($component === true) {
-			$routeIs = $this->componentX;
-			if ($route !== 'initial') {
-				$routeIs .= '.' . $route;
-			}
-		}
+	// protected function setWireRouteX($route, $persist = true, $component = true)
+	// {
+	// 	$routeIs = $route;
+	// 	if ($component === true) {
+	// 		$routeIs = $this->componentX;
+	// 		if ($route !== 'initial') {
+	// 			$routeIs .= '.' . $route;
+	// 		}
+	// 	}
 
-		// ~ requests available until session is cleared or data overwritten
-		if ($persist) {
-			Session::put('wireRouteX', $routeIs);
-		} else {
-			// ~ next request only
-			Session::flash('wireRouteX', $routeIs);
-		}
-	}
+	// 	// ~ requests available until session is cleared or data overwritten
+	// 	if ($persist) {
+	// 		Session::put('wireRouteX', $routeIs);
+	// 	} else {
+	// 		// ~ next request only
+	// 		Session::flash('wireRouteX', $routeIs);
+	// 	}
+	// }
 
 
 
