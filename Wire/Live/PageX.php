@@ -50,6 +50,21 @@ abstract class PageX extends WireX
 
 
 
+	// ◈ === setWireRouteX → set wire method as route name »
+	protected function setWireRouteX(string $route, bool $persist = true, bool $component = true)
+	{
+		$routeIs = $route;
+		if ($component === true) {
+			$routeIs = $this->componentX;
+			if ($route !== 'initial') {
+				$routeIs .= '.' . $route;
+			}
+		}
+		$this->flashX('wireRouteX', $routeIs, $persist);
+	}
+
+
+
 	// ◈ === setViewX » set view property with blade name
 	protected function setViewX($view, $theme = true, $path = 'page')
 	{
