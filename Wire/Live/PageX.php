@@ -3,11 +3,50 @@
 namespace Yale\Wire\Live;
 
 use Yale\Wire\WireX;
+use Yale\Xeno\Http\RouteX;
+use Yale\Xeno\Data\StringX;
 
 abstract class PageX extends WireX
 {
 	// ◈ property
+	protected $routeX;
 	protected $viewX;
+	protected $layoutX;
+	protected $titleX;
+	protected $sloganX;
+
+
+
+	// ◈ === getTitleX »
+	protected function getTitleX()
+	{
+		if (!empty($this->titleX)) {
+			return $this->titleX;
+		}
+		return null;
+	}
+
+
+
+	// ◈ === getSloganX »
+	protected function getSloganX()
+	{
+		if (!empty($this->sloganX)) {
+			return $this->sloganX;
+		}
+		return null;
+	}
+
+
+
+	// ◈ === setRouteX »
+	protected function setRouteX(?string $route = null)
+	{
+		if (empty($route)) {
+			$route = RouteX::current('name');
+		}
+		$this->routeX = $route;
+	}
 
 
 
@@ -27,6 +66,40 @@ abstract class PageX extends WireX
 	{
 		if (!empty($layout)) {
 			$this->layoutX = $this->formatBladeX($layout, $theme, $path);
+		}
+	}
+
+
+
+	// ◈ === setTitleX »
+	protected function setTitleX(?string $title = null)
+	{
+		if (empty($title) && !empty($this->moduleX)) {
+			$title = $this->moduleX;
+		}
+
+		if (!empty($title)) {
+			$this->titleX = $title;
+		}
+	}
+
+
+
+	// ◈ === setSloganX »
+	protected function setSloganX(?string $slogan = null)
+	{
+		if (empty($slogan) && !empty($this->moduleX) && !empty($this->actionX) && $this->actionX !== 'initial') {
+			if (in_array($this->actionX, ['create', 'update', 'clone'])) {
+				$slogan = $this->actionX . ' ' . $this->moduleX;
+			} elseif ($this->actionX === 'listing') {
+				$slogan = 'list of ' . StringX::plural($this->moduleX);
+			} elseif ($this->actionX === 'detail') {
+				$slogan = $this->moduleX . ' information';
+			}
+		}
+
+		if (!empty($slogan)) {
+			$this->sloganX = $slogan;
 		}
 	}
 
