@@ -7,7 +7,7 @@ use Yale\Xeno\Data\StringX;
 trait ManageX
 {
 	// ◈ property
-	protected $actionCountX;
+	// protected $actionCountX;
 
 
 
