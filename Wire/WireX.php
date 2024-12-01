@@ -11,7 +11,18 @@ use Yale\Xeno\Data\StringX;
 abstract class WireX extends Component
 {
 	// ◈ property
-	protected $recordX = [];
+	protected $componentX;
+	protected $moduleX;
+
+
+
+	// ◈ === callMethodX »
+	protected function callMethodX($method, ...$arguments)
+	{
+		if (method_exists($this, $method)) {
+			return $this->$method(...$arguments);
+		}
+	}
 
 
 
@@ -47,6 +58,14 @@ abstract class WireX extends Component
 
 
 
+	// ◈ === getClassX »
+	public function getClassX()
+	{
+		return basename(get_class($this));
+	}
+
+
+
 	// ◈ === getViewX »
 	protected function getViewX()
 	{
@@ -76,6 +95,55 @@ abstract class WireX extends Component
 			return $this->recordX;
 		}
 		return [];
+	}
+
+
+
+	// ◈ === getComponentX »
+	protected function getComponentX()
+	{
+		if (!empty($this->componentX)) {
+			return $this->componentX;
+		}
+		return null;
+	}
+
+
+
+	// ◈ === getModuleX »
+	protected function getModuleX()
+	{
+		if (!empty($this->moduleX)) {
+			return $this->moduleX;
+		}
+		return null;
+	}
+
+
+
+	// ◈ === setComponentX »
+	protected function setComponentX(?string $component = null)
+	{
+		if (empty($component)) {
+			$component = $this->getClassX();
+		}
+		return strtolower($component);
+	}
+
+
+
+	// ◈ === setModuleX »
+	protected function setModuleX(bool|string $module = true)
+	{
+		if ($module === true) {
+			if (!empty($this->componentX)) {
+				$module = StringX::firstWord($this->componentX);
+			}
+		}
+
+		if (!empty($module)) {
+			$this->moduleX = $module;
+		}
 	}
 
 
