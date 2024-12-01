@@ -26,4 +26,19 @@ abstract class WidgetX extends WireX
 	{
 	}
 
+
+
+	// ◈ === iWidgetX »
+	protected function iWidgetX(?string $view = null, array|object|null $record = null, bool|string|null $theme = true)
+	{
+		if (!empty($view)) {
+			$this->setViewX($view, $theme);
+		}
+		$render = [
+			'view' => $this->getViewX(),
+			'record' => $record,
+		];
+		return $this->doRenderX($render);
+	}
+
 }//> end of abstract ~ WidgetX
