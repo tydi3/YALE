@@ -55,35 +55,35 @@ abstract class PageX extends ComponentX
 
 
 	// ◈ === setViewX »
-	protected function setViewX($view, $theme = true)
-	{
-		if (empty($view)) {
-			// TODO: implement using module as name
-		}
+	// protected function setViewX($view, $theme = true)
+	// {
+	// 	if (empty($view)) {
+	// 		// TODO: implement using module as name
+	// 	}
 
-		if (!empty($view)) {
-			$view = 'page.' . $view;
-			$this->viewX = $this->asBladeX($view, $theme);
-			return true;
-		}
-	}
+	// 	if (!empty($view)) {
+	// 		$view = 'page.' . $view;
+	// 		$this->viewX = $this->asBladeX($view, $theme);
+	// 		return true;
+	// 	}
+	// }
 
 
 
 	// ◈ === setLayoutX »
-	protected function setLayoutX($layout = 'page', $theme = true)
-	{
-		if (!empty($layout)) {
-			$layout = 'layout.' . $layout;
-			$this->layoutX = $this->asBladeX($layout, $theme);
-		}
-	}
+	// protected function setLayoutX($layout = 'page', $theme = true)
+	// {
+	// 	if (!empty($layout)) {
+	// 		$layout = 'layout.' . $layout;
+	// 		$this->layoutX = $this->asBladeX($layout, $theme);
+	// 	}
+	// }
 
 
 
 	// ◈ === getViewX »
-	protected function getViewX()
-	{
+	// protected function getViewX()
+	// {
 		// if (empty($view)) {
 		// 	if (empty($this->viewX)) {
 		// 		if (!empty($this->moduleX)) {
@@ -97,39 +97,39 @@ abstract class PageX extends ComponentX
 		// }
 		// return $view;
 
-		if (!empty($this->viewX)) {
-			return $this->viewX;
-		}
-		// TODO: flag error when view is empty
-		DebugX::oversight('PageX', __FUNCTION__ . '() view is empty on $this->viewX');
-	}
+	// 	if (!empty($this->viewX)) {
+	// 		return $this->viewX;
+	// 	}
+	// 	// TODO: flag error when view is empty
+	// 	DebugX::oversight('PageX', __FUNCTION__ . '() view is empty on $this->viewX');
+	// }
 
 
 
 	// ◈ === getLayoutX »
-	protected function getLayoutX(string|bool|null $layout = true)
-	{
-		if (empty($layout) || $layout === true) {
-			if (empty($this->layoutX)) {
-				$this->setLayoutX();
-			}
-			return $this->layoutX;
-		} elseif ($layout === false) {
-			return null;
-		}
-		return $layout;
-	}
+	// protected function getLayoutX(string|bool|null $layout = true)
+	// {
+	// 	if (empty($layout) || $layout === true) {
+	// 		if (empty($this->layoutX)) {
+	// 			$this->setLayoutX();
+	// 		}
+	// 		return $this->layoutX;
+	// 	} elseif ($layout === false) {
+	// 		return null;
+	// 	}
+	// 	return $layout;
+	// }
 
 
 
 	// ◈ === iPageX »
-	protected function iPageX(?string $view = null, array|object|null $record = null, string|bool|null $layout = true)
-	{
-		if (!empty($view)) {
-			$this->setViewX($view, $theme);
-		}
-		return $this->doRenderX(view: $this->getViewX(), layout: $this->getLayoutX($layout), record: $record);
-	}
+	// protected function iPageX(?string $view = null, array|object|null $record = null, string|bool|null $layout = true)
+	// {
+	// 	if (!empty($view)) {
+	// 		$this->setViewX($view, $theme);
+	// 	}
+	// 	return $this->doRenderX(view: $this->getViewX(), layout: $this->getLayoutX($layout), record: $record);
+	// }
 
 
 
