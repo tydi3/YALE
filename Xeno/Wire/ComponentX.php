@@ -170,34 +170,34 @@ abstract class ComponentX extends Component
 
 
 	// ◈ === checkBladeX »
-	protected function checkBladeX($blade)
-	{
-		if (!empty($blade)) {
-			if (!FileX::is()->blade($blade)) {
-				return DebugX::blade404($blade);
-			}
-		}
-	}
+	// protected function checkBladeX($blade)
+	// {
+	// 	if (!empty($blade)) {
+	// 		if (!FileX::is()->blade($blade)) {
+	// 			return DebugX::blade404($blade);
+	// 		}
+	// 	}
+	// }
 
 
 
-	// ◈ === checkViewX »
-	protected function checkViewX()
-	{
-		if (!empty($this->viewX)) {
-			return self::checkBladeX($this->viewX);
-		}
-	}
+	// // ◈ === checkViewX »
+	// protected function checkViewX()
+	// {
+	// 	if (!empty($this->viewX)) {
+	// 		return self::checkBladeX($this->viewX);
+	// 	}
+	// }
 
 
 
-	// ◈ === checkLayoutX »
-	protected function checkLayoutX()
-	{
-		if (!empty($this->layoutX)) {
-			return self::checkBladeX($this->layoutX);
-		}
-	}
+	// // ◈ === checkLayoutX »
+	// protected function checkLayoutX()
+	// {
+	// 	if (!empty($this->layoutX)) {
+	// 		return self::checkBladeX($this->layoutX);
+	// 	}
+	// }
 
 
 
