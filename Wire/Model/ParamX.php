@@ -40,10 +40,9 @@ trait ParamX
 
 
 	// ◈ === setRecordX »
-	protected function setRecordX(array|object|null $record = [])
+	protected function setRecordX(array|object|null $record = [], $return = 'object')
 	{
-		//TODO: check the effect (if it is wanted)
-		if (is_array($record) && !empty($record)) {
+		if (is_array($record) && !empty($record) && $return === 'object') {
 			$record = ArrayX::toObject($record);
 		}
 
