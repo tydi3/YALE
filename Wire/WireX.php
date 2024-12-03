@@ -43,6 +43,17 @@ abstract class WireX extends Component
 
 
 
+	// ◈ === successX »
+	protected function successX($message = null, $title = 'successful', $persist = false)
+	{
+		if(empty($message)){
+			$message = 'action completed successfully.';
+		}
+		$this->flashX($message, $persist);
+	}
+
+
+
 	// ◈ === formatBladeX »
 	protected function formatBladeX(string $blade, bool|string $theme = true, ?string $path = null)
 	{
@@ -106,10 +117,14 @@ abstract class WireX extends Component
 
 
 	// ◈ === getRecordX »
-	protected function getRecordX()
+	protected function getRecordX($return = 'object')
 	{
 		if (!empty($this->recordX)) {
 			return $this->recordX;
+		}
+
+		if ($return === 'object') {
+			return new stdClass();
 		}
 		return [];
 	}
