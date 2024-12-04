@@ -42,8 +42,8 @@ abstract class PageX extends WireX
 		// $this->setModuleX();
 
 
-	//	// $this->callMethodX('igniteX');
-	//	// $this->setActionX();
+		//	// $this->callMethodX('igniteX');
+		//	// $this->setActionX();
 	}
 
 
@@ -193,6 +193,16 @@ abstract class PageX extends WireX
 			$link = RouteX::format($route, $param, $absolute);
 			$this->dispatch('urlChanged', $link);
 		}
+	}
+
+
+
+	// ◈ === render »
+	public function render()
+	{
+		$this->callMethodX('iSetViewX');
+		$this->setWireX();
+		return $this->iPageX();
 	}
 
 }//> end of abstract ~ PageX
