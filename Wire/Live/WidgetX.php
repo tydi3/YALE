@@ -8,6 +8,7 @@ abstract class WidgetX extends WireX
 {
 	// ◈ property
 	protected $viewX;
+	protected $widgetX = true;
 
 
 
