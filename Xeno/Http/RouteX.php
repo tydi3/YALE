@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Session;
 
 class RouteX
 {
-	// ◈ === as »
-	public static function as($route = null, $param = [], $absolute = false)
+	// ◈ === format »
+	public static function format($route = null, $param = [], $absolute = false)
 	{
 		if (!empty($route)) {
 			if (Route::has($route)) {
@@ -30,7 +30,6 @@ class RouteX
 				$route = request()->getRequestUri();
 			}
 		}
-
 
 		return $route;
 	}
@@ -54,7 +53,7 @@ class RouteX
 	// ◈ === expired »
 	public static function expired($route = 'login', $param = ['status' => 'session-expired'], $absolute = false)
 	{
-		return self:: as($route, $param, $absolute);
+		return self::format($route, $param, $absolute);
 	}
 
 
@@ -87,7 +86,7 @@ class RouteX
 			// TODO: do refresh instead
 		}
 
-		return self:: as($route, [], $absolute);
+		return self::format($route, [], $absolute);
 	}
 
 
@@ -95,7 +94,7 @@ class RouteX
 	// ◈ === isGroupAuth » is route considered part of auth?
 	public static function isGroupAuth($route = null)
 	{
-		$route = self:: as();
+		$route = self::format();
 		// dd($route);
 		if (!empty($route)) {
 			$route = StringX::cropBegin($route, '/');
@@ -111,7 +110,7 @@ class RouteX
 	public static function title($title = null)
 	{
 		if (!$title) {
-			$title = self:: as();
+			$title = self::format();
 			$title = StringX::cropBegin($title, '/');
 
 			if (self::isGroupAuth()) {
