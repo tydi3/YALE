@@ -1,8 +1,8 @@
 <?php //*** ManageX ~ trait » Yale™ Library - Yet Another Laravel Elevator © 2024 ∞ AO™ • @osawereao • www.osawere.com ∞ Apache License ***//
 
-namespace Yale\Wire\Segment;
+namespace Yale\Wire\Render;
 
-class ManageX
+trait ManageX
 {
 	// ◈ === iSetViewX »
 	protected function iSetViewX($view = 'manage')

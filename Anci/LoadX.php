@@ -13,7 +13,7 @@ class LoadX
 		if (is_file($file)) {
 			require $file;
 		} elseif ($check) {
-			return DebugX::oversight('LoadX::File', 'File Unavailable',$file);
+			return DebugX::oversight('LoadX::File', 'File Unavailable', $file);
 		}
 	}
 
@@ -45,23 +45,37 @@ class LoadX
 	// ◈ === router »
 	public static function router(string $path)
 	{
+
+
 		if (StringX::beginWith($path, 'zero')) {
+
 			$directory = PathX::zero('route');
-			$files = [
-				'api' => $directory . 'api.php',
-				'app' => $directory . 'app.php',
-				'site' => $directory . 'site.php',
-			];
-			if (StringX::endWith($path, '-api')) {
-				unset($files['app'], $files['site']);
-			} elseif (StringX::endWith($path, '-app')) {
-				unset($files['api'], $files['site']);
-			} elseif (StringX::endWith($path, '-site')) {
-				unset($files['api'], $files['app']);
-			} elseif (StringX::endWith($path, '-web')) {
-				unset($files['api']);
+
+			if ($path === 'zero-api') {
+				$file = $directory . 'api.php';
+			} elseif ($path === 'zero-app') {
+				$file = $directory . 'app.php';
+			} elseif ($path === 'zero-site') {
+				$file = $directory . 'site.php';
 			}
-			return self::files($files, false);
+
+			if ($file) {
+				return self::file($file);
+			} else {
+				$files = [
+					'api' => $directory . 'api.php',
+					'app' => $directory . 'app.php',
+					'site' => $directory . 'site.php',
+				];
+
+				if ($path === 'zero-web') {
+					unset($files['api']);
+				}
+			}
+
+			if ($files) {
+				return self::files($files);
+			}
 		}
 
 		if ($path === 'debug') {
@@ -70,7 +84,6 @@ class LoadX
 		}
 
 		// TODO: Implement check for $path to return appropriately
-
 		return $path;
 	}
 

@@ -7,7 +7,7 @@ use Yale\Concept\Abstract\Model as AbstractModelX;
 class Visit extends AbstractModelX
 {
 	// ◈ property
-	protected $table = 'journal_visit';
+	protected $table = 'logvisit';
 	protected $fillable = [
 		'method',
 		'route',
