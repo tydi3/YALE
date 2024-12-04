@@ -11,9 +11,9 @@ class App extends Controller
 	// ◈ === index »
 	public static function index()
 	{
-		$route = RouteX:: as('login');
+		$route = RouteX:: format('login');
 		if (Auth::check()) {
-			$route = RouteX:: as('dashboard');
+			$route = RouteX:: format('dashboard');
 		}
 		return redirect($route);
 	}
