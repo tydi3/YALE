@@ -8,6 +8,7 @@ abstract class ShardX extends WireX
 {
 	// ◈ property
 	protected $viewX;
+	protected $shardX = true;
 
 
 
