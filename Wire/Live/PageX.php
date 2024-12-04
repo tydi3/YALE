@@ -164,12 +164,7 @@ abstract class PageX extends WireX
 		if (!empty($view)) {
 			$this->setViewX($view, $theme);
 		}
-		$render = [
-			'view' => $this->getViewX(),
-			'layout' => $this->getLayoutX(),
-			'record' => $record,
-		];
-		return $this->doRenderX($render);
+		return $this->doRenderX(view: $this->getViewX(), layout: $this->getLayoutX(), record: $record);
 	}
 
 
