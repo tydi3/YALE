@@ -10,6 +10,19 @@ trait ActionX
 
 
 
+
+	// ◈ === igniteX »
+	protected function igniteX()
+	{
+		$actions = ['initial', 'listing', 'detail', 'create', 'update', 'clone'];
+		if (!empty($this->actionX) && in_array($this->actionX, $actions)) {
+			$action = $this->actionX;
+			$this->{$action}();
+		}
+	}
+
+
+
 	// ◈ === actionCountX »
 	protected function actionCountX($action, $do = 'return', $number = 1)
 	{
@@ -95,5 +108,90 @@ trait ActionX
 
 		return $action;
 	}
+
+
+
+	// ◈ === doActionX »
+	protected function doActionX($action, $record = [])
+	{
+		$this->setIfNotX('action', $action);
+		$this->setActionCountX($action);
+		if ($action !== 'create') {
+			$this->setRecordX($record);
+		}
+		$this->callMethodX('organizeX', $action);
+		if (isset($this->pageX) && $this->pageX === true) {
+			$this->setWireRouteX($action);
+			if (!empty($this->moduleX)) {
+				$this->setTitleX($this->moduleX);
+				if ($actionv === 'initial') {
+					$this->setSloganX('manage ' . $this->moduleX);
+				} elseif ($actionv === 'listing') {
+					$this->setSloganX('list of ' . StringX::plural($this->moduleX));
+				} elseif ($actionv === 'detail') {
+					$this->setSloganX($this->moduleX . ' information');
+				} elseif ($actionv === 'update') {
+					$this->setSloganX('update ' . $this->moduleX);
+				} elseif ($actionv === 'clone') {
+					$this->setSloganX('clone ' . $this->moduleX);
+				} elseif ($actionv === 'create') {
+					$this->setSloganX('create ' . $this->moduleX);
+				}
+			}
+		}
+	}
+
+
+
+	// ◈ === initialX »
+	protected function initialX($record = [], $action = 'initial')
+	{
+		$this->doActionX($action, $record);
+	}
+
+
+
+	// ◈ === listingX »
+	protected function listingX($record = [], $action = 'listing')
+	{
+		$this->doActionX($action, $record);
+	}
+
+
+
+	// ◈ === detailX »
+	protected function detailX($record = [], $action = 'detail')
+	{
+		$this->doActionX($action, $record);
+	}
+
+
+
+	// ◈ === createX »
+	protected function createX($action = 'create')
+	{
+		$this->doActionX($action, $record);
+	}
+
+
+
+	// ◈ === updateX »
+	protected function updateX($action = 'update')
+	{
+		$this->doActionX($action, $record);
+	}
+
+
+
+	// ◈ === cloneX »
+	protected function cloneX($action = 'clone')
+	{
+		$this->doActionX($action, $record);
+	}
+
+
+
+	// ◈ === deleteX »
+
 
 }//> end of trait ~ ActionX
