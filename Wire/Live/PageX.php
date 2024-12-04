@@ -2,6 +2,7 @@
 
 namespace Yale\Wire\Live;
 
+use Yale\Anci\EnvX;
 use Yale\Wire\WireX;
 use Yale\Xeno\Http\RouteX;
 use Yale\Xeno\Data\StringX;
@@ -14,6 +15,36 @@ abstract class PageX extends WireX
 	protected $layoutX;
 	protected $titleX;
 	protected $sloganX;
+	protected $pageX = true;
+
+
+
+	// ◈ === mount » [initial request]
+	public function mount($id = null)
+	{
+		// $action = $this->spotActionX('mount');
+		// if (!empty($action)) {
+		// 	$this->setActionX($action);
+		// } else {
+		// 	$this->setActionX();
+		// }
+		// $this->setIdX($id);
+		// $this->callMethodX('igniteX');
+	}
+
+
+
+	// ◈ === boot » [every request]
+	public function boot()
+	{
+		// $this->setRouteX();
+		// $this->setComponentX();
+		// $this->setModuleX();
+
+
+	//	// $this->callMethodX('igniteX');
+	//	// $this->setActionX();
+	}
 
 
 
@@ -139,6 +170,29 @@ abstract class PageX extends WireX
 			'record' => $record,
 		];
 		return $this->doRenderX($render);
+	}
+
+
+
+	// ◈ === emitNavX »
+	protected function emitNavX($title = null, $route = null, $param = [], $absolute = false)
+	{
+		if (!empty($title)) {
+			if (StringX::wordCount($title) === 1 && (strtolower($title) === strtolower($this->titleX)) && !empty($this->actionX)) {
+				if ($this->actionX === 'detail') {
+					$title .= '';
+				} else {
+					$title = $actionX . ' ' . $titleX;
+				}
+				$title .= ' - ' . EnvX::project('name') . ' • ' . EnvX::firm('brand');
+			}
+			$this->dispatch('titleChanged', ucwords($title));
+		}
+
+		if (!empty($route)) {
+			$link = RouteX::format($route, $param, $absolute);
+			$this->dispatch('urlChanged', $link);
+		}
 	}
 
 }//> end of abstract ~ PageX
