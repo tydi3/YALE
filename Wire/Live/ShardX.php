@@ -36,11 +36,7 @@ abstract class ShardX extends WireX
 		if (!empty($view)) {
 			$this->setViewX($view, $theme);
 		}
-		$render = [
-			'view' => $this->getViewX(),
-			'record' => $record,
-		];
-		return $this->doRenderX($render);
+		return $this->doRenderX(view: $this->getViewX(), record: $record);
 	}
 
 }//> end of abstract ~ ShardX

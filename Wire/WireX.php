@@ -46,7 +46,7 @@ abstract class WireX extends Component
 	// ◈ === successX »
 	protected function successX($message = null, $title = 'successful', $persist = false)
 	{
-		if(empty($message)){
+		if (empty($message)) {
 			$message = 'action completed successfully.';
 		}
 		$this->flashX($message, $persist);
@@ -77,8 +77,7 @@ abstract class WireX extends Component
 					$o .= '.';
 				}
 			}
-
-			$blade .= $o;
+			$blade = $o . $blade;
 			return strtolower($blade);
 		}
 		return null;
@@ -124,7 +123,7 @@ abstract class WireX extends Component
 		}
 
 		if ($return === 'object') {
-			return new stdClass();
+			return new \stdClass();
 		}
 		return [];
 	}
