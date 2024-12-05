@@ -2,6 +2,7 @@
 
 namespace Yale\Wire\Model;
 
+use Yale\Anci\DebugX;
 use Yale\Xeno\Data\ArrayX;
 
 trait ParamX
