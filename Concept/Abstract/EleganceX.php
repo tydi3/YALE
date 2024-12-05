@@ -31,12 +31,12 @@ abstract class EleganceX extends Eloquent
 
 
 
-	// ◈ === oFilterByID » determine column from id's value
-	protected static function oFilterByID($id, &$filterColumn)
+	// ◈ === oColumnID » determine column from id's value
+	protected static function oColumnID($id, &$column)
 	{
 		$length = strlen($id);
 		if ($length === 20) {
-			$filterColumn = 'puid';
+			$column = 'puid';
 		}
 	}
 
