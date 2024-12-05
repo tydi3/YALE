@@ -75,4 +75,24 @@ class ImgX
 		return $signature;
 	}
 
+
+
+	// ◈ === noCover »
+	public static function noCover()
+	{
+		return FileX::photo('user/no-cover.jpg');
+	}
+
+
+
+	// ◈ === asset »
+	public static function asset($theme = true)
+	{
+		if ($theme === true) {
+			$path = EnvX::project('theme');
+		}
+		$image = $path . '/i' . $image;
+	}
+
+
 }//> end of class ~ ImgX
