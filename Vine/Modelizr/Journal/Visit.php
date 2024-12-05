@@ -2,9 +2,9 @@
 
 namespace Yale\Vine\Modelizr\Journal;
 
-use Yale\Concept\Abstract\Model as AbstractModelX;
+use Yale\Concept\Abstract\EleganceX;
 
-class Visit extends AbstractModelX
+class Visit extends EleganceX
 {
 	// ◈ property
 	protected $table = 'logvisit';
