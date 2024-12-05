@@ -4,39 +4,30 @@ namespace Yale\Concept\Trait;
 
 use Illuminate\Support\Str;
 use Yale\Xeno\Data\GenerateX;
-use Yale\Concept\Trait\Model\Scope as ScopeX;
-use Yale\Concept\Trait\Model\Record as RecordX;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
+
+use Yale\Concept\Trait\Elegance\AllX;
+use Yale\Concept\Trait\Elegance\CountX;
+use Yale\Concept\Trait\Elegance\FindX;
+use Yale\Concept\Trait\Elegance\HasX;
+use Yale\Concept\Trait\Elegance\ScopeX;
 
 trait Model
 {
 	// ◈ traits
+	use AllX;
+	use CountX;
+	use FindX;
+	use HasX;
 	use ScopeX;
-	use RecordX;
 
 
 
-	// ◈ === oauthor »
+	// ◈ === author »
 	public function author()
 	{
 		return $this->belongsTo(\App\Models\User::class, 'oauthor', 'tuid');
-	}
-
-
-
-	// ◈ === oCountByValue » using a column's value count record
-	public static function oCountByValue($column, $value)
-	{
-		return self::query()->where($column, $value)->count();
-	}
-
-
-
-	// ◈ === oArray » sefely perform toArray()
-	public static function oArray($result)
-	{
-		return $result ? $result->toArray() : [];
 	}
 
 
