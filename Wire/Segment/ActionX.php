@@ -2,6 +2,8 @@
 
 namespace Yale\Wire\Segment;
 
+use Yale\Xeno\Data\StringX;
+
 trait ActionX
 {
 	// ◈ property
