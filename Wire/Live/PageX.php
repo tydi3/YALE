@@ -188,10 +188,6 @@ abstract class PageX extends WireX
 		if (!$hasLayout) {
 			$this->setLayoutX();
 		}
-
-
-		// dd($this->recordX);
-
 		return $this->iPageX();
 	}
 
