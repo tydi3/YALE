@@ -240,7 +240,11 @@ abstract class WireX extends Component
 			if (!empty($this->$property)) {
 				$wire->{$param} = $this->{$property};
 			} else {
-				$wire->$param = '';
+				if($param === 'permission'){
+				$wire->$param = [];
+				} else {
+					$wire->$param = '';
+				}
 			}
 		}
 
