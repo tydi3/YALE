@@ -86,7 +86,7 @@ abstract class WireX extends Component
 
 
 	// ◈ === getClassX »
-	public function getClassX()
+	protected function getClassX()
 	{
 		return basename(get_class($this));
 	}
@@ -170,7 +170,7 @@ abstract class WireX extends Component
 			$component = $this->getClassX();
 		}
 
-		if (empty($component)) {
+		if (!empty($component)) {
 			$this->componentX = strtolower($component);
 		}
 	}
