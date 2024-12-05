@@ -12,7 +12,6 @@ trait ActionX
 
 
 
-
 	// ◈ === igniteX »
 	protected function igniteX()
 	{
@@ -87,7 +86,7 @@ trait ActionX
 
 
 	// ◈ === spotActionX » detect action from http
-	protected function spotActionX($caller = null)
+	protected function spotActionX()
 	{
 		$action = null;
 		if (!empty($this->routeX)) {
@@ -126,17 +125,17 @@ trait ActionX
 			$this->setWireRouteX($action);
 			if (!empty($this->moduleX)) {
 				$this->setTitleX($this->moduleX);
-				if ($actionv === 'initial') {
+				if ($action === 'initial') {
 					$this->setSloganX('manage ' . $this->moduleX);
-				} elseif ($actionv === 'listing') {
+				} elseif ($action === 'listing') {
 					$this->setSloganX('list of ' . StringX::plural($this->moduleX));
-				} elseif ($actionv === 'detail') {
+				} elseif ($action === 'detail') {
 					$this->setSloganX($this->moduleX . ' information');
-				} elseif ($actionv === 'update') {
+				} elseif ($action === 'update') {
 					$this->setSloganX('update ' . $this->moduleX);
-				} elseif ($actionv === 'clone') {
+				} elseif ($action === 'clone') {
 					$this->setSloganX('clone ' . $this->moduleX);
-				} elseif ($actionv === 'create') {
+				} elseif ($action === 'create') {
 					$this->setSloganX('create ' . $this->moduleX);
 				}
 			}
