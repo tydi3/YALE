@@ -190,7 +190,7 @@ abstract class PageX extends WireX
 		}
 
 
-		dd($this->recordX);
+		// dd($this->recordX);
 
 		return $this->iPageX();
 	}
