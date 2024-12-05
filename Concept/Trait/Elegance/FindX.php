@@ -4,10 +4,20 @@ namespace Yale\Concept\Trait\Elegance;
 
 trait FindX
 {
-	// ◈ === oFindByPuid »
-	public static function oFindByPuid($puid, string|array $columns = ['*'])
+	// ◈ === oFindByID »
+	public static function oFindByID(int|string $id, array|string $columns = ['*'])
 	{
-		return static::where('puid', $puid)->select($columns)->first();
+		$filterColumn = 'id';
+		self::oColumnID($id, $filterColumn);
+		return static::query()->where($filterColumn, $id)->select(self::oColumn($columns))->first();
+	}
+
+
+
+	// ◈ === oFindByPuid »
+	public static function oFindByPuid(int|string $puid, string|array $columns = ['*'])
+	{
+		return static::where('puid', $puid)->select(self::oColumn($columns))->first();
 	}
 
 }//> end of trait ~ FindX
