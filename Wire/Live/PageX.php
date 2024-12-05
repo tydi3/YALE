@@ -22,14 +22,7 @@ abstract class PageX extends WireX
 	// ◈ === mount » [initial request]
 	public function mount($id = null)
 	{
-		$action = $this->spotActionX('mount');
-		if (!empty($action)) {
-			$this->setActionX($action);
-		} else {
-			$this->setActionX();
-		}
-		$this->callMethodX('setIdX', $id);
-		// $this->callMethodX('igniteX');
+		$this->callMethodX('presetX', 'mount', $id);
 	}
 
 
@@ -37,13 +30,7 @@ abstract class PageX extends WireX
 	// ◈ === boot » [every request]
 	public function boot()
 	{
-		$this->setRouteX();
-		$this->setComponentX();
-		// $this->setModuleX();
-
-
-		//	// $this->callMethodX('igniteX');
-		//	// $this->setActionX();
+		$this->callMethodX('presetX', 'boot');
 	}
 
 
@@ -164,7 +151,6 @@ abstract class PageX extends WireX
 		if (!empty($view)) {
 			$this->setViewX($view, $theme);
 		}
-		// dd($this->getLayoutX());
 		return $this->doRenderX(view: $this->getViewX(), layout: $this->getLayoutX(), record: $record);
 	}
 
@@ -202,6 +188,10 @@ abstract class PageX extends WireX
 		if (!$hasLayout) {
 			$this->setLayoutX();
 		}
+
+
+		dd($this->recordX);
+
 		return $this->iPageX();
 	}
 
