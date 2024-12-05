@@ -14,4 +14,16 @@ trait DataX
 		return self::oArray($result);
 	}
 
+
+
+	// ◈ === detail »
+	public static function detail(int|string $id, array|string $columns = [])
+	{
+		if (empty($columns) && isset(self::$columns)) {
+			$columns = self::$columns;
+		}
+		$result = self::oFindByID($id, $columns);
+		return self::oArray($result);
+	}
+
 }//> end of trait ~ DataX
