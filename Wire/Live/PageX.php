@@ -183,6 +183,7 @@ abstract class PageX extends WireX
 	public function render()
 	{
 		$this->callMethodX('iSetViewX');
+
 		$this->setWireX();
 		$hasLayout = $this->getLayoutX();
 		if (!$hasLayout) {
