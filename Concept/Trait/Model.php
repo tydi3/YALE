@@ -12,6 +12,7 @@ use Yale\Concept\Trait\Elegance\CountX;
 use Yale\Concept\Trait\Elegance\FindX;
 use Yale\Concept\Trait\Elegance\HasX;
 use Yale\Concept\Trait\Elegance\ScopeX;
+use Yale\Concept\Trait\Elegance\UpdateX;
 
 trait Model
 {
@@ -21,6 +22,7 @@ trait Model
 	use FindX;
 	use HasX;
 	use ScopeX;
+	use UpdateX;
 
 
 
