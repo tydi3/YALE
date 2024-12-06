@@ -10,6 +10,7 @@ trait ParamX
 	// ◈ property
 	protected $recordX;
 	protected $id;
+	protected $puid;
 
 
 
@@ -60,6 +61,16 @@ trait ParamX
 	{
 		if (!empty($id)) {
 			$this->id = $id;
+		}
+	}
+
+
+
+	// ◈ === setPuidX »
+	protected function setPuidX(int|string $puid = null)
+	{
+		if (!empty($puid)) {
+			$this->puid = $puid;
 		}
 	}
 
