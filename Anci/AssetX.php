@@ -154,6 +154,15 @@ class AssetX
 
 
 
+
+	// ◈ === yasl »
+	public static function yasl($href, $tag = null, $theme = true)
+	{
+		return self::path('yale/' . $tag . '/' . $href);
+	}
+
+
+
 	// ◈ === isFile »
 	public static function isFile($file)
 	{
