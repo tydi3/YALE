@@ -49,7 +49,7 @@ abstract class WireX extends Component
 		if (empty($message)) {
 			$message = 'action completed successfully.';
 		}
-		$this->flashX($message, $persist);
+		$this->flashX('successX', $message, $persist);
 	}
 
 
