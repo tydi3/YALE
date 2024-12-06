@@ -125,4 +125,18 @@ class RouteX
 	}
 
 
+
+	// ◈ === wireNavListing »
+	public static function wireNavListing($route = null)
+	{
+		$nav = null;
+		if (!empty($route)) {
+			$nav = StringX::beforeAs($route, '.');
+			if (StringX::notEndWith($nav, '.listing')) {
+				$nav .= '.listing';
+			}
+		}
+		return $nav;
+	}
+
 }//> end of class ~ RouteX
