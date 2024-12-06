@@ -4,6 +4,17 @@ namespace Yale\Wire\Model;
 
 trait DataX
 {
+	// ◈ === getFields »
+	public static function getFields()
+	{
+		if (!empty(self::$columns)) {
+			return self::$columns;
+		}
+		return [];
+	}
+
+
+
 	// ◈ === listing »
 	public static function listing(array|string $columns = [], $sortOrder = 'desc', $sortColumn = 'id')
 	{
@@ -24,6 +35,14 @@ trait DataX
 		}
 		$result = self::oFindByID($id, $columns);
 		return self::oArray($result);
+	}
+
+
+
+	// ◈ === modify »
+	public static function modify(int|string $id, array $input)
+	{
+		return self::oUpdateByID($id, $input);
 	}
 
 }//> end of trait ~ DataX
