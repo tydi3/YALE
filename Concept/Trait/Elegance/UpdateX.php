@@ -4,6 +4,16 @@ namespace Yale\Concept\Trait\Elegance;
 
 trait UpdateX
 {
+	// ◈ === oFindByID »
+	public static function oUpdateByID(int|string $id, array $data)
+	{
+		$filterColumn = 'id';
+		self::oColumnID($id, $filterColumn);
+		return static::where($filterColumn, $id)->update($data);
+	}
+
+
+
 	// ◈ === oUpdateByPuid »
 	public static function oUpdateByPuid($puid, array $data)
 	{
