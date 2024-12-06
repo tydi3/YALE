@@ -227,10 +227,13 @@ abstract class WireX extends Component
 		}
 
 		$wire = $this->wireX;
-		$params = ['route', 'component', 'module', 'action', 'title', 'slogan', 'permission', 'id'];
+		$params = ['route', 'component', 'module', 'action', 'title', 'slogan', 'permission', 'puid', 'id'];
 		$properties = array_map(
 			function ($param) {
-				return $param . 'X';
+				if ($param !== 'id' && $param !== 'puid') {
+					$param = $param . 'X';
+				}
+				return $param;
 			},
 			$params
 		);
@@ -240,8 +243,8 @@ abstract class WireX extends Component
 			if (!empty($this->$property)) {
 				$wire->{$param} = $this->{$property};
 			} else {
-				if($param === 'permission'){
-				$wire->$param = [];
+				if ($param === 'permission') {
+					$wire->$param = [];
 				} else {
 					$wire->$param = '';
 				}
