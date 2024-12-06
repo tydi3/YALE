@@ -177,7 +177,7 @@ trait ActionX
 
 
 	// ◈ === updateX »
-	protected function updateX($action = 'update')
+	protected function updateX($record = [], $action = 'update')
 	{
 		$this->doActionX($action, $record);
 	}
