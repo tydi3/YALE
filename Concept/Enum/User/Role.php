@@ -9,6 +9,7 @@ enum Role: string
 	case ADMIN = 'ADMIN';
 	case HR = 'HR';
 	case ICT = 'ICT';
+	case ZERO = 'ZERO';
 
 
 
@@ -39,6 +40,7 @@ enum Role: string
 			self::ADMIN => 'admin',
 			self::HR => 'human resource',
 			self::ICT => 'ICT',
+			self::ZERO => 'Zero',
 		};
 	}
 
