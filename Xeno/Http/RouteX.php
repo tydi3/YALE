@@ -126,17 +126,56 @@ class RouteX
 
 
 
-	// ◈ === wireNavListing »
-	public static function wireNavListing($route = null)
+	// ◈ === wireNav »
+	public static function wireNav($route = null, $action = null)
 	{
-		$nav = null;
+		$nav = $route;
 		if (!empty($route)) {
 			$nav = StringX::beforeAs($route, '.');
-			if (StringX::notEndWith($nav, '.listing')) {
-				$nav .= '.listing';
+			if (!empty($action)) {
+				if (StringX::notEndWith($nav, '.' . $action)) {
+					$nav .= '.' . $action;
+				}
 			}
 		}
 		return $nav;
+	}
+
+
+
+	// ◈ === wireNavDetail »
+	public static function wireNavDetail($route = null)
+	{
+		return self::wireNav($route, 'detail');
+	}
+
+
+
+	// ◈ === wireGo »
+	public static function wireGo($route, array|string|null $param = null, $absolute = false)
+	{
+		if (is_string($param) && !empty($param)) {
+			$param = ['id' => $param];
+		}
+		return self::format($route, $param, $absolute);
+	}
+
+
+
+	// ◈ === wireGoListing »
+	public static function wireGoListing($route)
+	{
+		$route = self::wireNav($route, 'listing');
+		return self::wireGo($route, []);
+	}
+
+
+
+	// ◈ === wireGoDetail »
+	public static function wireGoDetail($route, $id)
+	{
+		$route = self::wireNav($route, 'detail');
+		return self::wireGo($route, $id);
 	}
 
 }//> end of class ~ RouteX
