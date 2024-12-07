@@ -26,7 +26,7 @@ class SetX
 	{
 		if (!empty($placeholder) && !empty($id)) {
 			$placeholder = StringX::space($placeholder);
-			$placeholder = StringX::sentenceCase(trim($placeholder)) . '...';
+			$placeholder = StringX::sentence(trim($placeholder)) . '...';
 			if ($onFocusBlur !== false) {
 				$id = 'on' . $id;
 				$attr = ' x-bind:placeholder=';
