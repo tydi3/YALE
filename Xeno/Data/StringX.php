@@ -678,8 +678,8 @@ class StringX
 
 
 
-	// ◈ === sentenceCase »
-	public static function sentenceCase($string, $acronym = true)
+	// ◈ === sentence »
+	public static function sentence($string, $acronym = true)
 	{
 		if (self::is($string)) {
 			if ($acronym) {
@@ -712,7 +712,7 @@ class StringX
 	// ◈ === capitalize →
 	public static function capitalize($string)
 	{
-		return ucwords(self::sentenceCase($string));
+		return ucwords(self::sentence($string));
 	}
 
 
@@ -1113,6 +1113,14 @@ class StringX
 			return $upperCase;
 		}
 		return false;
+	}
+
+
+
+	// ◈ === singular »
+	public static function singular($string)
+	{
+		return Str::singular($string);
 	}
 
 
