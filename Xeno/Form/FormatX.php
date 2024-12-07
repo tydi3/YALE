@@ -32,7 +32,7 @@ class FormatX
 		if (StringX::countWord($title) == 2) {
 			return ucwords($title);
 		}
-		return StringX::sentenceCase($title);
+		return StringX::sentence($title);
 	}
 
 
