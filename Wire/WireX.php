@@ -44,11 +44,19 @@ abstract class WireX extends Component
 
 
 	// ◈ === successX »
-	protected function successX($message = null, $title = 'successful', $persist = false)
+	protected function successX($message = null, $subject = null, $persist = false)
 	{
-		if (empty($message)) {
-			$message = 'action completed successfully.';
+		if (empty($subject)) {
+			$subject = 'success';
 		}
+		if (empty($message)) {
+			$message = 'your action completed successfully.';
+		}
+		$message = '<span class="o-success-message">' . StringX::sentence($message) . '</span>';
+		if (!empty($subject)) {
+			$subject = '<strong>' . ucwords($subject) . '</strong>';
+		}
+		$message = $subject .': '. $message;
 		$this->flashX('successX', $message, $persist);
 	}
 
