@@ -132,11 +132,11 @@ trait ActionX
 				} elseif ($action === 'detail') {
 					$this->setSloganX($this->moduleX . ' information');
 				} elseif ($action === 'update') {
-					$this->setSloganX('update ' . $this->moduleX);
+					$this->setSloganX('update ' . StringX::singular($this->moduleX));
 				} elseif ($action === 'clone') {
-					$this->setSloganX('clone ' . $this->moduleX);
+					$this->setSloganX('clone ' . StringX::singular($this->moduleX));
 				} elseif ($action === 'create') {
-					$this->setSloganX('create ' . $this->moduleX);
+					$this->setSloganX('create ' . StringX::singular($this->moduleX));
 				}
 			}
 		}
