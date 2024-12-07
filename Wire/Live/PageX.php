@@ -69,7 +69,7 @@ abstract class PageX extends WireX
 
 
 	// ◈ === setWireRouteX → set wire method as route name »
-	protected function setWireRouteX(string $route, bool $persist = true, bool $component = true)
+	protected function setWireRouteX(string $route, bool $persist = true, bool $component = false)
 	{
 		$routeIs = $route;
 		if ($component === true) {
