@@ -145,6 +145,18 @@ abstract class PageX extends WireX
 
 
 
+	// ◈ === iSetRouteX »
+	protected function iSetRouteX($route, $id = null)
+	{
+		$this->setRouteX(route: $route);
+		$this->setWireRouteX(route: $route);
+		if (!empty($id)) {
+			$this->flashX('idX', $id);
+		}
+	}
+
+
+
 	// ◈ === iPageX »
 	protected function iPageX(?string $view = null, array|object|null $record = null, bool|string|null $theme = true)
 	{
