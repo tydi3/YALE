@@ -4,17 +4,21 @@ namespace Yale\Wire\Render;
 
 trait SavingX
 {
-	// ◈ === factorizeX »
+	// ◈ === abstract »
+	abstract protected function initX();
 	abstract protected function factorizeX(&$input, $action);
+	abstract protected function restore($action, $id);
 
 
 
 	// ◈ === iSavingX »
 	protected function iSavingX($action, $id = null, $input = [], null|string|array $success = null, $next = null)
 	{
+		$this->initX();
+
 		$fields = $input;
 		if (empty($input)) {
-			$fields = DataX::getFields();
+			$fields = $this->modelX::getFields();
 		}
 
 
@@ -23,7 +27,7 @@ trait SavingX
 			$this->grabParamX($input, $fields);
 			$this->cleanInputX($input);
 			$this->factorizeX(input: $input, action: $action);
-			$o = DataX::modify($id, $input);
+			$o = $this->modelX::modify($id, $input);
 			if ($o === true || $o > 0) {
 				$this->successX($success);
 				if ($next) {
