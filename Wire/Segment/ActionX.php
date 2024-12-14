@@ -171,7 +171,7 @@ trait ActionX
 	// ◈ === createX »
 	protected function createX($action = 'create')
 	{
-		$this->doActionX($action, $record);
+		$this->doActionX($action);
 	}
 
 
