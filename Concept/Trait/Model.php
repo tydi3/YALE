@@ -2,13 +2,13 @@
 
 namespace Yale\Concept\Trait;
 
-use Illuminate\Support\Str;
-use Yale\Xeno\Data\GenerateX;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
-
+use Illuminate\Support\Str;
+use Yale\Xeno\Data\GenerateX;
 use Yale\Concept\Trait\Elegance\AllX;
 use Yale\Concept\Trait\Elegance\CountX;
+use Yale\Concept\Trait\Elegance\CreateX;
 use Yale\Concept\Trait\Elegance\FindX;
 use Yale\Concept\Trait\Elegance\HasX;
 use Yale\Concept\Trait\Elegance\ScopeX;
@@ -19,6 +19,7 @@ trait Model
 	// ◈ traits
 	use AllX;
 	use CountX;
+	use CreateX;
 	use FindX;
 	use HasX;
 	use ScopeX;
