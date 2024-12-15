@@ -43,7 +43,7 @@ trait SavingX
 			}
 
 			if (!empty($id) && $action === 'update') {
-				$result = $this->modelX::modify($id, $input);
+				$result = $this->modelX::oUpdateByID($id, $input);
 			}
 		}
 
