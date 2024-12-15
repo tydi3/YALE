@@ -9,8 +9,9 @@ trait ResolveX
 	{
 		// ~ for creating
 		if ($action === 'create') {
-			if ($result && isset($result->guid)) {
+			if ($result && isset($result->puid)) {
 				$this->successX($success);
+				$this->setPuidX($result->puid);
 				if (!empty($next)) {
 					return $this->redirectX($next);
 				}
@@ -18,17 +19,15 @@ trait ResolveX
 			}
 		}
 
-		if ($result === true || (is_numeric($result) && $result >= 1)) {
-			$this->successX($success);
-			if (!empty($next)) {
-				return $this->redirectX($next);
-			}
 
-			if (in_array($action, ['update'])) {
-				return $this->{$action}($id);
-			} elseif ($action === 'create') {
-				dd('Created!');
-				// return $this->create();
+		// ~ for updating
+		if ($action === 'update') {
+			if ($result === true || (is_numeric($result) && $result >= 1)) {
+				$this->successX($success);
+				if (!empty($next)) {
+					return $this->redirectX($next);
+				}
+				return $this->update($id);
 			}
 		}
 	}
