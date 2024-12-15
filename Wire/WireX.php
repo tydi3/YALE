@@ -244,6 +244,18 @@ abstract class WireX extends Component
 
 
 
+	// ◈ === setWirePuidX »
+	protected function setWirePuidX($puid)
+	{
+		// ~ new object
+		if (!isset($this->wireX)) {
+			$this->wireX = new \stdClass();
+		}
+		$this->wireX->puid = $puid;
+	}
+
+
+
 	// ◈ === setWireX »
 	protected function setWireX()
 	{
