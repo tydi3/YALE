@@ -5,19 +5,19 @@ namespace Yale\Concept\Trait\Elegance;
 trait UpdateX
 {
 	// ◈ === oFindByID »
-	public static function oUpdateByID(int|string $id, array $data)
+	public static function oUpdateByID(int|string $id, array $input)
 	{
 		$filterColumn = 'id';
 		self::oColumnID($id, $filterColumn);
-		return static::where($filterColumn, $id)->update($data);
+		return static::where($filterColumn, $id)->update($input);
 	}
 
 
 
 	// ◈ === oUpdateByPuid »
-	public static function oUpdateByPuid($puid, array $data)
+	public static function oUpdateByPuid($puid, array $input)
 	{
-		return static::where('puid', $puid)->update($data);
+		return static::where('puid', $puid)->update($input);
 	}
 
 }//> end of trait ~ UpdateX
