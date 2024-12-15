@@ -126,17 +126,13 @@ trait ActionX
 			if (!empty($this->moduleX)) {
 				$this->setTitleX($this->moduleX);
 				if ($action === 'initial') {
-					$this->setSloganX('manage ' . $this->moduleX);
+					$this->setSloganX('manage ' . StringX::sentence($this->moduleX));
 				} elseif ($action === 'listing') {
-					$this->setSloganX('list of ' . StringX::plural($this->moduleX));
+					$this->setSloganX('list of ' . StringX::sentence(StringX::plural($this->moduleX)));
 				} elseif ($action === 'detail') {
 					$this->setSloganX($this->moduleX . ' information');
-				} elseif ($action === 'update') {
-					$this->setSloganX('update ' . StringX::singular($this->moduleX));
-				} elseif ($action === 'clone') {
-					$this->setSloganX('clone ' . StringX::singular($this->moduleX));
-				} elseif ($action === 'create') {
-					$this->setSloganX('create ' . StringX::singular($this->moduleX));
+				} elseif (in_array($action, ['create', 'update', 'clone'])) {
+					$this->setSloganX(StringX::capitalize($action) . ' ' . StringX::sentence(StringX::singular($this->moduleX)));
 				}
 			}
 		}
