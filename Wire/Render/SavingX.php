@@ -2,31 +2,19 @@
 
 namespace Yale\Wire\Render;
 
+use Yale\Wire\Render\ResolveX;
+
 trait SavingX
 {
+	// ◈ trait
+	use ResolveX;
+
+
+
 	// ◈ === abstract »
 	abstract protected function initX();
 	abstract protected function factorizeX(&$input, $action);
 	abstract protected function restore($action, $id);
-
-
-
-	// ◈ === iResolveX »
-	protected function iResolveX($action, $response, null|string|array $success = null, ?string $next = null)
-	{
-		if ($response === true || (is_numeric($response) && $response >= 1)) {
-			$this->successX($success);
-			if (!empty($next)) {
-				return $this->redirectX($next);
-			}
-
-			if (in_array($action, ['update'])) {
-				return $this->{$action}($id);
-			} elseif ($action === 'create') {
-				return $this->create();
-			}
-		}
-	}
 
 
 
@@ -40,7 +28,7 @@ trait SavingX
 			$fields = $this->modelX::getFields();
 		}
 
-		$response = false;
+		$result = false;
 
 		if (in_array($action, ['create', 'update'])) {
 
@@ -50,13 +38,16 @@ trait SavingX
 				$this->factorizeX(input: $input, action: $action);
 			}
 
-			if (!empty($id)) {
-				$response = $this->modelX::modify($id, $input);
+			if ($action === 'create') {
+				$result = $this->modelX::oCreate($input);
 			}
 
+			if (!empty($id) && $action === 'update') {
+				$result = $this->modelX::modify($id, $input);
+			}
 		}
 
-		return $this->iResolveX($action, $response, $success, $next);
+		return $this->iResolveX($action, $result, $id, $success, $next);
 	}
 
 }//> end of trait ~ SavingX
