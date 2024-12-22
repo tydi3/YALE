@@ -10,6 +10,20 @@ enum Gender: string
 
 
 
+	// ◈ === toValue »
+	public static function toValue($gender): string
+	{
+		$gender = strtoupper($gender);
+		foreach (self::cases() as $case) {
+			if ($case->name === $gender || $case->value === $gender) {
+				return $case->name;
+			}
+		}
+		return '';
+	}
+
+
+
 	// ◈ === toArray »
 	public static function toArray($gender = []): array
 	{
