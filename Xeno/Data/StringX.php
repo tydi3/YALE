@@ -678,6 +678,14 @@ class StringX
 
 
 
+	// ◈ === firstCap »
+	public static function firstCap($string)
+	{
+		return ucfirst(strtolower($string));
+	}
+
+
+
 	// ◈ === sentence »
 	public static function sentence($string, $acronym = true)
 	{
@@ -713,6 +721,28 @@ class StringX
 	public static function capitalize($string)
 	{
 		return ucwords(self::sentence($string));
+	}
+
+
+
+	// ◈ === lowercase →
+	public static function lowercase($string)
+	{
+		if (self::is($string)) {
+			return strtolower(trim($string));
+		}
+		return false;
+	}
+
+
+
+	// ◈ === uppercase →
+	public static function uppercase($string)
+	{
+		if (self::is($string)) {
+			return strtoupper($string);
+		}
+		return false;
 	}
 
 
@@ -1019,49 +1049,6 @@ class StringX
 			}
 		}
 		return false;
-	}
-
-
-
-	// ◈ === toUppercase →
-	public static function toUppercase($string)
-	{
-		if (self::is($string)) {
-			return strtoupper($string);
-		}
-		return false;
-	}
-
-
-
-	// ◈ === toLowercase →
-	public static function toLowercase($string)
-	{
-		if (self::is($string)) {
-			return strtolower(trim($string));
-		}
-		return false;
-	}
-
-
-
-	// ◈ === toSnakeCase →
-	public static function toSnakeCase($string, $separator = null)
-	{
-		if (!empty($separator)) {
-			$words = explode($separator, $string);
-		} else {
-			$words = explode(' ', $string);
-		}
-		foreach ($words as $key => $word) {
-			if (self::isUppercase($word)) {
-				$words[$key] = strtolower($word);
-			}
-		}
-		$string = implode(' ', $words);
-		$string = preg_replace('/\s+/u', '', ucwords($string));
-		$string = preg_replace('/(.)(?=[A-Z])/u', '$1_', $string);
-		return strtolower($string);
 	}
 
 
