@@ -2,6 +2,8 @@
 
 namespace Yale\Wire\Segment;
 
+use Yale\Xeno\Http\RouteX;
+
 trait NavigateX
 {
 	// ◈ === redirectX »
@@ -26,7 +28,7 @@ trait NavigateX
 	// ◈ === reloadX »
 	protected function reloadX()
 	{
-		$component = $this->getClassX();
+		$component = $this->getClassX(true);
 		if ($component) {
 			return $this->redirect($component::class);
 		}
@@ -34,10 +36,11 @@ trait NavigateX
 
 
 
-	// ◈ === gotoX »
-	protected function gotoX($route, $param = [])
+	// ◈ === gotoX
+	public function gotoX($route = null, $param = [], $absolute = false, $wire = true)
 	{
-		$this->redirectRoute($route, $param);
+		// 	$this->redirectRoute($route, $param);
+		return $this->redirectX(RouteX::format($route, $param, $absolute), $wire);
 	}
 
 }//> end of trait ~ NavigateX
