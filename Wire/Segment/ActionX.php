@@ -181,7 +181,7 @@ trait ActionX
 
 
 	// ◈ === cloneX »
-	protected function cloneX($action = 'clone')
+	protected function cloneX($record = [], $action = 'clone')
 	{
 		$this->doActionX($action, $record);
 	}
@@ -189,6 +189,5 @@ trait ActionX
 
 
 	// ◈ === deleteX »
-
 
 }//> end of trait ~ ActionX
