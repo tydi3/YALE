@@ -71,6 +71,9 @@ class TemplateX
 	// ◈ === collop »
 	public static function collop($file = null, $module = null)
 	{
+		// if ($file == 'index') {
+		// 	DebugX::exit([$file, $module]);
+		// }
 		if (!empty($module)) {
 			$file = $module . '.' . $file;
 		}

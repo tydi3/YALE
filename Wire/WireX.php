@@ -114,7 +114,7 @@ abstract class WireX extends Component
 	// ◈ === getClassX »
 	protected function getClassX()
 	{
-		return basename(get_class($this));
+		return basename(str_replace('\\', '/', get_class($this)));
 	}
 
 
