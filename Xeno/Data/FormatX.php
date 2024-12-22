@@ -2,6 +2,8 @@
 
 namespace Yale\Xeno\Data;
 
+use Yale\Concept\Enum\Gender as GenderEnum;
+
 class FormatX
 {
 	// ◈ === title »
@@ -54,10 +56,41 @@ class FormatX
 
 
 
+	// ◈ === gender »
+	public static function gender($gender)
+	{
+		return StringX::firstCap(GenderEnum::toValue($gender));
+	}
+
+
+
+	// ◈ === email »
+	public static function email($email)
+	{
+		return StringX::lowercase($email);
+	}
+
+
+
+	// ◈ === phone »
+	public static function phone($phone, $country = 'NG')
+	{
+		if ($country === 'NG') {
+			if (StringX::beginWith($phone, '0')) {
+				$phone = StringX::swapFirst($phone, '0', '+234');
+			} elseif (StringX::beginWith($phone, '234')) {
+				$phone = '+' . $phone;
+			}
+		}
+		return ($phone);
+	}
+
+
+
 	// ◈ === uppercase »
 	public static function uppercase($var)
 	{
-		return StringX::toUpperCase($var);
+		return StringX::uppercase($var);
 	}
 
 
@@ -65,7 +98,7 @@ class FormatX
 	// ◈ === lowercase »
 	public static function lowercase($var)
 	{
-		return StringX::toLowerCase($var);
+		return StringX::lowercase($var);
 	}
 
 
