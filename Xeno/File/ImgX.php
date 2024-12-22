@@ -90,10 +90,14 @@ class ImgX
 					$image = null;
 				}
 			}
-			$image = self::asPath($image, true);
-			$isFile = FileX::in()->storage($image, true);
-			if ($isFile) {
-				return FileX::storage($image);
+
+			if ($image) {
+				$image = self::asPath($image, true);
+				$isFile = FileX::in()->storage($image, true);
+
+				if ($isFile) {
+					return FileX::storage($image);
+				}
 			}
 		}
 		return self::noSignature();
