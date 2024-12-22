@@ -30,7 +30,8 @@ trait SavingX
 
 		$result = false;
 
-		if (in_array($action, ['create', 'update'])) {
+
+		if (in_array($action, ['create', 'update', 'clone'])) {
 
 			if (!empty($fields)) {
 				$this->grabParamX($input, $fields);
@@ -38,7 +39,7 @@ trait SavingX
 				$this->factorizeX(input: $input, action: $action);
 			}
 
-			if ($action === 'create') {
+			if ($action === 'create' || $action === 'clone') {
 				$result = $this->modelX::oCreate($input);
 			}
 
