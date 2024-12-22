@@ -8,7 +8,7 @@ trait ResolveX
 	protected function iResolveX($action, $result, $id = null, null|string|array $success = null, ?string $next = null)
 	{
 		// ~ for creating
-		if ($action === 'create') {
+		if ($action === 'create' || $action === 'clone') {
 			if ($result && isset($result->puid)) {
 				$this->successX($success);
 				$this->setPuidX($result->puid);
@@ -30,6 +30,9 @@ trait ResolveX
 				return $this->update($id);
 			}
 		}
+
+
+
 	}
 
 }//> end of trait ~ ResolveX
