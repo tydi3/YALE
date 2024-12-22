@@ -44,7 +44,29 @@ class ImgX
 				return FileX::storage($image);
 			}
 		}
-		return FileX::photo('user/no-dp.png');
+		return self::noDp();
+	}
+
+
+
+	// ◈ === cover »
+	public static function cover($image = null)
+	{
+		if (!empty($image)) {
+			if ($image === 'auth') {
+				if (Auth::check()) {
+					$image = Auth::user()->cover;
+				} else {
+					$image = null;
+				}
+			}
+			$image = self::asPath($image, true);
+			$isFile = FileX::in()->storage($image, true);
+			if ($isFile) {
+				return FileX::storage($image);
+			}
+		}
+		return self::noDp();
 	}
 
 
@@ -58,21 +80,31 @@ class ImgX
 
 
 	// ◈ === signature »
-	public static function signature($signature = null, $public = true)
+	public static function signature($image = null)
 	{
-		if ($signature === 'auth' && Auth::check() && !empty(Auth::user()->signature)) {
-			$signature = Auth::user()->signature;
-		} else {
-			$signature = 'signature/none.png';
+		if (!empty($image)) {
+			if ($image === 'auth') {
+				if (Auth::check()) {
+					$image = Auth::user()->signature;
+				} else {
+					$image = null;
+				}
+			}
+			$image = self::asPath($image, true);
+			$isFile = FileX::in()->storage($image, true);
+			if ($isFile) {
+				return FileX::storage($image);
+			}
 		}
+		return self::noSignature();
+	}
 
-		if (!empty($signature) && FileX::in()->storage($signature, $public)) {
-			$signature = FileX::storage($signature);
-		} else {
-			$signature = '/storage/signature/404.png';
-		}
 
-		return $signature;
+
+	// ◈ === noDp »
+	public static function noDp()
+	{
+		return FileX::photo('user/no-dp.png');
 	}
 
 
@@ -85,6 +117,14 @@ class ImgX
 
 
 
+	// ◈ === noSignature »
+	public static function noSignature()
+	{
+		return FileX::photo('user/no-signature.png');
+	}
+
+
+
 	// ◈ === asset »
 	public static function asset($theme = true)
 	{
@@ -93,6 +133,5 @@ class ImgX
 		}
 		$image = $path . '/i' . $image;
 	}
-
 
 }//> end of class ~ ImgX
