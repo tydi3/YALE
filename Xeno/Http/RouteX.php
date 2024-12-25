@@ -95,7 +95,6 @@ class RouteX
 	public static function isGroupAuth($route = null)
 	{
 		$route = self::format();
-		// dd($route);
 		if (!empty($route)) {
 			$route = StringX::cropBegin($route, '/');
 			$routes = 'register | login | logout | password.request';
