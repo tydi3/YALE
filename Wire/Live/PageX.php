@@ -31,6 +31,7 @@ abstract class PageX extends WireX
 	public function boot()
 	{
 		$this->callMethodX('presetX', 'boot');
+		$this->callMethodX('bootX');
 	}
 
 
