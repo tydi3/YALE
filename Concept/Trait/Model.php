@@ -27,14 +27,6 @@ trait Model
 
 
 
-	// ◈ === author »
-	public function author()
-	{
-		return $this->belongsTo(\App\Models\User::class, 'oauthor', 'tuid');
-	}
-
-
-
 	// ◈ === getFillable »
 	public function getFillable()
 	{

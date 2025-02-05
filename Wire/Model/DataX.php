@@ -16,12 +16,12 @@ trait DataX
 
 
 	// ◈ === listing »
-	public static function listing(array|string $columns = [], $sortOrder = 'desc', $sortColumn = 'id')
+	public static function listing(array|string $columns = [], $sortOrder = 'desc', $sortColumn = 'id', $author = false)
 	{
 		if (empty($columns) && isset(self::$columns)) {
 			$columns = self::$columns;
 		}
-		$result = self::oAll($columns, $sortOrder, $sortColumn);
+		$result = self::oAll($columns, $sortOrder, $sortColumn, $author);
 		return self::oArray($result);
 	}
 

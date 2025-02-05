@@ -13,9 +13,17 @@ trait AllX
 
 
 	// ◈ === oAll »
-	public static function oAll(array|string $columns = ['*'], $sortOrder = 'desc', $sortColumn = 'id')
+	public static function oAll(array|string $columns = ['*'], $sortOrder = 'desc', $sortColumn = 'id', $author = false)
 	{
-		return static::query()->select(self::oColumn($columns))->orderBy($sortColumn, $sortOrder)->get();
+		$query = static::query();
+		if ($author === true) {
+			$query->with('author')->select(array_merge(self::oColumn($columns), ['oauthor']));
+		} else {
+			$query->select(self::oColumn($columns));
+		}
+		$query->orderBy($sortColumn, $sortOrder);
+		return $query->get();
+		// return static::query()->select(self::oColumn($columns))->orderBy($sortColumn, $sortOrder)->get();#
 	}
 
 }//> end of trait ~ AllX

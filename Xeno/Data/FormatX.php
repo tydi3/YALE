@@ -2,6 +2,8 @@
 
 namespace Yale\Xeno\Data;
 
+use Yale\Anci\VarX;
+use Yale\Xeno\Time\PeriodX;
 use Yale\Concept\Enum\Gender as GenderEnum;
 
 class FormatX
@@ -44,6 +46,37 @@ class FormatX
 		$var = StringX::capitalize($var);
 		$var = StringX::swap($var, '(hq)', '(HQ)');
 		return $var;
+	}
+
+
+
+	// ◈ === var »
+	public static function var(&$var, $format = 'string', $default = '')
+	{
+		$o = VarX::safe($var, $default);
+		if (!empty($o)) {
+			if ($format === 'capitalize') {
+				return self::capitalize($o);
+			}
+		}
+		return $o;
+	}
+
+
+
+	// ◈ === date »
+	public static function date($date, $format = null)
+	{
+		if ($format === 'log') {
+			$format = 'datetime';
+		}
+		if ($format === 'logdate') {
+			$format = 'date';
+		}
+		if ($format === 'logtime') {
+			$format = 'time';
+		}
+		return PeriodX::log($date, $format);
 	}
 
 

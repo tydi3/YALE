@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Auth;
 class App extends Controller
 {
 	// ◈ === index »
-	public static function index()
+	public static function index($route = 'login')
 	{
-		$route = RouteX::format('login');
+		$route = RouteX::format($route);
 		if (Auth::check()) {
 			$route = RouteX::format('dashboard');
 		}

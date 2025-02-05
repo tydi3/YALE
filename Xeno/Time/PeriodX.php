@@ -5,6 +5,7 @@ namespace Yale\Xeno\Time;
 use Exception;
 use Carbon\Carbon;
 use Carbon\Exceptions\InvalidFormatException;
+use Yale\Xeno\Time\TimeX;
 
 class PeriodX
 {
@@ -129,11 +130,36 @@ class PeriodX
 
 
 
+	// ◈ === toDate »
+	public static function toDate($format, $timestamp)
+	{
+		return date($format, $timestamp);
+	}
+
+
+
 	// ◈ === fulldate » human readable → string
 	public static function fulldate($datetime)
 	{
-		$time = date('F j, Y g:i A', strtotime($datetime));
-		return $time;
+		return self::toDate('F j, Y g:i A', strtotime($datetime));
+	}
+
+
+
+	// ◈ === log »
+	public static function log($period, $format = 'datetime')
+	{
+		$timestamp = TimeX::timestamp($period);
+
+		if ($format === 'date') {
+			$timestamp = self::toDate('Y-m-d', $timestamp);
+		} elseif ($format === 'time') {
+			$timestamp = self::toDate('h:i:s A', $timestamp);
+		} elseif ($format === 'datetime') {
+			$timestamp = self::toDate('Y-m-d h:i:s A', $timestamp);
+		}
+
+		return $timestamp;
 	}
 
 }//> end of PeriodX n

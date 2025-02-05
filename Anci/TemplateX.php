@@ -2,13 +2,29 @@
 
 namespace Yale\Anci;
 
+use Yale\Xeno\File\FileX;
 use Yale\Xeno\Data\StringX;
+use function PHPUnit\Framework\isTrue;
 
 class TemplateX
 {
 	// ◈ property
 	private static $init = false;
 	private static $theme;
+
+
+
+	// ◈ === check »
+	public static function check($file, $flag404 = true){
+		$blade = FileX::is()->blade($file);
+		if($blade){
+			return $file;
+		}
+		if ($flag404 === true) {
+			DebugX::blade404($file);
+		}
+		return false;
+	}
 
 
 
@@ -69,15 +85,16 @@ class TemplateX
 
 
 	// ◈ === collop »
-	public static function collop($file = null, $module = null)
+	public static function collop($file = null, $module = null, $check = null)
 	{
-		// if ($file == 'index') {
-		// 	DebugX::exit([$file, $module]);
-		// }
 		if (!empty($module)) {
 			$file = $module . '.' . $file;
 		}
-		return self::path('collop.' . $file);
+		$collop = self::path('collop.' . $file);
+		if ($check) {
+			return self::check($collop, $check);
+		}
+		return $collop;
 	}
 
 
